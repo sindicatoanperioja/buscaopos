@@ -133,6 +133,15 @@ def anadir(reg):
     plazas.append({"id": rid, **reg})
 
 
+def tipo(conv):
+    """Ordinaria, estabilización con prueba (concurso-oposición) o sin prueba (concurso de méritos)."""
+    if conv.get("tipo", "").strip().lower() != "estabilización":
+        return "ordinaria"
+    if conv.get("procedimiento", "").strip().lower() == "concurso de méritos":
+        return "estabilizacion_sin_prueba"
+    return "estabilizacion_prueba"
+
+
 def registro(fila, anio, est_fase, cu, codigo, especialidad, idioma, plazas_n, nota, fuente,
              turnos=None, desglose=None):
     est, fase = est_fase
@@ -163,7 +172,8 @@ def registro(fila, anio, est_fase, cu, codigo, especialidad, idioma, plazas_n, n
         "desglose": desglose,
         "estado": est,
         "fase": fase,
-        "tipo_oposicion": conv.get("tipo_oposicion", "").strip() or None,
+        "tipo": tipo(conv),
+        "normativa": conv.get("normativa", "").strip() or None,
         "inicio_plazo": conv.get("inicio_plazo", "").strip() or None,
         "fin_plazo": conv.get("fin_plazo", "").strip() or None,
         "fecha_examen": conv.get("fecha_examen", "").strip() or None,
@@ -184,6 +194,10 @@ for r in filas_plazas:
     turnos = None
     if any(r[k].strip() for k in ("libre", "reserva", "acceso")):
         turnos = {k: entero(r[k]) or 0 for k in ("libre", "reserva", "acceso")}
+        # Lo que no es libre, discapacidad ni promoción son otras reservas (víctimas, etc.)
+        otras = (entero(r["plazas"]) or 0) - sum(turnos.values())
+        if otras > 0:
+            turnos["otras"] = otras
     desglose = None
     if r["aprobadas"].strip() or r["extra"].strip():
         desglose = {"ordinarias": entero(r["aprobadas"]) or 0, "extraordinarias": entero(r["extra"]) or 0}

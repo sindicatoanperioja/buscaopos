@@ -16,7 +16,7 @@ Cada registro es un año, una comunidad, un cuerpo y una especialidad con su nú
 | Campo | Obligatorio | Ejemplo | Notas |
 |---|---|---|---|
 | `id` | sí | `2027-la-rioja-0590-006` | Único. |
-| `anio` | sí | `2027` | Año de celebración de las pruebas. |
+| `anio` | sí | `2027` | Año de celebración de las pruebas, no el de publicación. Navarra convoca en otoño o diciembre y examina en junio del año siguiente: va en el año siguiente. |
 | `comunidad` | sí | `Navarra` | |
 | `lista` | sí | `Navarra (euskera)` | Lo que se muestra. Navarra va en dos listas; en el resto coincide con la comunidad. |
 | `lista_id` | sí | `navarra-euskera` | Es lo que va en el enlace (`?ccaa=navarra-euskera`). |
@@ -26,16 +26,17 @@ Cada registro es un año, una comunidad, un cuerpo y una especialidad con su nú
 | `especialidad` | no | `Matemáticas` | Vacío en los totales sin reparto. |
 | `idioma` | no | `Euskera` | |
 | `plazas` | no | `25` | Vacío si solo hay anuncio sin cifra. |
-| `turnos` | no | `{"libre":24,"reserva":6,"acceso":30}` | Cuando la convocatoria los separa. |
+| `turnos` | no | `{"libre":24,"reserva":6,"acceso":30}` | Cuando la convocatoria los separa: `libre`, `reserva` (discapacidad), `acceso` (promoción interna desde otro cuerpo o subgrupo) y `otras` (otras reservas, como víctimas del terrorismo; sale de restar al total los otros tres). |
 | `desglose` | no | `{"ordinarias":17,"extraordinarias":8}` | De momento solo La Rioja. |
 | `estado` | sí | `convocada` | `borrador`, `convocada` o `cerrada` (convocada con el plazo de inscripción cerrado). |
 | `fase` | no | `Acordada en mesa sectorial` | Solo en los borradores: de dónde sale la cifra (anuncio, propuesta en mesa, acuerdo u OEP). |
-| `tipo_oposicion` | no | `RD 276/2007` | |
+| `tipo` | sí | `ordinaria` | `ordinaria` (RD 276/2007), `estabilizacion_prueba` (concurso-oposición de estabilización, RD 270/2022) o `estabilizacion_sin_prueba` (concurso de méritos excepcional, sin examen). |
+| `normativa` | no | `RD 276/2007` | |
 | `inicio_plazo`, `fin_plazo` | no | `2026-10-28` | Plazo de inscripción, en formato AAAA-MM-DD. |
 | `fecha_examen` | no | `2027-04-17` | Día en que empiezan las pruebas. |
 | `requisito_linguistico` | no | `Catalán C1` | En Cataluña, C. Valenciana, Baleares, Galicia y País Vasco sale de `requisitos_linguisticos.csv` y vale para todas sus plazas. En Navarra (euskera), de la convocatoria. |
 | `requisito_detalle` | no | `Hay que acreditar el nivel C1 de catalán.` | Explicación corta del requisito. |
-| `procedimiento` | sí | `concurso_oposicion` | `concurso_oposicion` (con examen) o `concurso_meritos` (sin examen). |
+| `procedimiento` | sí | `concurso_oposicion` | `concurso_oposicion` (con examen) o `concurso_meritos` (sin examen). Hay concursos de méritos que no son de estabilización, como el acceso a Catedráticos. |
 | `observaciones` | no | | Texto libre. |
 | `fuentes` | sí | `["https://bon.navarra.es/..."]` | Enlaces o descripciones de la fuente. |
 
@@ -54,7 +55,7 @@ Hay tres estados:
 - `resumen_ccaa.csv`: los totales de 2025 de las comunidades sin reparto.
 - `requisitos_linguisticos.csv`: el requisito de lengua cooficial de cada comunidad que lo exige.
 
-En `convocatorias.csv`, la columna `procedimiento` vale "Concurso de méritos" cuando no hay examen; vacía es concurso-oposición. La página marca esas plazas aparte y se pueden filtrar.
+En `convocatorias.csv`, la columna `tipo` vale "Ordinaria" o "Estabilización", `normativa` dice la norma, y `procedimiento` vale "Concurso de méritos" cuando no hay examen (vacía es concurso-oposición). Con `tipo` y `procedimiento` el generador saca los tres tipos: ordinaria, estabilización con prueba y estabilización sin prueba.
 
 Después de tocar un CSV hay que volver a generar los datos:
 
@@ -71,7 +72,8 @@ La dirección de la página guarda la búsqueda, así que se puede copiar y comp
 - `?estado=convocada`: todo lo convocado que aún admite inscripciones.
 - `?vista=lista`: resultados en lista en vez de fichas.
 - `?idioma=ninguno`: solo plazas sin requisito de lengua cooficial.
-- `?proc=concurso_oposicion`: deja fuera los concursos de méritos.
+- `?tipo=ordinaria`: solo oposiciones ordinarias, sin estabilización.
+- `?turno=reserva`: solo plazas de reserva para personas con discapacidad; las cifras pasan a ser las de ese turno.
 - `?q=ingles&cuerpo=0590,0592`: búsqueda de texto con dos cuerpos.
 
 Los valores múltiples van separados por comas. Si el enlace no lleva año, la página muestra la primera convocatoria con datos a partir del año en curso.

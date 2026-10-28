@@ -149,8 +149,13 @@ aside.filtros{align-self:start;position:sticky;top:84px;max-height:calc(100vh - 
 .mas summary{cursor:pointer;color:var(--azul);font-weight:700}
 .mas p{margin:6px 0 0;color:var(--tinta-suave)}
 .mas a{word-break:break-all}
-.meritos{display:inline-block;margin:6px 0 0;border:1.5px dashed var(--verde-texto);color:var(--verde-texto);border-radius:999px;padding:1px 9px;font-size:12px;font-weight:700}
-.c-esp .meritos{margin:0;padding:0 7px;font-size:11px}
+.marca{display:inline-block;margin:6px 0 0;border:1.5px solid var(--azul-medio);color:var(--azul-profundo);border-radius:999px;padding:1px 9px;font-size:12px;font-weight:700}
+.marca.sin-examen{border-style:dashed;border-color:var(--verde-texto);color:var(--verde-texto)}
+.c-esp .marca{margin:0;padding:0 7px;font-size:11px}
+.ayuda{margin:-4px 0 8px;font-size:12px;color:var(--tinta-suave)}
+.turnos{display:flex;flex-wrap:wrap;gap:4px}
+.turnos span{background:var(--azul-niebla);border-radius:6px;padding:1px 7px;font-size:12px}
+.turnos span.elegido{background:var(--verde-niebla);color:var(--verde-texto);font-weight:700}
 .card.es-meritos{border-style:dashed;border-color:var(--verde)}
 .card.agregado{border-style:dashed;background:color-mix(in srgb,var(--surface) 70%,var(--azul-niebla))}
 
@@ -347,10 +352,19 @@ const ESTADOS = {
   borrador:  { txt: "Borrador",                 ayuda: "Anuncios, propuestas y ofertas sin convocar", orden: 3 },
 };
 const COLOR_ESTADO = { convocada: "#3d7a62", cerrada: "#94a3b8", borrador: "#5b9bce" };
-const PROCEDIMIENTOS = {
-  concurso_oposicion: { txt: "Concurso-oposición", ayuda: "Con examen" },
-  concurso_meritos:   { txt: "Concurso de méritos", ayuda: "Sin examen, solo méritos" },
+const TIPOS = {
+  ordinaria:                 { txt: "Ordinaria",                   ayuda: "RD 276/2007" },
+  estabilizacion_prueba:     { txt: "Estabilización con prueba",   ayuda: "Concurso-oposición, RD 270/2022" },
+  estabilizacion_sin_prueba: { txt: "Estabilización sin prueba",   ayuda: "Concurso de méritos, sin examen" },
 };
+const TURNOS = {
+  libre:   { txt: "Libre",                corto: "libre" },
+  reserva: { txt: "Discapacidad",         corto: "discapacidad" },
+  acceso:  { txt: "Promoción interna",    corto: "promoción" },
+  otras:   { txt: "Otras reservas",       corto: "otras reservas" },
+};
+// Con el filtro de turno, cada plaza cuenta solo las de los turnos elegidos.
+const plazasDe = (p) => filtros.turno.size && p.turnos ? [...filtros.turno].reduce((s, k) => s + (p.turnos[k] || 0), 0) : (p.plazas || 0);
 const POR_PAGINA = 36;
 const HOY = new Date(); HOY.setHours(0, 0, 0, 0);
 const ANIO_ACTUAL = HOY.getFullYear();
@@ -383,8 +397,8 @@ let TODAS = [];
 let pagina = 1;
 
 // ---------- Filtros y URL ----------
-const FACETAS = ["anio", "ccaa", "cuerpo", "esp", "estado", "proc", "idioma"];
-const filtros = { anio: new Set(), ccaa: new Set(), cuerpo: new Set(), esp: new Set(), estado: new Set(), proc: new Set(), idioma: new Set(), q: "", orden: "plazas", vista: "fichas" };
+const FACETAS = ["anio", "ccaa", "cuerpo", "esp", "estado", "tipo", "turno", "idioma"];
+const filtros = { anio: new Set(), ccaa: new Set(), cuerpo: new Set(), esp: new Set(), estado: new Set(), tipo: new Set(), turno: new Set(), idioma: new Set(), q: "", orden: "plazas", vista: "fichas" };
 
 function vistaGuardada() {
   try { return localStorage.getItem("buscaopos-vista") === "lista" ? "lista" : "fichas"; } catch { return "fichas"; }
@@ -414,7 +428,7 @@ function valor(p, f) {
   if (f === "cuerpo") return p.cuerpo || "varios";
   if (f === "esp") return p.esp;
   if (f === "estado") return p.sit;
-  if (f === "proc") return p.procedimiento;
+  if (f === "tipo") return p.tipo;
   if (f === "idioma") return p.requisito_linguistico ? slug(p.requisito_linguistico) : "ninguno";
 }
 function pasaTexto(p, q) {
@@ -426,6 +440,10 @@ function pasa(p, salvo) {
     if (f === salvo || !filtros[f].size) continue;
     if (f === "esp" && !p.esp) continue; // los totales sin reparto se tratan aparte
     if (f === "cuerpo" && !p.cuerpo) continue;
+    if (f === "turno") {
+      if (!p.turnos || ![...filtros.turno].some((k) => p.turnos[k] > 0)) return false;
+      continue;
+    }
     if (!filtros[f].has(valor(p, f))) return false;
   }
   return true;
@@ -460,9 +478,18 @@ function contar(f) {
     if (f === "esp" && !p.esp) continue;
     if (!pasa(p, f) || (p.esp && !pasaTexto(p, q))) continue;
     if (!p.esp && q && !pasaTexto(p, q)) continue;
+    if (f === "turno") {
+      for (const k of Object.keys(TURNOS)) {
+        if (!(p.turnos && p.turnos[k] > 0)) continue;
+        const o = m.get(k) || { n: 0, plazas: 0, p };
+        o.n++; o.plazas += p.turnos[k];
+        m.set(k, o);
+      }
+      continue;
+    }
     const v = valor(p, f);
     const o = m.get(v) || { n: 0, plazas: 0, p };
-    o.n++; o.plazas += p.plazas || 0;
+    o.n++; o.plazas += plazasDe(p);
     m.set(v, o);
   }
   return m;
@@ -479,7 +506,7 @@ function pintarFacetas() {
   const html = [];
   // Año
   const anios = [...new Set(TODAS.map((p) => p.anio))].sort((a, b) => b - a);
-  html.push(`<section class="faceta"><h2>Año de celebración</h2><div class="anios">${anios.map((a) =>
+  html.push(`<section class="faceta"><h2>Año de celebración</h2><p class="ayuda">El de las pruebas, aunque la convocatoria salga el año anterior.</p><div class="anios">${anios.map((a) =>
     `<label><input type="checkbox" data-f="anio" value="${a}"${filtros.anio.has(String(a)) ? " checked" : ""}><span>${a}</span></label>`).join("")}</div></section>`);
 
   // Estado
@@ -488,12 +515,19 @@ function pintarFacetas() {
   html.push(`<section class="faceta"><h2>Estado</h2>${claves.map((k) => opcion("estado", k,
     `${ESTADOS[k].txt}<br><small>${ESTADOS[k].ayuda}</small>`, ce.get(k), `<span class="punto" style="background:${COLOR_ESTADO[k]}"></span>`)).join("")}</section>`);
 
-  // Procedimiento
-  const cp = contar("proc");
-  const procs = Object.keys(PROCEDIMIENTOS).filter((k) => cp.has(k) || filtros.proc.has(k));
-  if (procs.length > 1 || filtros.proc.size) {
-    html.push(`<section class="faceta"><h2>Procedimiento</h2>${procs.map((k) => opcion("proc", k,
-      `${PROCEDIMIENTOS[k].txt}<br><small>${PROCEDIMIENTOS[k].ayuda}</small>`, cp.get(k))).join("")}</section>`);
+  // Tipo de oposición
+  const ct = contar("tipo");
+  const tipos = Object.keys(TIPOS).filter((k) => ct.has(k) || filtros.tipo.has(k));
+  if (tipos.length > 1 || filtros.tipo.size) {
+    html.push(`<section class="faceta"><h2>Tipo de oposición</h2>${tipos.map((k) => opcion("tipo", k,
+      `${TIPOS[k].txt}<br><small>${TIPOS[k].ayuda}</small>`, ct.get(k))).join("")}</section>`);
+  }
+
+  // Turno
+  const ctu = contar("turno");
+  const turnos = Object.keys(TURNOS).filter((k) => ctu.has(k) || filtros.turno.has(k));
+  if (turnos.length) {
+    html.push(`<section class="faceta"><h2>Turno</h2><p class="ayuda">Solo convocatorias con reparto por turnos. Las cifras pasan a ser las del turno elegido.</p>${turnos.map((k) => opcion("turno", k, TURNOS[k].txt, ctu.get(k))).join("")}</section>`);
   }
 
   // Requisito de idioma
@@ -562,8 +596,8 @@ function ordenar(lista) {
   return lista.sort((a, b) =>
     o === "especialidad" ? porNombre(a, b) || porCcaa(a, b) :
     o === "comunidad" ? porCcaa(a, b) || porNombre(a, b) :
-    o === "estado" ? (ESTADOS[a.sit].orden - ESTADOS[b.sit].orden) || ((b.plazas || 0) - (a.plazas || 0)) :
-    ((b.plazas || 0) - (a.plazas || 0)) || porNombre(a, b));
+    o === "estado" ? (ESTADOS[a.sit].orden - ESTADOS[b.sit].orden) || (plazasDe(b) - plazasDe(a)) :
+    (plazasDe(b) - plazasDe(a)) || porNombre(a, b));
 }
 
 const icoPin = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>`;
@@ -573,7 +607,7 @@ function detalle(p) {
   const filas = [];
   if (p.turnos) {
     const t = p.turnos;
-    filas.push(["Turnos", [t.libre && `${t.libre} libre`, t.reserva && `${t.reserva} discapacidad`, t.acceso && `${t.acceso} acceso`].filter(Boolean).join(" · ")]);
+    filas.push(["Turnos", `<span class="turnos">${Object.keys(TURNOS).filter((k) => t[k]).map((k) => `<span class="${filtros.turno.has(k) ? "elegido" : ""}"><b>${fmt(t[k])}</b> ${TURNOS[k].corto}</span>`).join("")}</span>`]);
   }
   if (p.desglose && p.desglose.extraordinarias) {
     filas.push(["Origen", `${p.desglose.ordinarias} ordinarias + ${p.desglose.extraordinarias} de la OPE extraordinaria`]);
@@ -585,7 +619,8 @@ function detalle(p) {
     filas.push(["Inscripción", txt]);
   }
   if (p.fecha_examen) filas.push(["Pruebas", `Desde el ${fecha(p.fecha_examen)}`]);
-  if (p.tipo_oposicion) filas.push(["Normativa", esc(p.tipo_oposicion)]);
+  filas.push(["Tipo", `${TIPOS[p.tipo].txt}${p.normativa ? ` <span class="tenue">(${esc(p.normativa)})</span>` : ""}`]);
+  if (!p.fecha_examen) filas.push(["Pruebas", `En ${p.anio} <span class="tenue">(fecha sin publicar)</span>`]);
   if (p.fase) filas.push(["Según", esc(p.fase)]);
 
   const fuentes = (p.fuentes || []).map((f) => /^https?:\/\//.test(f) ? `<a href="${esc(f)}" target="_blank" rel="noopener">${esc(f.replace(/^https?:\/\/(www\.)?/, "").split("/")[0])}</a>` : esc(f)).join(" · ");
@@ -597,14 +632,21 @@ function detalle(p) {
   };
 }
 
+// Etiqueta para lo que no es una oposición ordinaria con examen.
+function marca(p, tag) {
+  const txt = p.tipo !== "ordinaria" ? TIPOS[p.tipo].txt : p.procedimiento === "concurso_meritos" ? "Concurso de méritos, sin examen" : "";
+  if (!txt) return "";
+  return `${tag === "span" ? " · " : ""}<${tag} class="marca${p.procedimiento === "concurso_meritos" ? " sin-examen" : ""}">${txt}</${tag}>`;
+}
+
 function tarjeta(p) {
   const d = detalle(p);
   return `<article class="card e-${p.sit}${p.esp ? "" : " agregado"}${p.procedimiento === "concurso_meritos" ? " es-meritos" : ""}">
     <div class="card-top"><span class="pill">${ESTADOS[p.sit].txt}</span><span class="anio">${p.anio}</span></div>
-    <div><h3>${d.titulo}</h3><p class="cuerpo">${d.sub}</p>${p.procedimiento === "concurso_meritos" ? `<p class="meritos">Concurso de méritos, sin examen</p>` : ""}</div>
+    <div><h3>${d.titulo}</h3><p class="cuerpo">${d.sub}</p>${marca(p, "p")}</div>
     <div class="card-medio">
       <span class="ccaa">${icoPin}${esc(p.lista)}</span>
-      <span class="cifra${p.plazas ? "" : " sin"}">${p.plazas ? `<b>${fmt(p.plazas)}</b><span>${p.plazas === 1 ? "plaza" : "plazas"}</span>` : `<b>Sin cifra</b>`}</span>
+      <span class="cifra${p.plazas ? "" : " sin"}">${p.plazas ? `<b>${fmt(plazasDe(p))}</b><span>${plazasDe(p) === 1 ? "plaza" : "plazas"}${filtros.turno.size ? ` de ${[...filtros.turno].map((k) => TURNOS[k].corto).join(" y ")}` : ""}</span>` : `<b>Sin cifra</b>`}</span>
     </div>
     ${d.dl}
     ${d.notas ? `<details class="mas"><summary>Notas y fuente</summary>${d.notas}</details>` : ""}
@@ -625,9 +667,9 @@ function fila(p) {
   return `<details class="fila e-${p.sit}${p.esp ? "" : " agregado"}${p.procedimiento === "concurso_meritos" ? " es-meritos" : ""}">
     <summary>
       <span class="c-est"><span class="pill">${ESTADOS[p.sit].txt}</span> <span class="anio">${p.anio}</span></span>
-      <span class="c-esp"><b>${d.titulo}</b><small>${d.sub}${p.requisito_linguistico ? ` · <span class="etq aviso">${esc(p.requisito_linguistico)}</span>` : ""}${p.procedimiento === "concurso_meritos" ? ` · <span class="meritos">Concurso de méritos, sin examen</span>` : ""}</small></span>
+      <span class="c-esp"><b>${d.titulo}</b><small>${d.sub}${p.requisito_linguistico ? ` · <span class="etq aviso">${esc(p.requisito_linguistico)}</span>` : ""}${marca(p, "span")}</small></span>
       <span class="c-ccaa">${esc(p.lista)}</span>
-      <span class="c-num${p.plazas ? "" : " sin"}">${p.plazas ? fmt(p.plazas) : "Sin cifra"}</span>
+      <span class="c-num${p.plazas ? "" : " sin"}">${p.plazas ? fmt(plazasDe(p)) : "Sin cifra"}</span>
       <span class="c-fecha">${resumenFechas(p)}</span>
       <span class="c-ico" aria-hidden="true"></span>
     </summary>
@@ -646,8 +688,8 @@ function pintarReparto(lista) {
   const por = new Map();
   for (const p of lista) {
     const o = por.get(p.lista_id) || { nom: p.lista, total: 0, e: {} };
-    o.total += p.plazas || 0;
-    o.e[p.sit] = (o.e[p.sit] || 0) + (p.plazas || 0);
+    o.total += plazasDe(p);
+    o.e[p.sit] = (o.e[p.sit] || 0) + plazasDe(p);
     por.set(p.lista_id, o);
   }
   const filas = [...por.entries()].filter(([, o]) => o.total > 0).sort((a, b) => b[1].total - a[1].total);
@@ -669,7 +711,8 @@ function pintarChips() {
     cuerpo: (v) => TODAS.find((p) => p.cuerpo === v)?.cuerpo_corto || v,
     esp: (v) => TODAS.find((p) => p.esp === v)?.especialidad || v,
     estado: (v) => ESTADOS[v]?.txt || v,
-    proc: (v) => PROCEDIMIENTOS[v]?.txt || v,
+    tipo: (v) => TIPOS[v]?.txt || v,
+    turno: (v) => `Turno: ${TURNOS[v]?.txt || v}`,
     idioma: (v) => v === "ninguno" ? "Sin requisito de idioma" : TODAS.find((p) => valor(p, "idioma") === v)?.requisito_linguistico || v,
   };
   for (const f of FACETAS) for (const v of filtros[f]) chips.push(`<button class="chip" type="button" data-quitar="${f}" data-v="${esc(v)}" aria-label="Quitar filtro ${esc(nombre[f](v))}">${esc(nombre[f](v))} <span aria-hidden="true">✕</span></button>`);
@@ -685,12 +728,12 @@ function pintar() {
   const { conEsp, agregados, buscaEsp } = filtrar();
   ordenar(conEsp);
   ordenar(agregados);
-  const totalPlazas = conEsp.reduce((s, p) => s + (p.plazas || 0), 0);
+  const totalPlazas = conEsp.reduce((s, p) => s + plazasDe(p), 0);
   const nCcaa = new Set(conEsp.map((p) => p.lista_id)).size;
   const nEsp = new Set(conEsp.map((p) => p.esp)).size;
   $("#total").innerHTML = conEsp.length
     ? `<b>${fmt(totalPlazas)}</b> plazas · ${nEsp === 1 ? "1 especialidad" : `${fmt(nEsp)} especialidades`} en ${nCcaa === 1 ? "1 comunidad" : `${nCcaa} comunidades`}`
-    + (agregados.length && !buscaEsp ? ` <span class="extra">y ${fmt(agregados.reduce((s, p) => s + (p.plazas || 0), 0))} más aún sin repartir</span>` : "")
+    + (agregados.length && !buscaEsp ? ` <span class="extra">y ${fmt(agregados.reduce((s, p) => s + plazasDe(p), 0))} más aún sin repartir</span>` : "")
     : agregados.length ? `Sin reparto por especialidad con estos filtros` : `Ninguna plaza con estos filtros`;
   $("#verResultados").textContent = conEsp.length || agregados.length ? `Ver ${fmt(conEsp.length + agregados.length)} resultados` : "Sin resultados";
 
