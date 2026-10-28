@@ -4,15 +4,18 @@ Comparativa de las oposiciones docentes de todas las comunidades autónomas: cu�
 
 ## Carpetas
 
-- `index.html`: la aplicación (una sola página, sin servidor).
+- `index.html`: el buscador de plazas (una sola página, sin servidor). Filtra por año, comunidad, cuerpo, especialidad y estado, y la dirección guarda los filtros para poder compartir la búsqueda.
 - `datos/`: los datos en CSV, separados por `;` y en UTF-8.
   - `resumen_ccaa.csv`: plazas de 2025 y 2027 por comunidad y estado del proceso.
   - `plazas_especialidad_2027.csv`: una fila por comunidad, cuerpo, especialidad e idioma.
   - `estado_ccaa_2027.csv`: estado de cada comunidad en Secundaria y en Maestros.
   - `especialidades.csv`: catálogo de cuerpos y especialidades con su código.
   - `navarra_2027_turnos.csv`: Navarra 2027 por turno (libre, reserva y acceso).
-- `documentacion/`: notas por comunidad y fuentes consultadas.
-- `herramientas/`: scripts para generar la Excel comparativa a partir de los CSV.
+  - `convocatorias.csv`: datos comunes de cada convocatoria (plazo de inscripción, fecha de las pruebas, normativa, requisito de idioma).
+  - `plazas.json` y `plazas.js`: lo que lee el buscador. Se generan, no se editan a mano.
+- `documentacion/`: notas por comunidad, fuentes consultadas y el formato de los datos del buscador (`esquema-datos.md`).
+- `herramientas/`: scripts para generar los datos del buscador y la Excel comparativa a partir de los CSV.
+- `img/`: logo.
 
 ## Estados
 
@@ -25,6 +28,14 @@ Comparativa de las oposiciones docentes de todas las comunidades autónomas: cu�
 | Anuncio | Declaración del gobierno, sin documento |
 
 Navarra va en dos filas, castellano y euskera, porque son listas separadas.
+
+## Actualizar el buscador
+
+Después de cambiar cualquier CSV:
+
+```
+python herramientas/generar_datos.py
+```
 
 ## Generar la Excel
 

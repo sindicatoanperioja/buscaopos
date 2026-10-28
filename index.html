@@ -3,45 +3,693 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Buscaopos · Oposiciones docentes por CCAA</title>
-<meta name="description" content="ANPE La Rioja: plazas de oposiciones docentes de todas las comunidades autónomas, por cuerpo y especialidad.">
+<title>Oposiciones docentes · ANPE La Rioja</title>
+<meta name="description" content="ANPE La Rioja: buscador de plazas de oposiciones docentes de todas las comunidades autónomas, por cuerpo, especialidad y estado.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --azul:#1b619c; --azul-profundo:#1b4f7d; --azul-cielo:#c6dbec; --azul-niebla:#e4eef6;
-  --verde:#6cb195; --verde-texto:#3d7a62; --tinta:#334155; --tinta-suave:#64748b;
-  --bg:#ffffff; --surface:#f7fafc;
+  --azul:#1b619c; --azul-profundo:#1b4f7d; --azul-medio:#5b9bce; --azul-cielo:#c6dbec; --azul-niebla:#e4eef6;
+  --verde:#6cb195; --verde-texto:#3d7a62; --verde-niebla:#e6f2ec;
+  --tinta:#334155; --tinta-suave:#64748b; --linea:#d9e4ee;
+  --bg:#f5f8fb; --surface:#ffffff; --sombra:0 1px 2px rgba(27,79,125,.06),0 4px 14px rgba(27,79,125,.06);
+  --gris-niebla:#eef1f4;
   color-scheme:light;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --azul:#7fb3e0; --azul-profundo:#c6dbec; --azul-niebla:#18242f;
-    --tinta:#e2e8f0; --tinta-suave:#94a3b8; --bg:#0f161c; --surface:#16202a;
+    --azul:#8dbbe4; --azul-profundo:#c6dbec; --azul-medio:#5b9bce; --azul-cielo:#2a4560; --azul-niebla:#1a2a3a;
+    --verde:#6cb195; --verde-texto:#8fd0b3; --verde-niebla:#1d3a30;
+    --tinta:#e2e8f0; --tinta-suave:#9aa9bb; --linea:#2b3a4a;
+    --bg:#0f161c; --surface:#16202a; --sombra:none; --gris-niebla:#222d38;
     color-scheme:dark;
   }
 }
+:root[data-theme="dark"]{
+  --azul:#8dbbe4; --azul-profundo:#c6dbec; --azul-medio:#5b9bce; --azul-cielo:#2a4560; --azul-niebla:#1a2a3a;
+  --verde:#6cb195; --verde-texto:#8fd0b3; --verde-niebla:#1d3a30;
+  --tinta:#e2e8f0; --tinta-suave:#9aa9bb; --linea:#2b3a4a;
+  --bg:#0f161c; --surface:#16202a; --sombra:none; --gris-niebla:#222d38;
+  color-scheme:dark;
+}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--tinta);font-family:Raleway,Arial,sans-serif;line-height:1.5}
-header{background:var(--azul-niebla);padding:32px 16px 24px}
-.wrap{max-width:1100px;margin:0 auto;padding:0 16px}
-h1{font-family:"Bebas Neue",Impact,sans-serif;font-weight:400;font-size:clamp(36px,6vw,56px);letter-spacing:.02em;color:var(--azul);margin:0}
-.sub{color:var(--tinta-suave);margin:4px 0 0}
-main{padding:32px 16px}
-.aviso{background:var(--surface);border-left:6px solid var(--verde);border-radius:12px;padding:16px 20px}
-footer{color:var(--tinta-suave);font-size:14px;padding:24px 16px;border-top:1px solid var(--azul-cielo)}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--tinta);font-family:Raleway,Arial,sans-serif;line-height:1.45;font-size:15px}
 a{color:var(--azul)}
+button,input,select{font:inherit;color:inherit}
+.wrap{max-width:1280px;margin:0 auto;padding:0 16px}
+.oculto{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Cabecera con la onda del banner */
+header{background:var(--surface);position:relative;padding:18px 0 46px}
+.cab{display:flex;align-items:center;gap:18px}
+.logo{height:76px;width:auto;flex:0 0 auto;background:#fff;border-radius:12px;padding:4px 6px}
+.cab-txt{border-left:2px solid var(--azul-cielo);padding-left:18px;min-width:0}
+.antetitulo{margin:0;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--verde-texto)}
+h1{font-family:"Bebas Neue",Impact,sans-serif;font-weight:400;font-size:clamp(38px,6vw,58px);line-height:.95;letter-spacing:.02em;color:var(--azul);margin:2px 0 0}
+.sub{color:var(--tinta-suave);margin:6px 0 0;max-width:60ch}
+.onda{position:absolute;left:0;right:0;bottom:0;width:100%;height:40px;display:block}
+
+/* Barra de búsqueda */
+.barra{position:sticky;top:0;z-index:20;background:var(--bg);padding:12px 0;border-bottom:1px solid var(--linea)}
+.barra .wrap{display:flex;gap:10px;align-items:center}
+.buscar{flex:1;position:relative}
+.buscar input{width:100%;height:46px;border:1.5px solid var(--azul-cielo);border-radius:999px;background:var(--surface);padding:0 44px 0 46px;font-size:16px;outline:none}
+.buscar input:focus{border-color:var(--azul);box-shadow:0 0 0 3px color-mix(in srgb,var(--azul) 18%,transparent)}
+.buscar svg{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--tinta-suave)}
+.buscar .limpiar{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:none;width:32px;height:32px;border-radius:50%;cursor:pointer;color:var(--tinta-suave)}
+.btn{height:46px;border-radius:999px;border:1.5px solid var(--azul-cielo);background:var(--surface);padding:0 18px;cursor:pointer;font-weight:600;white-space:nowrap;display:inline-flex;align-items:center;gap:8px}
+.btn:hover{border-color:var(--azul)}
+.btn-filtros{display:none}
+.btn .num{background:var(--azul);color:#fff;border-radius:999px;font-size:12px;min-width:20px;height:20px;padding:0 6px;display:inline-grid;place-items:center}
+[data-theme="dark"] .btn .num{color:#0f161c}
+
+/* Disposición */
+.cuerpo-pag{display:grid;grid-template-columns:280px 1fr;gap:28px;padding:22px 16px 40px;max-width:1280px;margin:0 auto}
+aside.filtros{align-self:start;position:sticky;top:84px;max-height:calc(100vh - 100px);overflow-y:auto;overflow-x:hidden;padding-right:4px}
+.filtros-cab{display:none}
+.faceta{border-bottom:1px solid var(--linea);padding:14px 0}
+.faceta:first-child{padding-top:0}
+.faceta h2{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--azul-profundo);margin:0 0 8px;display:flex;justify-content:space-between;align-items:center}
+.faceta h3{font-size:12px;font-weight:700;color:var(--tinta-suave);margin:10px 0 4px}
+.faceta h3:first-of-type{margin-top:0}
+.opc{display:flex;align-items:center;gap:9px;padding:5px 6px;margin:0 -6px;border-radius:8px;cursor:pointer;font-size:14px}
+.opc:hover{background:var(--azul-niebla)}
+.opc input{width:17px;height:17px;accent-color:var(--azul);margin:0;flex:0 0 auto}
+.opc .et{flex:1;min-width:0}
+.opc .et small{color:var(--tinta-suave);font-size:12px}
+.opc .cnt{color:var(--tinta-suave);font-size:12px;font-variant-numeric:tabular-nums}
+.opc.vacia{opacity:.45}
+.anios{display:flex;flex-wrap:wrap;gap:6px}
+.anios label{cursor:pointer}
+.anios input{position:absolute;opacity:0}
+.anios span{display:inline-block;border:1.5px solid var(--azul-cielo);border-radius:999px;padding:4px 14px;font-weight:700;font-size:14px}
+.anios input:checked+span{background:var(--azul);border-color:var(--azul);color:#fff}
+[data-theme="dark"] .anios input:checked+span{color:#0f161c}
+.anios input:focus-visible+span{outline:2px solid var(--azul);outline-offset:2px}
+.faceta-buscar{width:100%;height:36px;border:1px solid var(--linea);border-radius:999px;padding:0 14px;margin-bottom:6px;background:var(--surface);font-size:14px}
+.ver-mas{border:0;background:none;color:var(--azul);font-weight:700;cursor:pointer;padding:6px 0 0;font-size:13px}
+.punto{width:10px;height:10px;border-radius:50%;flex:0 0 auto}
+
+/* Resultados */
+.res-cab{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:end;justify-content:space-between;margin-bottom:12px}
+.total{margin:0;font-size:15px}
+.total .extra{color:var(--tinta-suave)}
+.total b{font-family:"Bebas Neue",Impact,sans-serif;font-weight:400;font-size:34px;color:var(--azul);letter-spacing:.02em;margin-right:4px;vertical-align:-3px}
+.orden{display:flex;gap:8px;align-items:center;font-size:14px;color:var(--tinta-suave)}
+.orden select{height:38px;border-radius:999px;border:1.5px solid var(--azul-cielo);background:var(--surface);padding:0 12px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}
+.chip{display:inline-flex;align-items:center;gap:6px;background:var(--azul-niebla);color:var(--azul-profundo);border:0;border-radius:999px;padding:5px 10px 5px 12px;font-size:13px;font-weight:600;cursor:pointer}
+.chip:hover{background:var(--azul-cielo)}
+.chip.borrar{background:none;color:var(--azul);text-decoration:underline}
+.compartir{font-size:13px;height:34px;padding:0 14px}
+
+/* Reparto por comunidad */
+.reparto{background:var(--surface);border-radius:20px;box-shadow:var(--sombra);border:1px solid var(--linea);padding:4px 18px;margin-bottom:18px}
+.reparto summary{cursor:pointer;padding:12px 0;font-weight:700;color:var(--azul-profundo);list-style:none;display:flex;justify-content:space-between;align-items:center}
+.reparto summary::-webkit-details-marker{display:none}
+.reparto summary::after{content:"";width:9px;height:9px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);margin:0 4px 4px}
+.reparto[open] summary::after{transform:rotate(-135deg);margin-bottom:-4px}
+.barras{display:grid;grid-template-columns:minmax(110px,190px) 1fr auto;gap:6px 12px;align-items:center;padding:0 0 14px;font-size:14px}
+.barras button{all:unset;cursor:pointer;display:contents}
+.barras .nom{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.barras .pista{height:12px;background:var(--azul-niebla);border-radius:999px;overflow:hidden;display:flex}
+.barras .pista i{display:block;height:100%}
+.barras .val{font-variant-numeric:tabular-nums;font-weight:700;text-align:right;min-width:48px}
+.barras button:hover .nom{color:var(--azul);text-decoration:underline}
+.leyenda{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;color:var(--tinta-suave);padding-bottom:12px}
+.leyenda span{display:inline-flex;align-items:center;gap:6px}
+
+/* Tarjetas */
+.rejilla{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--linea);border-radius:20px;box-shadow:var(--sombra);padding:16px 16px 14px;display:flex;flex-direction:column;gap:10px;position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--c-estado)}
+.card-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:3px 10px;font-size:12px;font-weight:700;background:var(--c-fondo);color:var(--c-texto)}
+.pill::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--c-estado)}
+.anio{font-size:12px;font-weight:700;color:var(--tinta-suave)}
+.card h3{margin:0;font-size:17px;line-height:1.25;font-weight:800;color:var(--tinta)}
+.card .cuerpo{margin:2px 0 0;font-size:13px;color:var(--tinta-suave)}
+.card-medio{display:flex;align-items:end;justify-content:space-between;gap:10px}
+.ccaa{font-weight:700;color:var(--azul-profundo);font-size:15px;display:flex;align-items:center;gap:6px}
+.ccaa svg{flex:0 0 auto;color:var(--verde)}
+.cifra{text-align:right;line-height:1}
+.cifra b{display:block;font-family:"Bebas Neue",Impact,sans-serif;font-weight:400;font-size:46px;color:var(--azul);letter-spacing:.01em}
+.cifra span{font-size:12px;color:var(--tinta-suave);font-weight:600}
+.cifra.sin b{font-size:24px;color:var(--tinta-suave)}
+.atributos{margin:0;display:grid;gap:6px;font-size:13px;border-top:1px dashed var(--linea);padding-top:10px}
+.atributos div{display:grid;grid-template-columns:92px 1fr;gap:8px}
+.atributos dt{color:var(--tinta-suave);font-weight:600}
+.atributos dd{margin:0}
+.etq{display:inline-block;border-radius:6px;padding:1px 7px;font-size:12px;font-weight:700;background:var(--verde-niebla);color:var(--verde-texto)}
+.etq.aviso{background:var(--azul-niebla);color:var(--azul-profundo)}
+.mas{font-size:13px}
+.mas summary{cursor:pointer;color:var(--azul);font-weight:700}
+.mas p{margin:6px 0 0;color:var(--tinta-suave)}
+.mas a{word-break:break-all}
+.card.agregado{border-style:dashed;background:color-mix(in srgb,var(--surface) 70%,var(--azul-niebla))}
+
+.sin-reparto{margin-top:28px}
+.sin-reparto h2,.vacio h2{font-family:"Bebas Neue",Impact,sans-serif;font-weight:400;font-size:28px;letter-spacing:.02em;color:var(--azul-profundo);margin:0}
+.sin-reparto>p{margin:2px 0 12px;color:var(--tinta-suave);font-size:14px}
+.vacio{background:var(--surface);border-radius:20px;border:1px dashed var(--azul-cielo);padding:28px;text-align:center}
+.cargar{display:flex;justify-content:center;margin-top:18px}
+
+footer{color:var(--tinta-suave);font-size:13px;padding:22px 0 30px;border-top:1px solid var(--linea);background:var(--surface)}
+footer p{margin:4px 0}
+
+/* Colores por estado */
+.e-abierta{--c-estado:#3d7a62;--c-fondo:var(--verde-niebla);--c-texto:var(--verde-texto)}
+.e-convocada{--c-estado:var(--verde);--c-fondo:var(--verde-niebla);--c-texto:var(--verde-texto)}
+.e-cerrada{--c-estado:#94a3b8;--c-fondo:var(--gris-niebla);--c-texto:var(--tinta-suave)}
+.e-acordada{--c-estado:var(--azul);--c-fondo:var(--azul-niebla);--c-texto:var(--azul-profundo)}
+.e-oep{--c-estado:var(--azul-medio);--c-fondo:var(--azul-niebla);--c-texto:var(--azul-profundo)}
+.e-borrador{--c-estado:var(--azul-cielo);--c-fondo:var(--azul-niebla);--c-texto:var(--azul-profundo)}
+.e-anuncio{--c-estado:#b8c7d6;--c-fondo:var(--gris-niebla);--c-texto:var(--tinta-suave)}
+.e-sin_datos{--c-estado:#cbd5e1;--c-fondo:var(--gris-niebla);--c-texto:var(--tinta-suave)}
+
+@media (max-width:900px){
+  .cuerpo-pag{grid-template-columns:1fr;padding-top:16px}
+  .btn-filtros{display:inline-flex}
+  aside.filtros{position:fixed;inset:0 auto 0 0;width:min(360px,92vw);max-height:none;height:100%;background:var(--bg);z-index:50;padding:0 18px 90px;transform:translateX(-102%);transition:transform .22s ease;box-shadow:0 0 40px rgba(0,0,0,.2)}
+  aside.filtros.abierto{transform:none}
+  .filtros-cab{display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:var(--bg);padding:14px 0;z-index:1;border-bottom:1px solid var(--linea);margin-bottom:12px}
+  .filtros-cab strong{font-family:"Bebas Neue",Impact,sans-serif;font-weight:400;font-size:26px;color:var(--azul)}
+  .filtros-pie{position:fixed;bottom:0;left:0;width:min(360px,92vw);padding:12px 18px;background:var(--bg);border-top:1px solid var(--linea)}
+  .filtros-pie .btn{width:100%;justify-content:center;background:var(--azul);border-color:var(--azul);color:#fff}
+  .velo{position:fixed;inset:0;background:rgba(15,22,28,.4);z-index:40}
+  .compartir-txt{display:none}
+}
+@media (min-width:901px){.filtros-pie,.velo{display:none!important}}
+@media (max-width:560px){
+  header{padding:14px 0 38px}
+  .logo{height:58px}
+  .sub{display:none}
+  .cab{gap:12px}.cab-txt{padding-left:12px}
+  .barras{grid-template-columns:minmax(90px,120px) 1fr auto}
+  .rejilla{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){aside.filtros{transition:none}}
 </style>
 </head>
 <body>
-<header><div class="wrap">
-  <h1>Buscaopos</h1>
-  <p class="sub">Oposiciones docentes en todas las comunidades autónomas: plazas, cuerpos, especialidades y estado del proceso.</p>
-</div></header>
-<main><div class="wrap">
-  <p class="aviso">Página en preparación. Los datos están en la carpeta <code>datos/</code> del repositorio.</p>
-</div></main>
-<footer><div class="wrap">ANPE La Rioja · <a href="https://www.anperioja.es">www.anperioja.es</a> · rioja@anpe.es</div></footer>
+<header>
+  <div class="wrap cab">
+    <a href="https://www.anperioja.es" aria-label="ANPE La Rioja"><img class="logo" src="img/logo-anpe.png" alt="ANPE"></a>
+    <div class="cab-txt">
+      <p class="antetitulo">Buscador de plazas</p>
+      <h1>Oposiciones docentes</h1>
+      <p class="sub">Lo que convoca o tiene previsto convocar cada comunidad, por cuerpo y especialidad, y en qué punto está.</p>
+    </div>
+  </div>
+  <svg class="onda" viewBox="0 0 1440 40" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 22 C 260 4, 520 4, 760 18 S 1220 36, 1440 12 L1440 40 L0 40Z" fill="var(--azul-cielo)"/>
+    <path d="M0 30 C 300 16, 560 18, 820 28 S 1240 38, 1440 22 L1440 40 L0 40Z" fill="var(--verde)" opacity=".55"/>
+    <path d="M0 35 C 320 26, 620 28, 900 34 S 1260 40, 1440 30 L1440 40 L0 40Z" fill="var(--bg)"/>
+  </svg>
+</header>
+
+<div class="barra">
+  <div class="wrap">
+    <button class="btn btn-filtros" id="abrirFiltros" type="button" aria-controls="filtros" aria-expanded="false">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+      Filtros <span class="num oculto" id="numFiltros"></span>
+    </button>
+    <div class="buscar">
+      <label for="q" class="sr">Buscar</label>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="Busca especialidad, comunidad o código" autocomplete="off">
+      <button class="limpiar oculto" id="limpiarQ" type="button" aria-label="Borrar búsqueda">✕</button>
+    </div>
+  </div>
+</div>
+
+<div class="cuerpo-pag">
+  <div class="velo oculto" id="velo"></div>
+  <aside class="filtros" id="filtros" aria-label="Filtros">
+    <div class="filtros-cab"><strong>Filtros</strong><button class="btn" id="cerrarFiltros" type="button">Cerrar</button></div>
+    <div id="facetas"></div>
+    <div class="filtros-pie"><button class="btn" id="verResultados" type="button">Ver resultados</button></div>
+  </aside>
+
+  <main>
+    <div class="res-cab">
+      <p class="total" id="total" aria-live="polite"></p>
+      <div class="orden">
+        <button class="btn compartir" id="compartir" type="button" title="Copiar el enlace con estos filtros">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>
+          <span class="compartir-txt">Copiar enlace</span>
+        </button>
+        <label for="orden">Ordenar</label>
+        <select id="orden">
+          <option value="plazas">Más plazas</option>
+          <option value="estado">Más avanzadas</option>
+          <option value="especialidad">Especialidad (A-Z)</option>
+          <option value="comunidad">Comunidad (A-Z)</option>
+        </select>
+      </div>
+    </div>
+    <div class="chips" id="chips"></div>
+    <details class="reparto" id="reparto">
+      <summary>Plazas por comunidad</summary>
+      <div class="leyenda" id="leyenda"></div>
+      <div class="barras" id="barras"></div>
+    </details>
+    <div class="rejilla" id="rejilla"></div>
+    <div class="cargar"><button class="btn oculto" id="cargarMas" type="button"></button></div>
+    <section class="sin-reparto oculto" id="sinReparto">
+      <h2>Sin reparto por especialidad todavía</h2>
+      <p>Estas comunidades tienen plazas anunciadas u ofertadas, pero aún no han dicho cuántas van a cada especialidad.</p>
+      <div class="rejilla" id="rejillaAgr"></div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p id="actualizado"></p>
+    <p>Cada cifra indica su estado y su fuente. Una oferta de empleo (OEP) o un borrador no son todavía una convocatoria: las plazas pueden cambiar hasta que se publican en el boletín oficial.</p>
+    <p>ANPE La Rioja · <a href="https://www.anperioja.es">www.anperioja.es</a> · rioja@anpe.es</p>
+  </div>
+</footer>
+
+<script src="datos/plazas.js"></script>
+<script>
+(() => {
+"use strict";
+
+// ---------- Datos ----------
+// Hoy vienen de datos/plazas.js (generado desde los CSV). Cuando haya backend,
+// basta con que cargarDatos() devuelva el mismo formato desde la API.
+async function cargarDatos() {
+  if (window.BUSCAOPOS_DATOS) return window.BUSCAOPOS_DATOS;
+  const r = await fetch("datos/plazas.json");
+  return r.json();
+}
+
+const ESTADOS = {
+  abierta:   { txt: "Plazo abierto",       grupo: "Convocadas",   orden: 1 },
+  convocada: { txt: "Convocada",           grupo: "Convocadas",   orden: 2 },
+  cerrada:   { txt: "Plazo cerrado",       grupo: "Convocadas",   orden: 3 },
+  acordada:  { txt: "Acordada",    grupo: "En previsión", orden: 4 },
+  oep:       { txt: "Oferta publicada (OEP)", grupo: "En previsión", orden: 5 },
+  borrador:  { txt: "Borrador",            grupo: "En previsión", orden: 6 },
+  anuncio:   { txt: "Anuncio",             grupo: "En previsión", orden: 7 },
+  sin_datos: { txt: "Sin datos",           grupo: "En previsión", orden: 8 },
+};
+const COLOR_ESTADO = {
+  abierta: "#3d7a62", convocada: "#6cb195", cerrada: "#94a3b8", acordada: "#1b619c",
+  oep: "#5b9bce", borrador: "#c6dbec", anuncio: "#b8c7d6", sin_datos: "#cbd5e1",
+};
+const POR_PAGINA = 36;
+const HOY = new Date(); HOY.setHours(0, 0, 0, 0);
+const ANIO_ACTUAL = HOY.getFullYear();
+
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const norm = (s) => String(s ?? "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+const slug = (s) => norm(s).replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+const fmt = (n) => n.toLocaleString("es-ES");
+const fecha = (iso, conAnio = true) => {
+  const d = new Date(iso + "T00:00:00");
+  return d.toLocaleDateString("es-ES", conAnio ? { day: "numeric", month: "short", year: "numeric" } : { day: "numeric", month: "short" });
+};
+const diasHasta = (iso) => Math.round((new Date(iso + "T00:00:00") - HOY) / 864e5);
+
+function situacion(p) {
+  if (p.estado !== "convocada") return p.estado;
+  if (p.anio < ANIO_ACTUAL) return "cerrada";
+  if (p.fin_plazo && diasHasta(p.fin_plazo) < 0) return "cerrada";
+  if (p.inicio_plazo && p.fin_plazo && diasHasta(p.inicio_plazo) <= 0) return "abierta";
+  return "convocada";
+}
+
+let TODAS = [];
+let pagina = 1;
+
+// ---------- Filtros y URL ----------
+const FACETAS = ["anio", "ccaa", "cuerpo", "esp", "estado"];
+const filtros = { anio: new Set(), ccaa: new Set(), cuerpo: new Set(), esp: new Set(), estado: new Set(), q: "", orden: "plazas" };
+
+function leerURL() {
+  const u = new URLSearchParams(location.search);
+  for (const f of FACETAS) filtros[f] = new Set((u.get(f) || "").split(",").filter(Boolean));
+  filtros.q = u.get("q") || "";
+  filtros.orden = u.get("orden") || "plazas";
+  return u;
+}
+function escribirURL(modo = "push") {
+  const u = new URLSearchParams();
+  for (const f of FACETAS) if (filtros[f].size) u.set(f, [...filtros[f]].join(","));
+  if (filtros.q) u.set("q", filtros.q);
+  if (filtros.orden !== "plazas") u.set("orden", filtros.orden);
+  const url = location.pathname + (u.toString() ? "?" + u.toString().replace(/%2C/g, ",") : "");
+  if (url === location.pathname + location.search) return;
+  history[modo === "push" ? "pushState" : "replaceState"](null, "", url);
+}
+
+function valor(p, f) {
+  if (f === "anio") return String(p.anio);
+  if (f === "ccaa") return p.lista_id;
+  if (f === "cuerpo") return p.cuerpo || "varios";
+  if (f === "esp") return p.esp;
+  if (f === "estado") return p.sit;
+}
+function pasaTexto(p, q) {
+  return !q || q.split(/\s+/).every((t) => p.texto.includes(t));
+}
+// Una plaza pasa si cumple todos los filtros salvo el que se indique (para contar cada faceta).
+function pasa(p, salvo) {
+  for (const f of FACETAS) {
+    if (f === salvo || !filtros[f].size) continue;
+    if (f === "esp" && !p.esp) continue; // los totales sin reparto se tratan aparte
+    if (f === "cuerpo" && !p.cuerpo) continue;
+    if (!filtros[f].has(valor(p, f))) return false;
+  }
+  return true;
+}
+
+// ---------- Preparar datos ----------
+function preparar(datos) {
+  const nombresEsp = new Map();
+  TODAS = datos.plazas.map((p) => {
+    const esp = p.especialidad ? `${p.cuerpo || "x"}-${p.codigo || slug(p.especialidad)}` : null;
+    const sit = situacion(p);
+    const codigo = p.cuerpo && p.codigo ? `${p.cuerpo}-${p.codigo}` : "";
+    const texto = norm([p.especialidad, p.lista, p.comunidad, p.cuerpo_nombre, p.cuerpo_corto, codigo, p.idioma, p.requisito_linguistico].join(" "));
+    if (esp) {
+      if (!nombresEsp.has(p.especialidad)) nombresEsp.set(p.especialidad, new Set());
+      nombresEsp.get(p.especialidad).add(p.cuerpo);
+    }
+    return { ...p, esp, sit, codigo_completo: codigo, texto };
+  });
+  // Si el mismo nombre existe en varios cuerpos, la faceta añade el cuerpo.
+  for (const p of TODAS) p.esp_txt = p.especialidad && nombresEsp.get(p.especialidad).size > 1 ? p.cuerpo_corto : "";
+}
+
+// ---------- Facetas ----------
+const abiertaFaceta = { esp: false, ccaa: false };
+let busquedaEsp = "";
+
+function contar(f) {
+  const m = new Map();
+  const q = norm(filtros.q.trim());
+  for (const p of TODAS) {
+    if (f === "esp" && !p.esp) continue;
+    if (!pasa(p, f) || (p.esp && !pasaTexto(p, q))) continue;
+    if (!p.esp && q && !pasaTexto(p, q)) continue;
+    const v = valor(p, f);
+    const o = m.get(v) || { n: 0, plazas: 0, p };
+    o.n++; o.plazas += p.plazas || 0;
+    m.set(v, o);
+  }
+  return m;
+}
+
+function opcion(f, v, et, info, extra = "") {
+  const marcado = filtros[f].has(v);
+  const n = info ? info.n : 0;
+  const cnt = info ? (info.plazas ? fmt(info.plazas) : "—") : "0";
+  return `<label class="opc${n ? "" : " vacia"}"><input type="checkbox" data-f="${f}" value="${esc(v)}"${marcado ? " checked" : ""}>${extra}<span class="et">${et}</span><span class="cnt">${cnt}</span></label>`;
+}
+
+function pintarFacetas() {
+  const html = [];
+  // Año
+  const anios = [...new Set(TODAS.map((p) => p.anio))].sort((a, b) => b - a);
+  html.push(`<section class="faceta"><h2>Año de celebración</h2><div class="anios">${anios.map((a) =>
+    `<label><input type="checkbox" data-f="anio" value="${a}"${filtros.anio.has(String(a)) ? " checked" : ""}><span>${a}</span></label>`).join("")}</div></section>`);
+
+  // Estado, agrupado
+  const ce = contar("estado");
+  let est = `<section class="faceta"><h2>Estado</h2>`;
+  for (const g of ["Convocadas", "En previsión"]) {
+    const claves = Object.keys(ESTADOS).filter((k) => ESTADOS[k].grupo === g && (ce.has(k) || filtros.estado.has(k)));
+    if (!claves.length) continue;
+    est += `<h3>${g}</h3>` + claves.map((k) => opcion("estado", k, ESTADOS[k].txt, ce.get(k), `<span class="punto" style="background:${COLOR_ESTADO[k]}"></span>`)).join("");
+  }
+  html.push(est + `</section>`);
+
+  // Comunidad
+  const cc = contar("ccaa");
+  const listas = [...new Map(TODAS.map((p) => [p.lista_id, p.lista])).entries()]
+    .filter(([id]) => cc.has(id) || filtros.ccaa.has(id))
+    .sort((a, b) => a[1].localeCompare(b[1], "es"));
+  html.push(`<section class="faceta"><h2>Comunidad</h2>${listas.map(([id, nom]) => opcion("ccaa", id, esc(nom), cc.get(id))).join("")}</section>`);
+
+  // Cuerpo
+  const cu = contar("cuerpo");
+  const cuerpos = [...new Map(TODAS.filter((p) => p.cuerpo).map((p) => [p.cuerpo, p])).values()]
+    .filter((p) => cu.has(p.cuerpo) || filtros.cuerpo.has(p.cuerpo))
+    .sort((a, b) => a.cuerpo.localeCompare(b.cuerpo));
+  html.push(`<section class="faceta"><h2>Cuerpo</h2>${cuerpos.map((p) => opcion("cuerpo", p.cuerpo, `${esc(p.cuerpo_corto)} <small>${p.cuerpo}</small>`, cu.get(p.cuerpo))).join("")}</section>`);
+
+  // Especialidad
+  const ces = contar("esp");
+  const qe = norm(busquedaEsp);
+  let esps = [...new Map(TODAS.filter((p) => p.esp).map((p) => [p.esp, p])).values()]
+    .filter((p) => ces.has(p.esp) || filtros.esp.has(p.esp))
+    .filter((p) => !qe || norm(p.especialidad + " " + p.codigo_completo).includes(qe))
+    .sort((a, b) => (filtros.esp.has(b.esp) - filtros.esp.has(a.esp)) || ((ces.get(b.esp)?.plazas || 0) - (ces.get(a.esp)?.plazas || 0)) || a.especialidad.localeCompare(b.especialidad, "es"));
+  const totalEsp = esps.length;
+  if (!abiertaFaceta.esp && !qe) esps = esps.slice(0, 12);
+  html.push(`<section class="faceta"><h2>Especialidad</h2>
+    <input class="faceta-buscar" id="buscarEsp" type="search" placeholder="Filtrar especialidades" value="${esc(busquedaEsp)}" aria-label="Filtrar la lista de especialidades">
+    <div id="listaEsp">${esps.map((p) => opcion("esp", p.esp, `${esc(p.especialidad)}${p.esp_txt ? ` <small>${esc(p.esp_txt)}</small>` : ""}`, ces.get(p.esp))).join("") || `<p class="opc vacia">Ninguna coincide</p>`}</div>
+    ${!qe && totalEsp > 12 ? `<button class="ver-mas" type="button" data-ver="esp">${abiertaFaceta.esp ? "Ver menos" : `Ver las ${totalEsp}`}</button>` : ""}</section>`);
+
+  const cont = $("#facetas");
+  const enfocado = document.activeElement && document.activeElement.id === "buscarEsp";
+  const pos = enfocado ? document.activeElement.selectionStart : 0;
+  cont.innerHTML = html.join("");
+  if (enfocado) { const i = $("#buscarEsp"); i.focus(); i.setSelectionRange(pos, pos); }
+}
+
+// ---------- Resultados ----------
+function filtrar() {
+  const q = norm(filtros.q.trim());
+  const conEsp = TODAS.filter((p) => p.esp && pasa(p) && pasaTexto(p, q));
+  // Totales sin reparto: se muestran si cumplen año, comunidad y estado, y si el cuerpo encaja.
+  const cuerposBuscados = new Set([...filtros.cuerpo, ...(filtros.esp.size || q ? conEsp.map((p) => p.cuerpo) : [])]);
+  const buscaEsp = filtros.esp.size > 0 || !!q;
+  const agregados = TODAS.filter((p) => {
+    if (p.esp || !pasa(p)) return false;
+    if (q && pasaTexto(p, q)) return true;
+    if (filtros.cuerpo.size && p.cuerpo && !filtros.cuerpo.has(p.cuerpo)) return false;
+    if (buscaEsp && p.cuerpo && !cuerposBuscados.has(p.cuerpo)) return false;
+    return true;
+  });
+  return { conEsp, agregados, buscaEsp };
+}
+
+function ordenar(lista) {
+  const o = filtros.orden;
+  const porNombre = (a, b) => (a.especialidad || "").localeCompare(b.especialidad || "", "es");
+  const porCcaa = (a, b) => a.lista.localeCompare(b.lista, "es");
+  return lista.sort((a, b) =>
+    o === "especialidad" ? porNombre(a, b) || porCcaa(a, b) :
+    o === "comunidad" ? porCcaa(a, b) || porNombre(a, b) :
+    o === "estado" ? (ESTADOS[a.sit].orden - ESTADOS[b.sit].orden) || ((b.plazas || 0) - (a.plazas || 0)) :
+    ((b.plazas || 0) - (a.plazas || 0)) || porNombre(a, b));
+}
+
+const icoPin = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>`;
+
+function tarjeta(p) {
+  const e = ESTADOS[p.sit];
+  const filas = [];
+  if (p.turnos) {
+    const t = p.turnos;
+    filas.push(["Turnos", [t.libre && `${t.libre} libre`, t.reserva && `${t.reserva} discapacidad`, t.acceso && `${t.acceso} acceso`].filter(Boolean).join(" · ")]);
+  }
+  if (p.desglose && p.desglose.extraordinarias) {
+    filas.push(["Origen", `${p.desglose.ordinarias} ordinarias + ${p.desglose.extraordinarias} de la OPE extraordinaria`]);
+  }
+  if (p.requisito_linguistico) filas.push(["Idioma", `<span class="etq aviso">${esc(p.requisito_linguistico)}</span>`]);
+  if (p.inicio_plazo || p.fin_plazo) {
+    let txt = p.inicio_plazo && p.fin_plazo ? `${fecha(p.inicio_plazo, false)} al ${fecha(p.fin_plazo)}` : p.fin_plazo ? `Hasta el ${fecha(p.fin_plazo)}` : `Desde el ${fecha(p.inicio_plazo)}`;
+    if (p.sit === "abierta" && p.fin_plazo) {
+      const d = diasHasta(p.fin_plazo);
+      txt += ` <span class="etq">${d === 0 ? "Último día" : d === 1 ? "Queda 1 día" : `Quedan ${d} días`}</span>`;
+    }
+    filas.push(["Inscripción", txt]);
+  }
+  if (p.fecha_examen) filas.push(["Pruebas", `Desde el ${fecha(p.fecha_examen)}`]);
+  if (p.tipo_oposicion) filas.push(["Normativa", esc(p.tipo_oposicion)]);
+
+  const fuentes = (p.fuentes || []).map((f) => /^https?:\/\//.test(f) ? `<a href="${esc(f)}" target="_blank" rel="noopener">${esc(f.replace(/^https?:\/\/(www\.)?/, "").split("/")[0])}</a>` : esc(f)).join(" · ");
+  const mas = p.observaciones || fuentes ? `<details class="mas"><summary>Notas y fuente</summary>${p.observaciones ? `<p>${esc(p.observaciones)}</p>` : ""}${fuentes ? `<p>Fuente: ${fuentes}</p>` : ""}</details>` : "";
+
+  const titulo = p.especialidad ? esc(p.especialidad) : p.cuerpo ? `Todo ${esc(p.cuerpo_corto)}` : "Todos los cuerpos";
+  const sub = p.especialidad ? `${esc(p.cuerpo_corto)}${p.codigo_completo ? ` · ${p.codigo_completo}` : ""}` : "Sin reparto por especialidad";
+  return `<article class="card e-${p.sit}${p.esp ? "" : " agregado"}">
+    <div class="card-top"><span class="pill">${e.txt}</span><span class="anio">${p.anio}</span></div>
+    <div><h3>${titulo}</h3><p class="cuerpo">${sub}</p></div>
+    <div class="card-medio">
+      <span class="ccaa">${icoPin}${esc(p.lista)}</span>
+      <span class="cifra${p.plazas ? "" : " sin"}">${p.plazas ? `<b>${fmt(p.plazas)}</b><span>${p.plazas === 1 ? "plaza" : "plazas"}</span>` : `<b>Sin cifra</b>`}</span>
+    </div>
+    ${filas.length ? `<dl class="atributos">${filas.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join("")}</dl>` : ""}
+    ${mas}
+  </article>`;
+}
+
+function pintarReparto(lista) {
+  const por = new Map();
+  for (const p of lista) {
+    const o = por.get(p.lista_id) || { nom: p.lista, total: 0, e: {} };
+    o.total += p.plazas || 0;
+    o.e[p.sit] = (o.e[p.sit] || 0) + (p.plazas || 0);
+    por.set(p.lista_id, o);
+  }
+  const filas = [...por.entries()].filter(([, o]) => o.total > 0).sort((a, b) => b[1].total - a[1].total);
+  const max = Math.max(1, ...filas.map(([, o]) => o.total));
+  const usados = new Set(filas.flatMap(([, o]) => Object.keys(o.e)));
+  $("#leyenda").innerHTML = Object.keys(ESTADOS).filter((k) => usados.has(k)).map((k) => `<span><i class="punto" style="background:${COLOR_ESTADO[k]}"></i>${ESTADOS[k].txt}</span>`).join("");
+  $("#barras").innerHTML = filas.map(([id, o]) => `<button type="button" data-ccaa="${esc(id)}" title="Filtrar por ${esc(o.nom)}">
+      <span class="nom">${esc(o.nom)}</span>
+      <span class="pista" style="width:${Math.max(2, (o.total / max) * 100)}%">${Object.keys(ESTADOS).filter((k) => o.e[k]).map((k) => `<i style="width:${(o.e[k] / o.total) * 100}%;background:${COLOR_ESTADO[k]}"></i>`).join("")}</span>
+      <span class="val">${fmt(o.total)}</span></button>`).join("");
+  $("#reparto").classList.toggle("oculto", filas.length < 2);
+}
+
+function pintarChips() {
+  const chips = [];
+  const nombre = {
+    anio: (v) => v,
+    ccaa: (v) => TODAS.find((p) => p.lista_id === v)?.lista || v,
+    cuerpo: (v) => TODAS.find((p) => p.cuerpo === v)?.cuerpo_corto || v,
+    esp: (v) => TODAS.find((p) => p.esp === v)?.especialidad || v,
+    estado: (v) => ESTADOS[v]?.txt || v,
+  };
+  for (const f of FACETAS) for (const v of filtros[f]) chips.push(`<button class="chip" type="button" data-quitar="${f}" data-v="${esc(v)}" aria-label="Quitar filtro ${esc(nombre[f](v))}">${esc(nombre[f](v))} <span aria-hidden="true">✕</span></button>`);
+  if (filtros.q) chips.push(`<button class="chip" type="button" data-quitar="q">«${esc(filtros.q)}» <span aria-hidden="true">✕</span></button>`);
+  if (chips.length > 1) chips.push(`<button class="chip borrar" type="button" data-quitar="todo">Quitar todos</button>`);
+  $("#chips").innerHTML = chips.join("");
+  const n = FACETAS.reduce((s, f) => s + filtros[f].size, 0);
+  $("#numFiltros").textContent = n;
+  $("#numFiltros").classList.toggle("oculto", !n);
+}
+
+function pintar() {
+  const { conEsp, agregados, buscaEsp } = filtrar();
+  ordenar(conEsp);
+  ordenar(agregados);
+  const totalPlazas = conEsp.reduce((s, p) => s + (p.plazas || 0), 0);
+  const nCcaa = new Set(conEsp.map((p) => p.lista_id)).size;
+  const nEsp = new Set(conEsp.map((p) => p.esp)).size;
+  $("#total").innerHTML = conEsp.length
+    ? `<b>${fmt(totalPlazas)}</b> plazas · ${nEsp === 1 ? "1 especialidad" : `${fmt(nEsp)} especialidades`} en ${nCcaa === 1 ? "1 comunidad" : `${nCcaa} comunidades`}`
+    + (agregados.length && !buscaEsp ? ` <span class="extra">y ${fmt(agregados.reduce((s, p) => s + (p.plazas || 0), 0))} más aún sin repartir</span>` : "")
+    : agregados.length ? `Sin reparto por especialidad con estos filtros` : `Ninguna plaza con estos filtros`;
+  $("#verResultados").textContent = conEsp.length || agregados.length ? `Ver ${fmt(conEsp.length + agregados.length)} resultados` : "Sin resultados";
+
+  const visibles = conEsp.slice(0, pagina * POR_PAGINA);
+  $("#rejilla").innerHTML = visibles.map(tarjeta).join("") ||
+    (agregados.length ? "" : `<div class="vacio"><h2>No hay plazas con estos filtros</h2><p>Prueba a quitar algún filtro o a buscar con otras palabras.</p><button class="btn" type="button" data-quitar="todo">Quitar filtros</button></div>`);
+  const quedan = conEsp.length - visibles.length;
+  $("#cargarMas").classList.toggle("oculto", quedan <= 0);
+  $("#cargarMas").textContent = `Ver ${Math.min(quedan, POR_PAGINA)} más (quedan ${fmt(quedan)})`;
+
+  $("#sinReparto").classList.toggle("oculto", !agregados.length);
+  $("#rejillaAgr").innerHTML = agregados.map(tarjeta).join("");
+
+  // Buscando una especialidad, los totales sin reparto no cuentan en las barras.
+  pintarReparto(buscaEsp ? conEsp : [...conEsp, ...agregados]);
+  pintarChips();
+  pintarFacetas();
+  $("#limpiarQ").classList.toggle("oculto", !filtros.q);
+  $("#orden").value = filtros.orden;
+}
+
+function cambiar(modo = "push") {
+  pagina = 1;
+  escribirURL(modo);
+  pintar();
+}
+
+// ---------- Eventos ----------
+$("#facetas").addEventListener("change", (ev) => {
+  const i = ev.target;
+  if (!i.dataset.f) return;
+  const s = filtros[i.dataset.f];
+  i.checked ? s.add(i.value) : s.delete(i.value);
+  cambiar();
+});
+$("#facetas").addEventListener("input", (ev) => {
+  if (ev.target.id !== "buscarEsp") return;
+  busquedaEsp = ev.target.value;
+  pintarFacetas();
+});
+$("#facetas").addEventListener("click", (ev) => {
+  const b = ev.target.closest("[data-ver]");
+  if (!b) return;
+  abiertaFaceta[b.dataset.ver] = !abiertaFaceta[b.dataset.ver];
+  pintarFacetas();
+});
+document.addEventListener("click", (ev) => {
+  const b = ev.target.closest("[data-quitar]");
+  if (b) {
+    const f = b.dataset.quitar;
+    if (f === "todo") { FACETAS.forEach((k) => filtros[k].clear()); filtros.q = ""; $("#q").value = ""; }
+    else if (f === "q") { filtros.q = ""; $("#q").value = ""; }
+    else filtros[f].delete(b.dataset.v);
+    cambiar();
+    return;
+  }
+  const c = ev.target.closest("[data-ccaa]");
+  if (c) { filtros.ccaa = new Set([c.dataset.ccaa]); cambiar(); }
+});
+let temporizador;
+$("#q").addEventListener("input", (ev) => {
+  clearTimeout(temporizador);
+  temporizador = setTimeout(() => { filtros.q = ev.target.value.trim(); cambiar("replace"); }, 180);
+});
+$("#limpiarQ").addEventListener("click", () => { filtros.q = ""; $("#q").value = ""; $("#q").focus(); cambiar(); });
+$("#orden").addEventListener("change", (ev) => { filtros.orden = ev.target.value; cambiar("replace"); });
+$("#cargarMas").addEventListener("click", () => { pagina++; pintar(); });
+$("#compartir").addEventListener("click", async () => {
+  const b = $("#compartir .compartir-txt");
+  try { await navigator.clipboard.writeText(location.href); b.textContent = "Enlace copiado"; }
+  catch { b.textContent = "No se pudo copiar"; }
+  setTimeout(() => { b.textContent = "Copiar enlace"; }, 2000);
+});
+window.addEventListener("popstate", () => { leerURL(); $("#q").value = filtros.q; pagina = 1; pintar(); });
+
+const panel = $("#filtros"), velo = $("#velo");
+function panelFiltros(abrir) {
+  panel.classList.toggle("abierto", abrir);
+  velo.classList.toggle("oculto", !abrir);
+  $("#abrirFiltros").setAttribute("aria-expanded", abrir);
+  document.body.style.overflow = abrir ? "hidden" : "";
+}
+$("#abrirFiltros").addEventListener("click", () => panelFiltros(true));
+$("#cerrarFiltros").addEventListener("click", () => panelFiltros(false));
+$("#verResultados").addEventListener("click", () => panelFiltros(false));
+velo.addEventListener("click", () => panelFiltros(false));
+document.addEventListener("keydown", (ev) => { if (ev.key === "Escape" && panel.classList.contains("abierto")) panelFiltros(false); });
+
+// ---------- Arranque ----------
+cargarDatos().then((datos) => {
+  preparar(datos);
+  const u = leerURL();
+  // Sin año en el enlace, se muestra la próxima convocatoria con datos.
+  if (!u.has("anio")) {
+    const anios = [...new Set(TODAS.map((p) => p.anio))].sort();
+    const def = anios.find((a) => a >= ANIO_ACTUAL) || anios[anios.length - 1];
+    if (def) filtros.anio.add(String(def));
+    escribirURL("replace");
+  }
+  $("#q").value = filtros.q;
+  $("#reparto").open = window.matchMedia("(min-width: 901px)").matches;
+  $("#actualizado").textContent = `Datos actualizados el ${fecha(datos.generado)}.`;
+  pintar();
+}).catch(() => {
+  $("#total").textContent = "No se han podido cargar los datos.";
+});
+})();
+</script>
 </body>
 </html>
