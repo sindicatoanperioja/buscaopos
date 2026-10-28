@@ -513,27 +513,12 @@ function pintarFacetas() {
   html.push(`<section class="faceta"><h2>Estado</h2>${claves.map((k) => opcion("estado", k,
     `${ESTADOS[k].txt}<br><small>${ESTADOS[k].ayuda}</small>`, ce.get(k), `<span class="punto" style="background:${COLOR_ESTADO[k]}"></span>`)).join("")}</section>`);
 
-  // Tipo de oposición
-  const ct = contar("tipo");
-  const tipos = Object.keys(TIPOS).filter((k) => ct.has(k) || filtros.tipo.has(k));
-  if (tipos.length > 1 || filtros.tipo.size) {
-    html.push(`<section class="faceta"><h2>Tipo de oposición</h2>${tipos.map((k) => opcion("tipo", k,
-      `${TIPOS[k].txt}<br><small>${TIPOS[k].ayuda}</small>`, ct.get(k))).join("")}</section>`);
-  }
-
-  // Turno
-  const ctu = contar("turno");
-  const turnos = Object.keys(TURNOS).filter((k) => ctu.has(k) || filtros.turno.has(k));
-  if (turnos.length) {
-    html.push(`<section class="faceta"><h2>Turno</h2><p class="ayuda">Solo convocatorias con reparto por turnos. Las cifras pasan a ser las del turno elegido.</p>${turnos.map((k) => opcion("turno", k, TURNOS[k].txt, ctu.get(k))).join("")}</section>`);
-  }
-
-  // Requisito de idioma
-  const ci = contar("idioma");
-  const idiomas = [...new Map(TODAS.map((p) => [valor(p, "idioma"), p.requisito_linguistico || "Sin requisito de idioma"])).entries()]
-    .filter(([v]) => ci.has(v) || filtros.idioma.has(v))
-    .sort((a, b) => (a[0] === "ninguno") - (b[0] === "ninguno") || a[1].localeCompare(b[1], "es"));
-  html.push(`<section class="faceta"><h2>Requisito de idioma</h2>${idiomas.map(([v, nom]) => opcion("idioma", v, esc(nom), ci.get(v))).join("")}</section>`);
+  // Cuerpo
+  const cu = contar("cuerpo");
+  const cuerpos = [...new Map(TODAS.filter((p) => p.cuerpo).map((p) => [p.cuerpo, p])).values()]
+    .filter((p) => cu.has(p.cuerpo) || filtros.cuerpo.has(p.cuerpo))
+    .sort((a, b) => a.cuerpo.localeCompare(b.cuerpo));
+  html.push(`<section class="faceta"><h2>Cuerpo</h2>${cuerpos.map((p) => opcion("cuerpo", p.cuerpo, `${esc(p.cuerpo_corto)} <small>${p.cuerpo}</small>`, cu.get(p.cuerpo))).join("")}</section>`);
 
   // Comunidad
   const cc = contar("ccaa");
@@ -542,12 +527,27 @@ function pintarFacetas() {
     .sort((a, b) => a[1].localeCompare(b[1], "es"));
   html.push(`<section class="faceta"><h2>Comunidad</h2>${listas.map(([id, nom]) => opcion("ccaa", id, esc(nom), cc.get(id))).join("")}</section>`);
 
-  // Cuerpo
-  const cu = contar("cuerpo");
-  const cuerpos = [...new Map(TODAS.filter((p) => p.cuerpo).map((p) => [p.cuerpo, p])).values()]
-    .filter((p) => cu.has(p.cuerpo) || filtros.cuerpo.has(p.cuerpo))
-    .sort((a, b) => a.cuerpo.localeCompare(b.cuerpo));
-  html.push(`<section class="faceta"><h2>Cuerpo</h2>${cuerpos.map((p) => opcion("cuerpo", p.cuerpo, `${esc(p.cuerpo_corto)} <small>${p.cuerpo}</small>`, cu.get(p.cuerpo))).join("")}</section>`);
+  // Turno
+  const ctu = contar("turno");
+  const turnos = Object.keys(TURNOS).filter((k) => ctu.has(k) || filtros.turno.has(k));
+  if (turnos.length) {
+    html.push(`<section class="faceta"><h2>Turno</h2><p class="ayuda">Solo convocatorias con reparto por turnos. Las cifras pasan a ser las del turno elegido.</p>${turnos.map((k) => opcion("turno", k, TURNOS[k].txt, ctu.get(k))).join("")}</section>`);
+  }
+
+  // Tipo de oposición
+  const ct = contar("tipo");
+  const tipos = Object.keys(TIPOS).filter((k) => ct.has(k) || filtros.tipo.has(k));
+  if (tipos.length > 1 || filtros.tipo.size) {
+    html.push(`<section class="faceta"><h2>Tipo de oposición</h2>${tipos.map((k) => opcion("tipo", k,
+      `${TIPOS[k].txt}<br><small>${TIPOS[k].ayuda}</small>`, ct.get(k))).join("")}</section>`);
+  }
+
+  // Requisito de idioma
+  const ci = contar("idioma");
+  const idiomas = [...new Map(TODAS.map((p) => [valor(p, "idioma"), p.requisito_linguistico || "Sin requisito de idioma"])).entries()]
+    .filter(([v]) => ci.has(v) || filtros.idioma.has(v))
+    .sort((a, b) => (a[0] === "ninguno") - (b[0] === "ninguno") || a[1].localeCompare(b[1], "es"));
+  html.push(`<section class="faceta"><h2>Requisito de idioma</h2>${idiomas.map(([v, nom]) => opcion("idioma", v, esc(nom), ci.get(v))).join("")}</section>`);
 
   // Especialidad
   const ces = contar("esp");
