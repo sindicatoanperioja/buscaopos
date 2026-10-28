@@ -44,9 +44,9 @@ Cada registro es un año, una comunidad, un cuerpo y una especialidad con su nú
 
 Hay tres estados:
 
-- Previsto: todo lo que aún no está convocado. Da igual que la cifra venga de un anuncio, de una noticia de un sindicato o de la Consejería, de una propuesta en mesa o de una OEP aprobada: la OEP se puede convocar en cualquiera de los tres años siguientes, así que lo que cuenta es el año en que se prevé convocar. El campo `fase` dice de dónde sale el dato.
-- Convocada: publicada en el boletín. Si hoy cae dentro del plazo de inscripción, la ficha dice cuántos días quedan.
-- Convocada, plazo cerrado: la página la marca así sola cuando ya pasó `fin_plazo` o el año es anterior al actual. También se puede poner a mano en el CSV con el estado "Convocada - plazo cerrado".
+- Previstas: todo lo que aún no está convocado. Da igual que la cifra venga de un anuncio, de una noticia de un sindicato o de la Consejería, de una propuesta en mesa o de una OEP aprobada: la OEP se puede convocar en cualquiera de los tres años siguientes, así que lo que cuenta es el año en que se prevé convocar. El campo `fase` dice de dónde sale el dato.
+- Convocadas: publicadas en el boletín. Si hoy cae dentro del plazo de inscripción, la ficha dice cuántos días quedan.
+- Convocadas, plazo cerrado: la página la marca así sola cuando ya pasó `fin_plazo` o el año es anterior al actual. También se puede poner a mano en el CSV con el estado "Convocada - plazo cerrado".
 
 ## De dónde sale cada campo hoy
 
