@@ -2,13 +2,10 @@
 
 Datos para preparar el informe de situación y distribución de plazas de todas las comunidades. Recogidos entre el 19 y el 27 de octubre de 2026 en webs de ANPE y otros sindicatos, boletines oficiales y notas de prensa de los gobiernos. Cada cifra lleva su fase: convocatoria (publicada en boletín), OEP (oferta aprobada en boletín, aún sin convocar), borrador (presentado en mesa) o anuncio (declaración política).
 
-Archivos de esta carpeta:
-- `Situacion por comunidades.md`: este resumen.
-- `navarra_2027_especialidades.csv`: plazas de Navarra 2027 por cuerpo, especialidad, idioma y turno (separador `;`).
-- `Plazas por especialidad CCAA 2027.xlsx`: matriz comunidad × especialidad con el formato de la Excel de centros de La Rioja (hojas Notas, Secundaria, Maestros y Detalle), con columna Estado. Navarra va en dos filas (castellano 608, euskera 114). A 27-10-2026 tienen reparto por especialidad: Navarra (convocada), La Rioja (acordada), Castilla-La Mancha 949 y Aragón 900 (acordadas en mesa el 20-10), Extremadura 805, Cantabria 453 y Baleares 474 (borradores) y los Maestros de la OEP 2026 de Andalucía (806). El resto solo tiene cifras por cuerpo o anuncios.
-- `generador/`: `datos_especialidades_2027.csv` (todas las filas en formato largo), `estados_2027.csv` (estado por comunidad y hoja), `notas.txt` y `generar_excel.py`. Para actualizar: editar los CSV y ejecutar `python -I generador/generar_excel.py "C:/Users/victo/Downloads/opos 2027.xlsx" generador/datos_especialidades_2027.csv generador/estados_2027.csv "Plazas por especialidad CCAA 2027.xlsx" generador/notas.txt` desde esta carpeta.
+Los datos de este resumen están en `../datos/` en CSV; la Excel comparativa se genera con `../herramientas/generar_excel.py`.
 
 La Rioja 2027 por especialidad (ya aprobadas + OPE extraordinaria = total), según la propuesta de la Consejería del 16-10-2026: Lengua 20+15=35, Matemáticas 17+8=25, Física y Química 11+4=15, Biología 11+15=26, Dibujo 6+4=10, Inglés 20+22=42, Educación Física 7+5=12, Informática 7, Intervención Sociocomunitaria 2+4=6, Fabricación Mecánica 4, Procesos Sanitarios 3+4=7, Instalaciones Electrotécnicas 5+2=7, Oficina de Proyectos de Construcción 3, Operaciones de Producción Agraria 3, Procesos Comerciales 6+3=9, Gestión Administrativa 10+15=25, EOI Inglés 8+6=14, Mantenimiento de Vehículos 5+4=9, Mecanizado 4+2=6, Patronaje y Confección 5+5=10. Total 157+118=275. La misma propuesta reparte 250 de Maestros para 2028 y 141 de otros cuerpos para 2029 (509 extraordinarias en total). Fuente: propuesta de la Consejería de Educación de 16-10-2026.
+
 
 ## Tabla resumen (cifra más alta entre 2025 y 2027)
 

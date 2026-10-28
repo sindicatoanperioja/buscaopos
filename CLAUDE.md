@@ -1,6 +1,6 @@
 # Buscaopos
 
-Comparativa de oposiciones docentes por CCAA, de ANPE La Rioja. Repositorio pensado para GitHub (cuenta sindicatoanperioja), como Retribuciones (`../Retribuciones`).
+Comparativa de oposiciones docentes por CCAA, de ANPE La Rioja. Repositorio pensado para GitHub (cuenta sindicatoanperioja), como Retribuciones.
 
 - Los datos viven en `datos/*.csv` (separador `;`, UTF-8 con BOM). La app y la Excel se generan desde ahí; no meter cifras a mano en `index.html`.
 - Cada cifra lleva estado (Convocada, Acordada, OEP publicada, Borrador, Anuncio, Sin datos) y fuente. Distinguir siempre OEP de convocatoria.
