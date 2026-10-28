@@ -218,7 +218,7 @@ footer p{margin:4px 0}
 /* Colores por estado */
 .e-convocada{--c-estado:#3d7a62;--c-fondo:var(--verde-niebla);--c-texto:var(--verde-texto)}
 .e-cerrada{--c-estado:#94a3b8;--c-fondo:var(--gris-niebla);--c-texto:var(--tinta-suave)}
-.e-borrador{--c-estado:var(--azul-medio);--c-fondo:var(--azul-niebla);--c-texto:var(--azul-profundo)}
+.e-previsto{--c-estado:var(--azul-medio);--c-fondo:var(--azul-niebla);--c-texto:var(--azul-profundo)}
 
 @media (max-width:900px){
   .cuerpo-pag{grid-template-columns:1fr;padding-top:16px}
@@ -324,7 +324,7 @@ footer p{margin:4px 0}
 <footer>
   <div class="wrap">
     <p id="actualizado"></p>
-    <p>Cada cifra indica su estado y su fuente. Una oferta de empleo (OEP) o un borrador no son todavía una convocatoria: las plazas pueden cambiar hasta que se publican en el boletín oficial.</p>
+    <p>Cada cifra indica su estado y su fuente. Una plaza prevista (anuncio, propuesta en mesa u oferta de empleo) no es todavía una convocatoria: las plazas pueden cambiar hasta que se publican en el boletín oficial.</p>
     <p>ANPE La Rioja · <a href="https://www.anperioja.es">www.anperioja.es</a> · rioja@anpe.es</p>
   </div>
 </footer>
@@ -343,13 +343,13 @@ async function cargarDatos() {
   return r.json();
 }
 
-// Borrador reúne todo lo que aún no está convocado: anuncios, propuestas en mesa, acuerdos y OEP.
+// Previsto reúne todo lo que aún no está convocado: anuncios, propuestas en mesa, acuerdos y OEP.
 const ESTADOS = {
   convocada: { txt: "Convocada",                ayuda: "Publicada en el boletín",           orden: 1 },
   cerrada:   { txt: "Convocada, plazo cerrado", ayuda: "Ya no admite inscripciones",        orden: 2 },
-  borrador:  { txt: "Borrador",                 ayuda: "Anuncios, propuestas y ofertas sin convocar", orden: 3 },
+  previsto:  { txt: "Previsto",                 ayuda: "Anuncios, propuestas y ofertas sin convocar", orden: 3 },
 };
-const COLOR_ESTADO = { convocada: "#3d7a62", cerrada: "#94a3b8", borrador: "#5b9bce" };
+const COLOR_ESTADO = { convocada: "#3d7a62", cerrada: "#94a3b8", previsto: "#5b9bce" };
 const TIPOS = {
   ordinaria:                 { txt: "Ordinaria",                   ayuda: "RD 276/2007" },
   estabilizacion_prueba:     { txt: "Estabilización con prueba",   ayuda: "Concurso-oposición, RD 270/2022" },
@@ -380,7 +380,7 @@ const diasHasta = (iso) => Math.round((new Date(iso + "T00:00:00") - HOY) / 864e
 
 function situacion(p) {
   if (p.estado === "cerrada") return "cerrada";
-  if (p.estado !== "convocada") return "borrador";
+  if (p.estado !== "convocada") return "previsto";
   if (p.anio < ANIO_ACTUAL) return "cerrada";
   if (p.fin_plazo && diasHasta(p.fin_plazo) < 0) return "cerrada";
   return "convocada";

@@ -40,15 +40,15 @@ CUERPOS_CORTO = {
     "0598": "FP (sectores singulares)",
 }
 # El buscador solo distingue tres estados. Anuncio, borrador, acuerdo en mesa y OEP son
-# todos previsión de una convocatoria futura ("borrador"); lo que fue se guarda en "fase".
+# todos previsión de una convocatoria futura ("previsto"); lo que fue se guarda en "fase".
 ESTADOS = {
     "convocada": ("convocada", None),
     "convocada - plazo cerrado": ("cerrada", None),
-    "acordada": ("borrador", "Acordada"),
-    "acordada en mesa": ("borrador", "Acordada en mesa sectorial"),
-    "oep publicada": ("borrador", "Oferta de empleo publicada, sin convocar"),
-    "borrador": ("borrador", "Borrador presentado en mesa"),
-    "anuncio": ("borrador", "Anuncio, sin documento"),
+    "acordada": ("previsto", "Acordada"),
+    "acordada en mesa": ("previsto", "Acordada en mesa sectorial"),
+    "oep publicada": ("previsto", "Oferta de empleo publicada, sin convocar"),
+    "borrador": ("previsto", "Borrador presentado en mesa"),
+    "anuncio": ("previsto", "Anuncio, sin documento"),
     "sin datos": (None, None),
 }
 

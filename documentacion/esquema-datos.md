@@ -28,8 +28,8 @@ Cada registro es un año, una comunidad, un cuerpo y una especialidad con su nú
 | `plazas` | no | `25` | Vacío si solo hay anuncio sin cifra. |
 | `turnos` | no | `{"libre":24,"reserva":6,"acceso":30}` | Cuando la convocatoria los separa: `libre`, `reserva` (discapacidad), `acceso` (promoción interna desde otro cuerpo o subgrupo) y `otras` (otras reservas, como víctimas del terrorismo; sale de restar al total los otros tres). |
 | `desglose` | no | `{"ordinarias":17,"extraordinarias":8}` | De momento solo La Rioja. |
-| `estado` | sí | `convocada` | `borrador`, `convocada` o `cerrada` (convocada con el plazo de inscripción cerrado). |
-| `fase` | no | `Acordada en mesa sectorial` | Solo en los borradores: de dónde sale la cifra (anuncio, propuesta en mesa, acuerdo u OEP). |
+| `estado` | sí | `convocada` | `previsto`, `convocada` o `cerrada` (convocada con el plazo de inscripción cerrado). |
+| `fase` | no | `Acordada en mesa sectorial` | Solo en las previstas: de dónde sale la cifra (anuncio, propuesta en mesa, acuerdo u OEP). |
 | `tipo` | sí | `ordinaria` | `ordinaria` (RD 276/2007), `estabilizacion_prueba` (concurso-oposición de estabilización, RD 270/2022) o `estabilizacion_sin_prueba` (concurso de méritos excepcional, sin examen). |
 | `normativa` | no | `RD 276/2007` | |
 | `inicio_plazo`, `fin_plazo` | no | `2026-10-28` | Plazo de inscripción, en formato AAAA-MM-DD. |
@@ -44,7 +44,7 @@ Cada registro es un año, una comunidad, un cuerpo y una especialidad con su nú
 
 Hay tres estados:
 
-- Borrador: todo lo que aún no está convocado. Da igual que la cifra venga de un anuncio, de una noticia de un sindicato o de la Consejería, de una propuesta en mesa o de una OEP aprobada: la OEP se puede convocar en cualquiera de los tres años siguientes, así que lo que cuenta es el año en que se prevé convocar. El campo `fase` dice de dónde sale el dato.
+- Previsto: todo lo que aún no está convocado. Da igual que la cifra venga de un anuncio, de una noticia de un sindicato o de la Consejería, de una propuesta en mesa o de una OEP aprobada: la OEP se puede convocar en cualquiera de los tres años siguientes, así que lo que cuenta es el año en que se prevé convocar. El campo `fase` dice de dónde sale el dato.
 - Convocada: publicada en el boletín. Si hoy cae dentro del plazo de inscripción, la ficha dice cuántos días quedan.
 - Convocada, plazo cerrado: la página la marca así sola cuando ya pasó `fin_plazo` o el año es anterior al actual. También se puede poner a mano en el CSV con el estado "Convocada - plazo cerrado".
 
