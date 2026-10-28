@@ -104,7 +104,6 @@ aside.filtros{align-self:start;position:sticky;top:84px;max-height:calc(100vh - 
 .chip{display:inline-flex;align-items:center;gap:6px;background:var(--azul-niebla);color:var(--azul-profundo);border:0;border-radius:999px;padding:5px 10px 5px 12px;font-size:13px;font-weight:600;cursor:pointer}
 .chip:hover{background:var(--azul-cielo)}
 .chip.borrar{background:none;color:var(--azul);text-decoration:underline}
-.compartir{font-size:13px;height:34px;padding:0 14px}
 
 /* Reparto por comunidad */
 .reparto{background:var(--surface);border-radius:20px;box-shadow:var(--sombra);border:1px solid var(--linea);padding:4px 18px;margin-bottom:18px}
@@ -228,7 +227,6 @@ footer p{margin:4px 0}
   .filtros-pie{position:fixed;bottom:0;left:0;width:min(360px,92vw);padding:12px 18px;background:var(--bg);border-top:1px solid var(--linea)}
   .filtros-pie .btn{width:100%;justify-content:center;background:var(--azul);border-color:var(--azul);color:#fff}
   .velo{position:fixed;inset:0;background:rgba(15,22,28,.4);z-index:40}
-  .compartir-txt{display:none}
 }
 @media (min-width:901px){.filtros-pie,.velo{display:none!important}}
 @media (max-width:560px){
@@ -286,10 +284,6 @@ footer p{margin:4px 0}
     <div class="res-cab">
       <p class="total" id="total" aria-live="polite"></p>
       <div class="orden">
-        <button class="btn compartir" id="compartir" type="button" title="Copiar el enlace con estos filtros">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>
-          <span class="compartir-txt">Copiar enlace</span>
-        </button>
         <div class="vistas" id="vistas" role="group" aria-label="Forma de ver los resultados">
           <button type="button" data-vista="fichas" aria-pressed="true" title="Ver en fichas">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2"/></svg><span>Fichas</span>
@@ -811,12 +805,6 @@ $("#vistas").addEventListener("click", (ev) => {
   filtros.vista = b.dataset.vista;
   try { localStorage.setItem("buscaopos-vista", filtros.vista); } catch {}
   cambiar("replace");
-});
-$("#compartir").addEventListener("click", async () => {
-  const b = $("#compartir .compartir-txt");
-  try { await navigator.clipboard.writeText(location.href); b.textContent = "Enlace copiado"; }
-  catch { b.textContent = "No se pudo copiar"; }
-  setTimeout(() => { b.textContent = "Copiar enlace"; }, 2000);
 });
 window.addEventListener("popstate", () => { leerURL(); $("#q").value = filtros.q; pagina = 1; pintar(); });
 
