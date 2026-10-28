@@ -12,7 +12,8 @@ Comparativa de las oposiciones docentes de todas las comunidades autónomas: cu�
   - `estado_ccaa_2027.csv`: estado de cada comunidad en Secundaria y en Maestros.
   - `especialidades.csv`: catálogo de cuerpos y especialidades con su código.
   - `navarra_2027_turnos.csv`: Navarra 2027 por turno (libre, reserva y acceso).
-  - `convocatorias.csv`: datos comunes de cada convocatoria (plazo de inscripción, fecha de las pruebas, normativa, requisito de idioma).
+  - `convocatorias.csv`: datos comunes de cada convocatoria (plazo de inscripción, fecha de las pruebas, normativa, requisito de idioma, concurso de méritos o concurso-oposición).
+  - `requisitos_linguisticos.csv`: lengua cooficial que exige cada comunidad.
   - `plazas.json` y `plazas.js`: lo que lee el buscador. Se generan, no se editan a mano.
 - `documentacion/`: notas por comunidad, fuentes consultadas y el formato de los datos del buscador (`esquema-datos.md`) y notas sobre las convocatorias de 2024 a 2026 (`convocatorias-2024-2026.md`).
 - `herramientas/`: scripts para generar los datos del buscador y la Excel comparativa a partir de los CSV.

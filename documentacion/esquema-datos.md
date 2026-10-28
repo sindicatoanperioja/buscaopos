@@ -33,7 +33,9 @@ Cada registro es un año, una comunidad, un cuerpo y una especialidad con su nú
 | `tipo_oposicion` | no | `RD 276/2007` | |
 | `inicio_plazo`, `fin_plazo` | no | `2026-10-28` | Plazo de inscripción, en formato AAAA-MM-DD. |
 | `fecha_examen` | no | `2027-04-17` | Día en que empiezan las pruebas. |
-| `requisito_linguistico` | no | `EGA o equivalente` | |
+| `requisito_linguistico` | no | `Catalán C1` | En Cataluña, C. Valenciana, Baleares, Galicia y País Vasco sale de `requisitos_linguisticos.csv` y vale para todas sus plazas. En Navarra (euskera), de la convocatoria. |
+| `requisito_detalle` | no | `Hay que acreditar el nivel C1 de catalán.` | Explicación corta del requisito. |
+| `procedimiento` | sí | `concurso_oposicion` | `concurso_oposicion` (con examen) o `concurso_meritos` (sin examen). |
 | `observaciones` | no | | Texto libre. |
 | `fuentes` | sí | `["https://bon.navarra.es/..."]` | Enlaces o descripciones de la fuente. |
 
@@ -49,7 +51,10 @@ Hay tres estados:
 
 - `plazas_convocadas.csv` (2024 a 2026) y `plazas_especialidad_2027.csv`: una fila por especialidad.
 - `convocatorias.csv`: los datos comunes a toda una convocatoria (plazo, fecha de las pruebas, normativa, requisito de idioma, enlace). Con el cuerpo vacío se aplican a todos los cuerpos de esa comunidad y año. Así, si cambia el plazo, se toca una fila y no cincuenta. Si un mismo año y cuerpo tiene dos convocatorias (por ejemplo, ordinaria y de estabilización), cada fila de plazas se asocia a la convocatoria cuyo enlace aparece en su columna fuente.
-- `resumen_ccaa.csv`: los totales de 2025.
+- `resumen_ccaa.csv`: los totales de 2025 de las comunidades sin reparto.
+- `requisitos_linguisticos.csv`: el requisito de lengua cooficial de cada comunidad que lo exige.
+
+En `convocatorias.csv`, la columna `procedimiento` vale "Concurso de méritos" cuando no hay examen; vacía es concurso-oposición. La página marca esas plazas aparte y se pueden filtrar.
 
 Después de tocar un CSV hay que volver a generar los datos:
 
@@ -65,6 +70,8 @@ La dirección de la página guarda la búsqueda, así que se puede copiar y comp
 - `?anio=2027&esp=0590-006`: Matemáticas de Secundaria en 2027, en todas las comunidades.
 - `?estado=convocada`: todo lo convocado que aún admite inscripciones.
 - `?vista=lista`: resultados en lista en vez de fichas.
+- `?idioma=ninguno`: solo plazas sin requisito de lengua cooficial.
+- `?proc=concurso_oposicion`: deja fuera los concursos de méritos.
 - `?q=ingles&cuerpo=0590,0592`: búsqueda de texto con dos cuerpos.
 
 Los valores múltiples van separados por comas. Si el enlace no lleva año, la página muestra la primera convocatoria con datos a partir del año en curso.

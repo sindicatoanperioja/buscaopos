@@ -100,12 +100,17 @@ for r in leer("convocatorias.csv"):
 
 def datos_convocatoria(fila, anio, cu, fuentes):
     """Los datos comunes de la convocatoria: primero los del cuerpo, si no los de toda la comunidad.
-    Si hay varias, la que tiene como enlace una de las fuentes de la fila."""
+    Si hay varias, la que tiene como enlace la primera fuente de la fila que coincida."""
     candidatas = convocatorias.get((fila, anio, cu)) or convocatorias.get((fila, anio, None)) or [{}]
-    for c in candidatas:
-        if c.get("enlace", "").strip() in fuentes:
-            return c
+    for f in fuentes:
+        for c in candidatas:
+            if c.get("enlace", "").strip() == f:
+                return c
     return candidatas[0]
+
+
+# Requisito de lengua cooficial por comunidad: se aplica a todas sus plazas, de cualquier año.
+requisitos = {r["comunidad"]: r for r in leer("requisitos_linguisticos.csv")}
 
 
 def comunidad(fila):
@@ -135,7 +140,8 @@ def registro(fila, anio, est_fase, cu, codigo, especialidad, idioma, plazas_n, n
     conv = datos_convocatoria(fila, str(anio), cu, fuentes)
     codigo = codigo.zfill(3) if codigo else por_nombre.get((cu, slug(especialidad or "")), "")
     nombre = catalogo.get((cu, codigo)) or especialidad or ""
-    requisito = conv.get("requisito_linguistico", "").strip()
+    req_ccaa = requisitos.get(comunidad(fila), {})
+    requisito = req_ccaa.get("requisito") or conv.get("requisito_linguistico", "").strip()
     if not requisito and idioma and idioma.lower() != "castellano":
         requisito = idioma
     obs = [x for x in (nota, conv.get("observaciones", "").strip()) if x]
@@ -162,6 +168,8 @@ def registro(fila, anio, est_fase, cu, codigo, especialidad, idioma, plazas_n, n
         "fin_plazo": conv.get("fin_plazo", "").strip() or None,
         "fecha_examen": conv.get("fecha_examen", "").strip() or None,
         "requisito_linguistico": requisito or None,
+        "requisito_detalle": req_ccaa.get("detalle") or None,
+        "procedimiento": "concurso_meritos" if conv.get("procedimiento", "").strip().lower() == "concurso de méritos" else "concurso_oposicion",
         "observaciones": " ".join(o if o.endswith(".") else o + "." for o in obs) or None,
         "fuentes": fuentes,
     }

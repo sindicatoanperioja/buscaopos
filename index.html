@@ -149,6 +149,9 @@ aside.filtros{align-self:start;position:sticky;top:84px;max-height:calc(100vh - 
 .mas summary{cursor:pointer;color:var(--azul);font-weight:700}
 .mas p{margin:6px 0 0;color:var(--tinta-suave)}
 .mas a{word-break:break-all}
+.meritos{display:inline-block;margin:6px 0 0;border:1.5px dashed var(--verde-texto);color:var(--verde-texto);border-radius:999px;padding:1px 9px;font-size:12px;font-weight:700}
+.c-esp .meritos{margin:0;padding:0 7px;font-size:11px}
+.card.es-meritos{border-style:dashed;border-color:var(--verde)}
 .card.agregado{border-style:dashed;background:color-mix(in srgb,var(--surface) 70%,var(--azul-niebla))}
 
 .sin-reparto{margin-top:28px}
@@ -344,6 +347,10 @@ const ESTADOS = {
   borrador:  { txt: "Borrador",                 ayuda: "Anuncios, propuestas y ofertas sin convocar", orden: 3 },
 };
 const COLOR_ESTADO = { convocada: "#3d7a62", cerrada: "#94a3b8", borrador: "#5b9bce" };
+const PROCEDIMIENTOS = {
+  concurso_oposicion: { txt: "Concurso-oposición", ayuda: "Con examen" },
+  concurso_meritos:   { txt: "Concurso de méritos", ayuda: "Sin examen, solo méritos" },
+};
 const POR_PAGINA = 36;
 const HOY = new Date(); HOY.setHours(0, 0, 0, 0);
 const ANIO_ACTUAL = HOY.getFullYear();
@@ -376,8 +383,8 @@ let TODAS = [];
 let pagina = 1;
 
 // ---------- Filtros y URL ----------
-const FACETAS = ["anio", "ccaa", "cuerpo", "esp", "estado"];
-const filtros = { anio: new Set(), ccaa: new Set(), cuerpo: new Set(), esp: new Set(), estado: new Set(), q: "", orden: "plazas", vista: "fichas" };
+const FACETAS = ["anio", "ccaa", "cuerpo", "esp", "estado", "proc", "idioma"];
+const filtros = { anio: new Set(), ccaa: new Set(), cuerpo: new Set(), esp: new Set(), estado: new Set(), proc: new Set(), idioma: new Set(), q: "", orden: "plazas", vista: "fichas" };
 
 function vistaGuardada() {
   try { return localStorage.getItem("buscaopos-vista") === "lista" ? "lista" : "fichas"; } catch { return "fichas"; }
@@ -407,6 +414,8 @@ function valor(p, f) {
   if (f === "cuerpo") return p.cuerpo || "varios";
   if (f === "esp") return p.esp;
   if (f === "estado") return p.sit;
+  if (f === "proc") return p.procedimiento;
+  if (f === "idioma") return p.requisito_linguistico ? slug(p.requisito_linguistico) : "ninguno";
 }
 function pasaTexto(p, q) {
   return !q || q.split(/\s+/).every((t) => p.texto.includes(t));
@@ -478,6 +487,21 @@ function pintarFacetas() {
   const claves = Object.keys(ESTADOS).filter((k) => ce.has(k) || filtros.estado.has(k));
   html.push(`<section class="faceta"><h2>Estado</h2>${claves.map((k) => opcion("estado", k,
     `${ESTADOS[k].txt}<br><small>${ESTADOS[k].ayuda}</small>`, ce.get(k), `<span class="punto" style="background:${COLOR_ESTADO[k]}"></span>`)).join("")}</section>`);
+
+  // Procedimiento
+  const cp = contar("proc");
+  const procs = Object.keys(PROCEDIMIENTOS).filter((k) => cp.has(k) || filtros.proc.has(k));
+  if (procs.length > 1 || filtros.proc.size) {
+    html.push(`<section class="faceta"><h2>Procedimiento</h2>${procs.map((k) => opcion("proc", k,
+      `${PROCEDIMIENTOS[k].txt}<br><small>${PROCEDIMIENTOS[k].ayuda}</small>`, cp.get(k))).join("")}</section>`);
+  }
+
+  // Requisito de idioma
+  const ci = contar("idioma");
+  const idiomas = [...new Map(TODAS.map((p) => [valor(p, "idioma"), p.requisito_linguistico || "Sin requisito de idioma"])).entries()]
+    .filter(([v]) => ci.has(v) || filtros.idioma.has(v))
+    .sort((a, b) => (a[0] === "ninguno") - (b[0] === "ninguno") || a[1].localeCompare(b[1], "es"));
+  html.push(`<section class="faceta"><h2>Requisito de idioma</h2>${idiomas.map(([v, nom]) => opcion("idioma", v, esc(nom), ci.get(v))).join("")}</section>`);
 
   // Comunidad
   const cc = contar("ccaa");
@@ -554,7 +578,7 @@ function detalle(p) {
   if (p.desglose && p.desglose.extraordinarias) {
     filas.push(["Origen", `${p.desglose.ordinarias} ordinarias + ${p.desglose.extraordinarias} de la OPE extraordinaria`]);
   }
-  if (p.requisito_linguistico) filas.push(["Idioma", `<span class="etq aviso">${esc(p.requisito_linguistico)}</span>`]);
+  if (p.requisito_linguistico) filas.push(["Idioma", `<span class="etq aviso">${esc(p.requisito_linguistico)}</span>${p.requisito_detalle ? ` ${esc(p.requisito_detalle)}` : ""}`]);
   if (p.inicio_plazo || p.fin_plazo) {
     let txt = p.inicio_plazo && p.fin_plazo ? `${fecha(p.inicio_plazo, false)} al ${fecha(p.fin_plazo)}` : p.fin_plazo ? `Hasta el ${fecha(p.fin_plazo)}` : `Desde el ${fecha(p.inicio_plazo)}`;
     if (plazoAbierto(p)) txt += ` <span class="etq">${quedan(p)}</span>`;
@@ -575,9 +599,9 @@ function detalle(p) {
 
 function tarjeta(p) {
   const d = detalle(p);
-  return `<article class="card e-${p.sit}${p.esp ? "" : " agregado"}">
+  return `<article class="card e-${p.sit}${p.esp ? "" : " agregado"}${p.procedimiento === "concurso_meritos" ? " es-meritos" : ""}">
     <div class="card-top"><span class="pill">${ESTADOS[p.sit].txt}</span><span class="anio">${p.anio}</span></div>
-    <div><h3>${d.titulo}</h3><p class="cuerpo">${d.sub}</p></div>
+    <div><h3>${d.titulo}</h3><p class="cuerpo">${d.sub}</p>${p.procedimiento === "concurso_meritos" ? `<p class="meritos">Concurso de méritos, sin examen</p>` : ""}</div>
     <div class="card-medio">
       <span class="ccaa">${icoPin}${esc(p.lista)}</span>
       <span class="cifra${p.plazas ? "" : " sin"}">${p.plazas ? `<b>${fmt(p.plazas)}</b><span>${p.plazas === 1 ? "plaza" : "plazas"}</span>` : `<b>Sin cifra</b>`}</span>
@@ -598,10 +622,10 @@ function resumenFechas(p) {
 
 function fila(p) {
   const d = detalle(p);
-  return `<details class="fila e-${p.sit}${p.esp ? "" : " agregado"}">
+  return `<details class="fila e-${p.sit}${p.esp ? "" : " agregado"}${p.procedimiento === "concurso_meritos" ? " es-meritos" : ""}">
     <summary>
       <span class="c-est"><span class="pill">${ESTADOS[p.sit].txt}</span> <span class="anio">${p.anio}</span></span>
-      <span class="c-esp"><b>${d.titulo}</b><small>${d.sub}${p.requisito_linguistico ? ` · <span class="etq aviso">${esc(p.requisito_linguistico)}</span>` : ""}</small></span>
+      <span class="c-esp"><b>${d.titulo}</b><small>${d.sub}${p.requisito_linguistico ? ` · <span class="etq aviso">${esc(p.requisito_linguistico)}</span>` : ""}${p.procedimiento === "concurso_meritos" ? ` · <span class="meritos">Concurso de méritos, sin examen</span>` : ""}</small></span>
       <span class="c-ccaa">${esc(p.lista)}</span>
       <span class="c-num${p.plazas ? "" : " sin"}">${p.plazas ? fmt(p.plazas) : "Sin cifra"}</span>
       <span class="c-fecha">${resumenFechas(p)}</span>
@@ -645,6 +669,8 @@ function pintarChips() {
     cuerpo: (v) => TODAS.find((p) => p.cuerpo === v)?.cuerpo_corto || v,
     esp: (v) => TODAS.find((p) => p.esp === v)?.especialidad || v,
     estado: (v) => ESTADOS[v]?.txt || v,
+    proc: (v) => PROCEDIMIENTOS[v]?.txt || v,
+    idioma: (v) => v === "ninguno" ? "Sin requisito de idioma" : TODAS.find((p) => valor(p, "idioma") === v)?.requisito_linguistico || v,
   };
   for (const f of FACETAS) for (const v of filtros[f]) chips.push(`<button class="chip" type="button" data-quitar="${f}" data-v="${esc(v)}" aria-label="Quitar filtro ${esc(nombre[f](v))}">${esc(nombre[f](v))} <span aria-hidden="true">✕</span></button>`);
   if (filtros.q) chips.push(`<button class="chip" type="button" data-quitar="q">«${esc(filtros.q)}» <span aria-hidden="true">✕</span></button>`);
