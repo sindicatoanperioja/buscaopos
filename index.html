@@ -419,7 +419,7 @@ function escribirURL(modo = "push") {
   if (filtros.vista === "lista") u.set("vista", "lista");
   const url = location.pathname + (u.toString() ? "?" + u.toString().replace(/%2C/g, ",") : "");
   if (url === location.pathname + location.search) return;
-  history[modo === "push" ? "pushState" : "replaceState"](null, "", url);
+  try { history[modo === "push" ? "pushState" : "replaceState"](null, "", url); } catch { /* sin historial (página incrustada) */ }
 }
 
 function valor(p, f) {
