@@ -600,7 +600,7 @@ function fila(p) {
   const d = detalle(p);
   return `<details class="fila e-${p.sit}${p.esp ? "" : " agregado"}">
     <summary>
-      <span class="c-est"><span class="pill">${ESTADOS[p.sit].txt}</span></span>
+      <span class="c-est"><span class="pill">${ESTADOS[p.sit].txt}</span> <span class="anio">${p.anio}</span></span>
       <span class="c-esp"><b>${d.titulo}</b><small>${d.sub}${p.requisito_linguistico ? ` · <span class="etq aviso">${esc(p.requisito_linguistico)}</span>` : ""}</small></span>
       <span class="c-ccaa">${esc(p.lista)}</span>
       <span class="c-num${p.plazas ? "" : " sin"}">${p.plazas ? fmt(p.plazas) : "Sin cifra"}</span>
@@ -768,10 +768,10 @@ document.addEventListener("keydown", (ev) => { if (ev.key === "Escape" && panel.
 cargarDatos().then((datos) => {
   preparar(datos);
   const u = leerURL();
-  // Sin año en el enlace, se muestra la próxima convocatoria con datos.
+  // Sin año en el enlace, se muestra la próxima convocatoria abierta o prevista.
   if (!u.has("anio")) {
     const anios = [...new Set(TODAS.map((p) => p.anio))].sort();
-    const def = anios.find((a) => a >= ANIO_ACTUAL) || anios[anios.length - 1];
+    const def = anios.find((a) => a >= ANIO_ACTUAL && TODAS.some((p) => p.anio === a && p.sit !== "cerrada")) || anios[anios.length - 1];
     if (def) filtros.anio.add(String(def));
     escribirURL("replace");
   }

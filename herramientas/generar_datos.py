@@ -83,19 +83,29 @@ def cuerpo(codigo):
 
 
 catalogo = {}
+por_nombre = {}  # (cuerpo, nombre normalizado) -> código, para convocatorias que no dan código
 for r in leer("especialidades.csv"):
     CUERPOS.setdefault(r["cuerpo"], r["nombre_cuerpo"])
     if r["codigo_confirmado"].strip().lower() == "si":
         catalogo[(r["cuerpo"], r["codigo"].zfill(3))] = r["especialidad"]
+        por_nombre[(r["cuerpo"], slug(r["especialidad"]))] = r["codigo"].zfill(3)
 
+# La columna cuerpo puede llevar varios separados por comas, o ir vacía para todos.
+# Un mismo año y cuerpo puede tener varias convocatorias (ordinaria y estabilización).
 convocatorias = {}
 for r in leer("convocatorias.csv"):
-    convocatorias[(r["fila"], r["anio"], cuerpo(r["cuerpo"]))] = r
+    for cu in (r["cuerpo"] or "").split(","):
+        convocatorias.setdefault((r["fila"], r["anio"], cuerpo(cu)), []).append(r)
 
 
-def datos_convocatoria(fila, anio, cu):
-    """Los datos comunes de la convocatoria: primero los del cuerpo, si no los de toda la comunidad."""
-    return convocatorias.get((fila, anio, cu)) or convocatorias.get((fila, anio, None)) or {}
+def datos_convocatoria(fila, anio, cu, fuentes):
+    """Los datos comunes de la convocatoria: primero los del cuerpo, si no los de toda la comunidad.
+    Si hay varias, la que tiene como enlace una de las fuentes de la fila."""
+    candidatas = convocatorias.get((fila, anio, cu)) or convocatorias.get((fila, anio, None)) or [{}]
+    for c in candidatas:
+        if c.get("enlace", "").strip() in fuentes:
+            return c
+    return candidatas[0]
 
 
 def comunidad(fila):
@@ -121,14 +131,14 @@ def anadir(reg):
 def registro(fila, anio, est_fase, cu, codigo, especialidad, idioma, plazas_n, nota, fuente,
              turnos=None, desglose=None):
     est, fase = est_fase
-    conv = datos_convocatoria(fila, str(anio), cu)
-    codigo = codigo.zfill(3) if codigo else ""
+    fuentes = [x.strip() for x in (fuente or "").split("|") if x.strip()]
+    conv = datos_convocatoria(fila, str(anio), cu, fuentes)
+    codigo = codigo.zfill(3) if codigo else por_nombre.get((cu, slug(especialidad or "")), "")
     nombre = catalogo.get((cu, codigo)) or especialidad or ""
     requisito = conv.get("requisito_linguistico", "").strip()
     if not requisito and idioma and idioma.lower() != "castellano":
         requisito = idioma
     obs = [x for x in (nota, conv.get("observaciones", "").strip()) if x]
-    fuentes = [x.strip() for x in (fuente or "").split("|") if x.strip()]
     if conv.get("enlace") and conv["enlace"] not in fuentes:
         fuentes.insert(0, conv["enlace"].strip())
     return {
@@ -157,8 +167,10 @@ def registro(fila, anio, est_fase, cu, codigo, especialidad, idioma, plazas_n, n
     }
 
 
-# 2027: una fila por comunidad, cuerpo y especialidad
-for r in leer("plazas_especialidad_2027.csv"):
+# Una fila por comunidad, cuerpo y especialidad: convocatorias ya celebradas y previsión de 2027
+FICHEROS_PLAZAS = ["plazas_convocadas.csv", "plazas_especialidad_2027.csv"]
+filas_plazas = [r for f in FICHEROS_PLAZAS if (DATOS / f).exists() for r in leer(f)]
+for r in filas_plazas:
     if "superada" in r["fila"] or estado(r["estado"])[0] is None:
         continue
     turnos = None
@@ -172,13 +184,26 @@ for r in leer("plazas_especialidad_2027.csv"):
                     r["especialidad"].strip(), r["idioma"].strip(), n if n else None,
                     r["nota"].strip(), r["fuente"], turnos, desglose))
 
-# 2025: solo el total por comunidad
+# 2025: el total por comunidad, solo donde no hay reparto por especialidad
+con_detalle = {(r["fila"], r["anio"]) for r in filas_plazas} | {(comunidad(r["fila"]), r["anio"]) for r in filas_plazas}
 for r in leer("resumen_ccaa.csv"):
     n = entero(r["plazas_2025"])
-    if not n:
+    if not n or (r["comunidad"], "2025") in con_detalle:
         continue
     nota = f"Total de la convocatoria de 2025 ({r['cuerpos_2025']})" if r["cuerpos_2025"] else "Total de la convocatoria de 2025"
     anadir(registro(r["comunidad"], 2025, ("convocada", None), None, "", "", "", n, nota, ""))
+
+# Si una especialidad sin código se llama igual que otra que sí lo trae en otra convocatoria
+# (y ese nombre solo tiene un código), se le pone ese código para que se agrupen al buscar.
+codigos_vistos = {}
+for p in plazas:
+    if p["codigo"] and p["especialidad"]:
+        codigos_vistos.setdefault((p["cuerpo"], slug(p["especialidad"])), set()).add(p["codigo"])
+for p in plazas:
+    if not p["codigo"] and p["especialidad"]:
+        cods = codigos_vistos.get((p["cuerpo"], slug(p["especialidad"])), set())
+        if len(cods) == 1:
+            p["codigo"] = next(iter(cods))
 
 salida = {
     "generado": date.today().isoformat(),
@@ -189,4 +214,6 @@ texto = json.dumps(salida, ensure_ascii=False, indent=1)
 (DATOS / "plazas.js").write_text(
     "// Generado con herramientas/generar_datos.py. No editar a mano.\n"
     f"window.BUSCAOPOS_DATOS = {texto};\n", encoding="utf-8")
-print(f"{len(plazas)} registros, {sum(p['plazas'] or 0 for p in plazas if p['anio'] == 2027)} plazas en 2027")
+for anio in sorted({p["anio"] for p in plazas}):
+    print(anio, sum(1 for p in plazas if p["anio"] == anio), "registros,",
+          sum(p["plazas"] or 0 for p in plazas if p["anio"] == anio), "plazas")

@@ -47,8 +47,8 @@ Hay tres estados:
 
 ## De dónde sale cada campo hoy
 
-- `plazas_especialidad_2027.csv`: una fila por especialidad.
-- `convocatorias.csv`: los datos comunes a toda una convocatoria (plazo, fecha de las pruebas, normativa, requisito de idioma, enlace). Con el cuerpo vacío se aplican a todos los cuerpos de esa comunidad y año. Así, si cambia el plazo, se toca una fila y no cincuenta.
+- `plazas_convocadas.csv` (2024 a 2026) y `plazas_especialidad_2027.csv`: una fila por especialidad.
+- `convocatorias.csv`: los datos comunes a toda una convocatoria (plazo, fecha de las pruebas, normativa, requisito de idioma, enlace). Con el cuerpo vacío se aplican a todos los cuerpos de esa comunidad y año. Así, si cambia el plazo, se toca una fila y no cincuenta. Si un mismo año y cuerpo tiene dos convocatorias (por ejemplo, ordinaria y de estabilización), cada fila de plazas se asocia a la convocatoria cuyo enlace aparece en su columna fuente.
 - `resumen_ccaa.csv`: los totales de 2025.
 
 Después de tocar un CSV hay que volver a generar los datos:
