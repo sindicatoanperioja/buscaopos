@@ -2,6 +2,8 @@
 
 Comparativa de las oposiciones docentes de todas las comunidades autónomas: cuántas plazas convoca cada una, de qué cuerpos y especialidades, y en qué punto está el proceso. Lo mantiene ANPE La Rioja.
 
+Buscador: https://sindicatoanperioja.github.io/buscaopos/
+
 ## Carpetas
 
 - `index.html`: el buscador de plazas (una sola página, sin servidor). Filtra por año, comunidad, cuerpo, especialidad y estado, y la dirección guarda los filtros para poder compartir la búsqueda.
