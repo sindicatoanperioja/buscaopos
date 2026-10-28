@@ -73372,8 +73372,8 @@ window.BUSCAOPOS_DATOS = {
    ]
   },
   {
-   "id": "2025-castilla-y-leon-0597-sin-reparto",
-   "anio": 2025,
+   "id": "2027-castilla-y-leon-0597-sin-reparto",
+   "anio": 2027,
    "comunidad": "Castilla y León",
    "lista": "Castilla y León",
    "lista_id": "castilla-y-leon",
@@ -73389,16 +73389,15 @@ window.BUSCAOPOS_DATOS = {
    "estado": "borrador",
    "fase": "Oferta de empleo publicada, sin convocar",
    "tipo": "ordinaria",
-   "normativa": "RD 276/2007",
-   "inicio_plazo": "2024-11-29",
-   "fin_plazo": "2024-12-19",
-   "fecha_examen": "2025-06-21",
+   "normativa": null,
+   "inicio_plazo": null,
+   "fin_plazo": null,
+   "fecha_examen": null,
    "requisito_linguistico": null,
    "requisito_detalle": null,
    "procedimiento": "concurso_oposicion",
-   "observaciones": "sin reparto por especialidad. OEP 2025 (Acuerdo 52/2025, BOCYL 15-12-2025, Anexo II): 320 Maestros de 1.138 plazas docentes de turno libre. Maestros se convocan en 2027. TecnosZubia (20-10-2026) suma 438 de la OEP 2024 (758 en total); no verificado que sigan pendientes. Orden EDU/1268/2024 (BOCYL de 28-11-2024), 767 plazas. Inicio fijado por Resolución de 14-5-2025 (BOCYL de 23-5-2025).",
+   "observaciones": "sin reparto por especialidad. OEP 2025 (Acuerdo 52/2025, BOCYL 15-12-2025, Anexo II): 320 Maestros de 1.138 plazas docentes de turno libre. Maestros se convocan en 2027. TecnosZubia (20-10-2026) suma 438 de la OEP 2024 (758 en total); no verificado que sigan pendientes.",
    "fuentes": [
-    "https://bocyl.jcyl.es/boletines/2024/11/28/pdf/BOCYL-D-28112024-14.pdf",
     "https://bocyl.jcyl.es/boletines/2025/12/15/pdf/BOCYL-D-15122025-2.pdf",
     "https://stecyl.net/publicada-la-oferta-empleo-publico-2025-en-castilla-y-leon-2-912-plazas-turno-libre-y-1-472-plazas-promocion-interna/"
    ]
