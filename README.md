@@ -27,6 +27,8 @@ Comparativa de las oposiciones docentes de todas las comunidades autónomas: cu�
 | Borrador | Propuesta presentada en mesa, sin acuerdo |
 | Anuncio | Declaración del gobierno, sin documento |
 
+Estos son los estados de los CSV y de la Excel. El buscador los reduce a tres: Borrador (todo lo que no está convocado, OEP incluidas), Convocada y Convocada con el plazo cerrado.
+
 Navarra va en dos filas, castellano y euskera, porque son listas separadas.
 
 ## Actualizar el buscador

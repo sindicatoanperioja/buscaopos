@@ -39,14 +39,17 @@ CUERPOS_CORTO = {
     "0597": "Maestros",
     "0598": "FP (sectores singulares)",
 }
+# El buscador solo distingue tres estados. Anuncio, borrador, acuerdo en mesa y OEP son
+# todos previsión de una convocatoria futura ("borrador"); lo que fue se guarda en "fase".
 ESTADOS = {
-    "convocada": "convocada",
-    "acordada": "acordada",
-    "acordada en mesa": "acordada",
-    "oep publicada": "oep",
-    "borrador": "borrador",
-    "anuncio": "anuncio",
-    "sin datos": "sin_datos",
+    "convocada": ("convocada", None),
+    "convocada - plazo cerrado": ("cerrada", None),
+    "acordada": ("borrador", "Acordada"),
+    "acordada en mesa": ("borrador", "Acordada en mesa sectorial"),
+    "oep publicada": ("borrador", "Oferta de empleo publicada, sin convocar"),
+    "borrador": ("borrador", "Borrador presentado en mesa"),
+    "anuncio": ("borrador", "Anuncio, sin documento"),
+    "sin datos": (None, None),
 }
 
 
@@ -115,8 +118,9 @@ def anadir(reg):
     plazas.append({"id": rid, **reg})
 
 
-def registro(fila, anio, est, cu, codigo, especialidad, idioma, plazas_n, nota, fuente,
+def registro(fila, anio, est_fase, cu, codigo, especialidad, idioma, plazas_n, nota, fuente,
              turnos=None, desglose=None):
+    est, fase = est_fase
     conv = datos_convocatoria(fila, str(anio), cu)
     codigo = codigo.zfill(3) if codigo else ""
     nombre = catalogo.get((cu, codigo)) or especialidad or ""
@@ -142,6 +146,7 @@ def registro(fila, anio, est, cu, codigo, especialidad, idioma, plazas_n, nota, 
         "turnos": turnos,
         "desglose": desglose,
         "estado": est,
+        "fase": fase,
         "tipo_oposicion": conv.get("tipo_oposicion", "").strip() or None,
         "inicio_plazo": conv.get("inicio_plazo", "").strip() or None,
         "fin_plazo": conv.get("fin_plazo", "").strip() or None,
@@ -154,7 +159,7 @@ def registro(fila, anio, est, cu, codigo, especialidad, idioma, plazas_n, nota, 
 
 # 2027: una fila por comunidad, cuerpo y especialidad
 for r in leer("plazas_especialidad_2027.csv"):
-    if "superada" in r["fila"]:
+    if "superada" in r["fila"] or estado(r["estado"])[0] is None:
         continue
     turnos = None
     if any(r[k].strip() for k in ("libre", "reserva", "acceso")):
@@ -173,7 +178,7 @@ for r in leer("resumen_ccaa.csv"):
     if not n:
         continue
     nota = f"Total de la convocatoria de 2025 ({r['cuerpos_2025']})" if r["cuerpos_2025"] else "Total de la convocatoria de 2025"
-    anadir(registro(r["comunidad"], 2025, "convocada", None, "", "", "", n, nota, ""))
+    anadir(registro(r["comunidad"], 2025, ("convocada", None), None, "", "", "", n, nota, ""))
 
 salida = {
     "generado": date.today().isoformat(),

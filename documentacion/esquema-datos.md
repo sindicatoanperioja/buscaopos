@@ -28,7 +28,8 @@ Cada registro es un año, una comunidad, un cuerpo y una especialidad con su nú
 | `plazas` | no | `25` | Vacío si solo hay anuncio sin cifra. |
 | `turnos` | no | `{"libre":24,"reserva":6,"acceso":30}` | Cuando la convocatoria los separa. |
 | `desglose` | no | `{"ordinarias":17,"extraordinarias":8}` | De momento solo La Rioja. |
-| `estado` | sí | `convocada` | `anuncio`, `borrador`, `oep`, `acordada`, `convocada` o `sin_datos`. |
+| `estado` | sí | `convocada` | `borrador`, `convocada` o `cerrada` (convocada con el plazo de inscripción cerrado). |
+| `fase` | no | `Acordada en mesa sectorial` | Solo en los borradores: de dónde sale la cifra (anuncio, propuesta en mesa, acuerdo u OEP). |
 | `tipo_oposicion` | no | `RD 276/2007` | |
 | `inicio_plazo`, `fin_plazo` | no | `2026-10-28` | Plazo de inscripción, en formato AAAA-MM-DD. |
 | `fecha_examen` | no | `2027-04-17` | Día en que empiezan las pruebas. |
@@ -38,12 +39,11 @@ Cada registro es un año, una comunidad, un cuerpo y una especialidad con su nú
 
 ## Estado que ve el usuario
 
-La página calcula la situación de cada plaza con la fecha del día:
+Hay tres estados:
 
-- Una plaza `convocada` sale como "Plazo abierto" si hoy cae entre `inicio_plazo` y `fin_plazo`, con los días que quedan.
-- Sale como "Plazo cerrado" si ya pasó `fin_plazo` o si el año es anterior al actual.
-- Sin fechas, sale como "Convocada".
-- El resto de estados (acordada, oferta publicada, borrador, anuncio) se agrupan como "En previsión".
+- Borrador: todo lo que aún no está convocado. Da igual que la cifra venga de un anuncio, de una noticia de un sindicato o de la Consejería, de una propuesta en mesa o de una OEP aprobada: la OEP se puede convocar en cualquiera de los tres años siguientes, así que lo que cuenta es el año en que se prevé convocar. El campo `fase` dice de dónde sale el dato.
+- Convocada: publicada en el boletín. Si hoy cae dentro del plazo de inscripción, la ficha dice cuántos días quedan.
+- Convocada, plazo cerrado: la página la marca así sola cuando ya pasó `fin_plazo` o el año es anterior al actual. También se puede poner a mano en el CSV con el estado "Convocada - plazo cerrado".
 
 ## De dónde sale cada campo hoy
 
@@ -63,7 +63,8 @@ La dirección de la página guarda la búsqueda, así que se puede copiar y comp
 
 - `?ccaa=la-rioja`: La Rioja (es el enlace para poner en la web de ANPE La Rioja).
 - `?anio=2027&esp=0590-006`: Matemáticas de Secundaria en 2027, en todas las comunidades.
-- `?estado=abierta`: todo lo que tiene el plazo de inscripción abierto.
+- `?estado=convocada`: todo lo convocado que aún admite inscripciones.
+- `?vista=lista`: resultados en lista en vez de fichas.
 - `?q=ingles&cuerpo=0590,0592`: búsqueda de texto con dos cuerpos.
 
 Los valores múltiples van separados por comas. Si el enlace no lleva año, la página muestra la primera convocatoria con datos a partir del año en curso.
