@@ -16,7 +16,7 @@ Cada registro es un año, una comunidad, un cuerpo y una especialidad con su nú
 | Campo | Obligatorio | Ejemplo | Notas |
 |---|---|---|---|
 | `id` | sí | `2027-la-rioja-0590-006` | Único. |
-| `anio` | sí | `2027` | Año de celebración de las pruebas, no el de publicación. Navarra convoca en otoño o diciembre y examina en junio del año siguiente: va en el año siguiente. |
+| `anio` | sí | `2027` | Año de celebración de las pruebas, no el de publicación. Navarra convoca en otoño o diciembre y examina en junio del año siguiente: va en el año siguiente. En los concursos de méritos sin pruebas, el año en que termina el plazo de solicitudes. |
 | `comunidad` | sí | `Navarra` | |
 | `lista` | sí | `Navarra (euskera)` | Lo que se muestra. Navarra va en dos listas; en el resto coincide con la comunidad. |
 | `lista_id` | sí | `navarra-euskera` | Es lo que va en el enlace (`?ccaa=navarra-euskera`). |
@@ -50,7 +50,7 @@ Hay tres estados:
 
 ## De dónde sale cada campo hoy
 
-- `plazas_convocadas.csv` (2024 a 2026) y `plazas_especialidad_2027.csv`: una fila por especialidad.
+- `plazas_convocadas.csv` (2023 a 2026) y `plazas_especialidad_2027.csv`: una fila por especialidad.
 - `convocatorias.csv`: los datos comunes a toda una convocatoria (plazo, fecha de las pruebas, normativa, requisito de idioma, enlace). Con el cuerpo vacío se aplican a todos los cuerpos de esa comunidad y año. Así, si cambia el plazo, se toca una fila y no cincuenta. Si un mismo año y cuerpo tiene dos convocatorias (por ejemplo, ordinaria y de estabilización), cada fila de plazas se asocia a la convocatoria cuyo enlace aparece en su columna fuente.
 - `resumen_ccaa.csv`: los totales de 2025 de las comunidades sin reparto.
 - `requisitos_linguisticos.csv`: el requisito de lengua cooficial de cada comunidad que lo exige.
