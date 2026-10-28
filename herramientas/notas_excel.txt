@@ -1,0 +1,19 @@
+Plazas de oposiciones docentes de 2027 por comunidad y especialidad. Datos a 27 de octubre de 2026. Hoja Secundaria: cuerpos 0590 a 0598. Hoja Maestros: cuerpo 0597. Hoja Detalle: todas las filas de origen, también las que solo tienen reparto por cuerpos.
+
+Estado: Convocada = convocatoria publicada en boletín. Acordada = reparto acordado (La Rioja) o aprobado en mesa sectorial. OEP publicada = oferta en boletín sin convocatoria ni reparto por especialidad. Borrador = propuesta presentada en mesa sin acuerdo. Anuncio = declaración del gobierno sin documento. "(sin reparto)" = hay cifra pero no por especialidades; la cifra está en la columna Fuente y en Detalle.
+
+Navarra va en dos filas, castellano (608) y euskera (114), como si fueran dos comunidades. Convocatoria: Resolución 232/2026, BON nº 214 de 27-10-2026.
+
+La Rioja: 275 = 157 ya aprobadas + 118 de la OPE extraordinaria (propuesta de la Consejería de 16-10-2026).
+
+Castilla-La Mancha (949) y Aragón (900): reparto aprobado en Mesa Sectorial el 20-10-2026. En Aragón CSIF y UGT votaron a favor, CGT y STEA en contra y CCOO se abstuvo. La OEP 2026 de Castilla-La Mancha aún no está en el DOCM.
+
+Extremadura (805, mesa del 19-10-2026), Cantabria (453, nueva propuesta según CSIF el 21-10-2026) y Baleares (474, presentada en mesa el 22-10-2026, pruebas desde el 17-4-2027): borradores con reparto completo, pendientes de acuerdo o de boletín.
+
+Andalucía, hoja Maestros: son las 806 plazas de la OEP 2026 (BOJA 16-2-2026), pendientes de convocar; la Junta ha anunciado que en 2027 irán Maestros y Secundaria juntos.
+
+País Vasco: la propuesta de junio (1.825 plazas, según UGT) quedó superada por el anuncio de 1.374; solo aparece en Detalle.
+
+Columnas añadidas al modelo de La Rioja: especialidades que convocan otras comunidades y no estaban (Lengua Catalana, Euskera, Navegación, Guitarra Eléctrica, Danza Clásica, etc.). Las que no llevan número son las que no se han podido confirmar con su código oficial.
+
+Los totales (columna E y fila TOTAL) son fórmulas.

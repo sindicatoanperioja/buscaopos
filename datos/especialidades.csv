@@ -1,0 +1,137 @@
+﻿cuerpo;nombre_cuerpo;codigo;especialidad;codigo_confirmado
+0590;Profesores de Enseñanza Secundaria;001;Filosofía;si
+0590;Profesores de Enseñanza Secundaria;002;Griego;si
+0590;Profesores de Enseñanza Secundaria;003;Latín;si
+0590;Profesores de Enseñanza Secundaria;004;Lengua Castellana y Literatura;si
+0590;Profesores de Enseñanza Secundaria;005;Geografía e Historia;si
+0590;Profesores de Enseñanza Secundaria;006;Matemáticas;si
+0590;Profesores de Enseñanza Secundaria;007;Física y Química;si
+0590;Profesores de Enseñanza Secundaria;008;Biología y Geología;si
+0590;Profesores de Enseñanza Secundaria;009;Dibujo;si
+0590;Profesores de Enseñanza Secundaria;010;Francés;si
+0590;Profesores de Enseñanza Secundaria;011;Inglés;si
+0590;Profesores de Enseñanza Secundaria;012;Alemán;si
+0590;Profesores de Enseñanza Secundaria;016;Música;si
+0590;Profesores de Enseñanza Secundaria;017;Educación Física;si
+0590;Profesores de Enseñanza Secundaria;018;Orientación Educativa;si
+0590;Profesores de Enseñanza Secundaria;019;Tecnología;si
+0590;Profesores de Enseñanza Secundaria;058;Apoyo de Lengua o Ciencas Sociales;si
+0590;Profesores de Enseñanza Secundaria;059;Apoyo de Ciencias y Tecnología;si
+0590;Profesores de Enseñanza Secundaria;061;Economía;si
+0590;Profesores de Enseñanza Secundaria;101;Administración de empresas;si
+0590;Profesores de Enseñanza Secundaria;102;Análisis y Química industrial;si
+0590;Profesores de Enseñanza Secundaria;103;Asesoría y Procesos de Imagen Personal;si
+0590;Profesores de Enseñanza Secundaria;104;Construcciones Civiles y Edificación;si
+0590;Profesores de Enseñanza Secundaria;105;Formación y Orientación Laboral;si
+0590;Profesores de Enseñanza Secundaria;106;Hostelería y Turismo;si
+0590;Profesores de Enseñanza Secundaria;107;Informática;si
+0590;Profesores de Enseñanza Secundaria;108;Intervención Sociocomunitaria;si
+0590;Profesores de Enseñanza Secundaria;109;Navegación e Instalaciones Marinas;si
+0590;Profesores de Enseñanza Secundaria;110;Organización y Gestión Comercial;si
+0590;Profesores de Enseñanza Secundaria;111;Org. y Procesos Mantenimiento Vehículos;si
+0590;Profesores de Enseñanza Secundaria;112;Org. y Proyectos de Fabricación Mecánica;si
+0590;Profesores de Enseñanza Secundaria;113;Org. y Proyectos de Sistemas Energéticos;si
+0590;Profesores de Enseñanza Secundaria;115;Procesos de Producción Agraria;si
+0590;Profesores de Enseñanza Secundaria;116;Procesos en la Industria Alimentaria;si
+0590;Profesores de Enseñanza Secundaria;117;Procesos Diag. Clínicos y Prod. Ortoprotésicos;si
+0590;Profesores de Enseñanza Secundaria;118;Procesos Sanitarios;si
+0590;Profesores de Enseñanza Secundaria;119;Procesos y Medios de Comunicación;si
+0590;Profesores de Enseñanza Secundaria;120;Procesos y Productos de Textil, Confección y Piel;si
+0590;Profesores de Enseñanza Secundaria;122;Procesos y Productos de Artes Gráficas;si
+0590;Profesores de Enseñanza Secundaria;123;Procesos y Productos en Madera y Mueble;si
+0590;Profesores de Enseñanza Secundaria;124;Sistemas Electrónicos;si
+0590;Profesores de Enseñanza Secundaria;125;Sistemas Electrotécnicos y Automáticos;si
+0590;Profesores de Enseñanza Secundaria;205;Instalación y Mantenimiento de Equipos Térmicos y de Fluidos;si
+0590;Profesores de Enseñanza Secundaria;206;Instalaciones Electrotécnicas;si
+0590;Profesores de Enseñanza Secundaria;208;Laboratorio;si
+0590;Profesores de Enseñanza Secundaria;212;Oficina de Proyectos de Construcción;si
+0590;Profesores de Enseñanza Secundaria;214;Operaciones y Equipos de Elab. de Prod. Alimentarios;si
+0590;Profesores de Enseñanza Secundaria;216;Operaciones de Producción Agraria;si
+0590;Profesores de Enseñanza Secundaria;219;Procedimientos de Diag. Clínico y Ortoprotésico;si
+0590;Profesores de Enseñanza Secundaria;220;Procedimientos Sanitarios y Asistenciales;si
+0590;Profesores de Enseñanza Secundaria;221;Procesos Comerciales;si
+0590;Profesores de Enseñanza Secundaria;222;Procesos de Gestión Administrativa;si
+0590;Profesores de Enseñanza Secundaria;225;Servicios a la Comunidad;si
+0590;Profesores de Enseñanza Secundaria;227;Sistemas y Aplicaciones Informáticas;si
+0590;Profesores de Enseñanza Secundaria;229;Técnicas y Procedimientos de Imagen y Sonido;si
+0590;Profesores de Enseñanza Secundaria;231;Equipos Electrónicos;si
+0590;Profesores de Enseñanza Secundaria;803;Cultura Clásica;si
+0590;Profesores de Enseñanza Secundaria;;Lengua Catalana y Literatura;no
+0590;Profesores de Enseñanza Secundaria;;Lengua y Literatura Vasca;no
+0592;Profesores de Escuelas Oficiales de Idiomas;001;Alemán;si
+0592;Profesores de Escuelas Oficiales de Idiomas;008;Francés;si
+0592;Profesores de Escuelas Oficiales de Idiomas;011;Inglés;si
+0592;Profesores de Escuelas Oficiales de Idiomas;012;Italiano;si
+0592;Profesores de Escuelas Oficiales de Idiomas;015;Portugués;si
+0592;Profesores de Escuelas Oficiales de Idiomas;;Catalán;no
+0592;Profesores de Escuelas Oficiales de Idiomas;;Español para extranjeros;no
+0592;Profesores de Escuelas Oficiales de Idiomas;;Euskera;no
+0594;Profesores de Música y Artes Escénicas;403;Canto;si
+0594;Profesores de Música y Artes Escénicas;404;Clarinete;si
+0594;Profesores de Música y Artes Escénicas;406;Contrabajo;si
+0594;Profesores de Música y Artes Escénicas;408;Fagot;si
+0594;Profesores de Música y Artes Escénicas;410;Flauta travesera;si
+0594;Profesores de Música y Artes Escénicas;411;Flauta de Pico;si
+0594;Profesores de Música y Artes Escénicas;412;Fundamentos de Composición;si
+0594;Profesores de Música y Artes Escénicas;414;Guitarra;si
+0594;Profesores de Música y Artes Escénicas;416;Historia de la Música;si
+0594;Profesores de Música y Artes Escénicas;418;Instrumentos de Púa;si
+0594;Profesores de Música y Artes Escénicas;419;Oboe;si
+0594;Profesores de Música y Artes Escénicas;421;Orquesta;si
+0594;Profesores de Música y Artes Escénicas;422;Percusión;si
+0594;Profesores de Música y Artes Escénicas;423;Piano;si
+0594;Profesores de Música y Artes Escénicas;424;Saxofón;si
+0594;Profesores de Música y Artes Escénicas;426;Trombón;si
+0594;Profesores de Música y Artes Escénicas;427;Trompa;si
+0594;Profesores de Música y Artes Escénicas;428;Trompeta;si
+0594;Profesores de Música y Artes Escénicas;429;Tuba;si
+0594;Profesores de Música y Artes Escénicas;431;Viola;si
+0594;Profesores de Música y Artes Escénicas;433;Violín;si
+0594;Profesores de Música y Artes Escénicas;434;Violonchelo;si
+0594;Profesores de Música y Artes Escénicas;436;Danza Clásica;si
+0594;Profesores de Música y Artes Escénicas;445;Dirección Escénica;si
+0594;Profesores de Música y Artes Escénicas;460;Lenguaje Musical;si
+0594;Profesores de Música y Artes Escénicas;463;Guitarra Eléctrica;si
+0594;Profesores de Música y Artes Escénicas;465;Cante Flamenco;si
+0594;Profesores de Música y Artes Escénicas;;Repertorio con piano para danza;no
+0595;Profesores de Artes Plásticas y Diseño;507;Dibujo Artístico y Color;si
+0595;Profesores de Artes Plásticas y Diseño;509;Diseño de Interiores;si
+0595;Profesores de Artes Plásticas y Diseño;510;Diseño de Moda;si
+0595;Profesores de Artes Plásticas y Diseño;511;Diseño de Producto;si
+0595;Profesores de Artes Plásticas y Diseño;512;Diseño Gráfico;si
+0595;Profesores de Artes Plásticas y Diseño;515;Fotografía;si
+0595;Profesores de Artes Plásticas y Diseño;516;Historia del Arte;si
+0595;Profesores de Artes Plásticas y Diseño;520;Materiales y Tecnología: Diseño;si
+0595;Profesores de Artes Plásticas y Diseño;521;Medios Audiovisuales;si
+0595;Profesores de Artes Plásticas y Diseño;522;Medios Informáticos;si
+0595;Profesores de Artes Plásticas y Diseño;523;Organización Industrial y Legislación;si
+0595;Profesores de Artes Plásticas y Diseño;525;Volumen;si
+0596;Maestros de Taller de Artes Plásticas y Diseño;608;Fotografía y Procesos De Reproducción;si
+0596;Maestros de Taller de Artes Plásticas y Diseño;613;Técnicas Cerámicas;si
+0596;Maestros de Taller de Artes Plásticas y Diseño;614;Técnicas de Grabado y Estampación;si
+0596;Maestros de Taller de Artes Plásticas y Diseño;617;Técnicas de Patronaje y Confección;si
+0597;Maestros;022;Ciencias Naturales;si
+0597;Maestros;023;Matemáticas;si
+0597;Maestros;024;Lengua y Literatura Española;si
+0597;Maestros;031;Educación infantil;si
+0597;Maestros;032;Lengua extranjera Inglés;si
+0597;Maestros;033;Lengua extranjera Francés;si
+0597;Maestros;034;Educación física;si
+0597;Maestros;035;Música;si
+0597;Maestros;036;Pedagogía terapéutica;si
+0597;Maestros;037;Audición y lenguaje;si
+0597;Maestros;038;Educación Primaria;si
+0597;Maestros;040;Educación Compensatoria;si
+0597;Maestros;060;Pedagogía terapéutica - IES;si
+0597;Maestros;074;Educación de Adultos;si
+0597;Maestros;076;Educación de Adultos - Inglés;si
+0598;Profesores Especialistas en Sectores Singulares de FP;001;Cocina y Pastelería;si
+0598;Profesores Especialistas en Sectores Singulares de FP;002;Estética;si
+0598;Profesores Especialistas en Sectores Singulares de FP;003;Fabricación e Instalación de Carpintería y Mueble;si
+0598;Profesores Especialistas en Sectores Singulares de FP;004;Mantenimiento de Vehículos;si
+0598;Profesores Especialistas en Sectores Singulares de FP;005;Mecanizado y Mantenimiento de Máquinas;si
+0598;Profesores Especialistas en Sectores Singulares de FP;006;Patronaje y Confección;si
+0598;Profesores Especialistas en Sectores Singulares de FP;007;Peluquería;si
+0598;Profesores Especialistas en Sectores Singulares de FP;008;Producción en Artes Gráficas;si
+0598;Profesores Especialistas en Sectores Singulares de FP;009;Servicios de Restauración;si
+0598;Profesores Especialistas en Sectores Singulares de FP;010;Soldadura;si

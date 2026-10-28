@@ -1,0 +1,52 @@
+﻿codigo_cuerpo;cuerpo;especialidad;idioma;libre;reserva_discapacidad;acceso;total
+590;Profesores de Enseñanza Secundaria;Filosofía;Castellano;4;1;5;10
+590;Profesores de Enseñanza Secundaria;Latín;Castellano;2;1;3;6
+590;Profesores de Enseñanza Secundaria;Lengua Castellana y Literatura;Castellano;21;6;28;55
+590;Profesores de Enseñanza Secundaria;Lengua Castellana y Literatura;Euskera;5;1;6;12
+590;Profesores de Enseñanza Secundaria;Geografía e Historia;Castellano;8;2;10;20
+590;Profesores de Enseñanza Secundaria;Geografía e Historia;Euskera;5;1;6;12
+590;Profesores de Enseñanza Secundaria;Matemáticas;Castellano;24;6;30;60
+590;Profesores de Enseñanza Secundaria;Matemáticas;Euskera;8;2;10;20
+590;Profesores de Enseñanza Secundaria;Física y Química;Castellano;6;1;7;14
+590;Profesores de Enseñanza Secundaria;Física y Química;Euskera;3;1;5;9
+590;Profesores de Enseñanza Secundaria;Biología y Geología;Castellano;7;2;9;18
+590;Profesores de Enseñanza Secundaria;Dibujo;Castellano;8;2;11;21
+590;Profesores de Enseñanza Secundaria;Inglés;Castellano;19;5;24;48
+590;Profesores de Enseñanza Secundaria;Inglés;Euskera;5;1;6;12
+590;Profesores de Enseñanza Secundaria;Educación Física;Castellano;6;1;7;14
+590;Profesores de Enseñanza Secundaria;Educación Física;Euskera;5;1;6;12
+590;Profesores de Enseñanza Secundaria;Orientación Educativa;Castellano;12;3;15;30
+590;Profesores de Enseñanza Secundaria;Orientación Educativa;Euskera;2;1;3;6
+590;Profesores de Enseñanza Secundaria;Tecnología;Castellano;13;3;17;33
+590;Profesores de Enseñanza Secundaria;Lengua y Literatura Vasca (Navarra);Euskera;5;1;6;12
+590;Profesores de Enseñanza Secundaria;Administración de Empresas;Castellano;6;1;7;14
+590;Profesores de Enseñanza Secundaria;Administración de Empresas;Euskera;2;0;2;4
+590;Profesores de Enseñanza Secundaria;Formación y Orientación Laboral;Castellano;7;2;9;18
+590;Profesores de Enseñanza Secundaria;Hostelería y Turismo;Castellano;1;1;3;5
+590;Profesores de Enseñanza Secundaria;Informática;Castellano;8;2;10;20
+590;Profesores de Enseñanza Secundaria;Informática;Euskera;1;0;1;2
+590;Profesores de Enseñanza Secundaria;Intervención Sociocomunitaria;Castellano;6;2;8;16
+590;Profesores de Enseñanza Secundaria;Organización y Gestión Comercial;Castellano;2;0;2;4
+590;Profesores de Enseñanza Secundaria;Organización y Proyectos de Fabricación Mecánica;Castellano;5;1;6;12
+590;Profesores de Enseñanza Secundaria;Organización y Proyectos de Sistemas Energéticos;Castellano;5;1;6;12
+590;Profesores de Enseñanza Secundaria;Procesos en la Industria Alimentaria;Castellano;2;1;3;6
+590;Profesores de Enseñanza Secundaria;Sistemas Electrónicos;Castellano;2;0;2;4
+590;Profesores de Enseñanza Secundaria;Sistemas Electrotécnicos y Automáticos;Castellano;3;1;4;8
+590;Profesores de Enseñanza Secundaria;Instalaciones Electrotécnicas;Castellano;5;1;6;12
+590;Profesores de Enseñanza Secundaria;Procedimientos de Diagnóstico Clínico y Ortoprotésico;Castellano;2;1;3;6
+590;Profesores de Enseñanza Secundaria;Procedimientos Sanitarios y Asistenciales;Castellano;3;1;4;8
+590;Profesores de Enseñanza Secundaria;Procesos Comerciales;Castellano;5;1;6;12
+590;Profesores de Enseñanza Secundaria;Procesos Comerciales;Euskera;2;0;2;4
+590;Profesores de Enseñanza Secundaria;Procesos de Gestión Administrativa;Castellano;7;2;9;18
+590;Profesores de Enseñanza Secundaria;Servicios a la Comunidad;Castellano;6;1;7;14
+590;Profesores de Enseñanza Secundaria;Sistemas y Aplicaciones Informáticas;Castellano;6;2;8;16
+590;Profesores de Enseñanza Secundaria;Sistemas y Aplicaciones Informáticas;Euskera;1;0;2;3
+590;Profesores de Enseñanza Secundaria;Equipos Electrónicos;Castellano;3;0;3;6
+592;Profesores de Escuelas Oficiales de Idiomas;Euskera;Euskera;5;1;0;6
+592;Profesores de Escuelas Oficiales de Idiomas;Francés;Castellano;5;0;0;5
+592;Profesores de Escuelas Oficiales de Idiomas;Inglés;Castellano;9;1;0;10
+598;Profesores Especialistas en Sectores Singulares de FP;Cocina y Pastelería;Castellano;7;2;0;9
+598;Profesores Especialistas en Sectores Singulares de FP;Estética;Castellano;5;2;0;7
+598;Profesores Especialistas en Sectores Singulares de FP;Mantenimiento de Vehículos;Castellano;8;1;0;9
+598;Profesores Especialistas en Sectores Singulares de FP;Mecanizado y Mantenimiento de Máquinas;Castellano;14;2;0;16
+598;Profesores Especialistas en Sectores Singulares de FP;Soldadura;Castellano;12;0;0;12

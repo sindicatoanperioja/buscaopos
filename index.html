@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Buscaopos · Oposiciones docentes por CCAA</title>
+<meta name="description" content="ANPE La Rioja: plazas de oposiciones docentes de todas las comunidades autónomas, por cuerpo y especialidad.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --azul:#1b619c; --azul-profundo:#1b4f7d; --azul-cielo:#c6dbec; --azul-niebla:#e4eef6;
+  --verde:#6cb195; --verde-texto:#3d7a62; --tinta:#334155; --tinta-suave:#64748b;
+  --bg:#ffffff; --surface:#f7fafc;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --azul:#7fb3e0; --azul-profundo:#c6dbec; --azul-niebla:#18242f;
+    --tinta:#e2e8f0; --tinta-suave:#94a3b8; --bg:#0f161c; --surface:#16202a;
+    color-scheme:dark;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tinta);font-family:Raleway,Arial,sans-serif;line-height:1.5}
+header{background:var(--azul-niebla);padding:32px 16px 24px}
+.wrap{max-width:1100px;margin:0 auto;padding:0 16px}
+h1{font-family:"Bebas Neue",Impact,sans-serif;font-weight:400;font-size:clamp(36px,6vw,56px);letter-spacing:.02em;color:var(--azul);margin:0}
+.sub{color:var(--tinta-suave);margin:4px 0 0}
+main{padding:32px 16px}
+.aviso{background:var(--surface);border-left:6px solid var(--verde);border-radius:12px;padding:16px 20px}
+footer{color:var(--tinta-suave);font-size:14px;padding:24px 16px;border-top:1px solid var(--azul-cielo)}
+a{color:var(--azul)}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <h1>Buscaopos</h1>
+  <p class="sub">Oposiciones docentes en todas las comunidades autónomas: plazas, cuerpos, especialidades y estado del proceso.</p>
+</div></header>
+<main><div class="wrap">
+  <p class="aviso">Página en preparación. Los datos están en la carpeta <code>datos/</code> del repositorio.</p>
+</div></main>
+<footer><div class="wrap">ANPE La Rioja · <a href="https://www.anperioja.es">www.anperioja.es</a> · rioja@anpe.es</div></footer>
+</body>
+</html>
