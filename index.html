@@ -45,7 +45,9 @@ button,input,select{font:inherit;color:inherit}
 /* Cabecera con la onda del banner */
 header{background:var(--surface);position:relative;padding:18px 0 46px}
 .cab{display:flex;align-items:center;gap:18px}
-.logo{height:76px;width:auto;flex:0 0 auto;background:#fff;border-radius:12px;padding:4px 6px}
+.logo{height:104px;width:auto;flex:0 0 auto;display:block}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .logo{background:#fff;border-radius:12px;padding:6px 8px}}
+[data-theme="dark"] .logo{background:#fff;border-radius:12px;padding:6px 8px}
 .cab-txt{border-left:2px solid var(--azul-cielo);padding-left:18px;min-width:0}
 .antetitulo{margin:0;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--verde-texto)}
 h1{font-family:"Bebas Neue",Impact,sans-serif;font-weight:400;font-size:clamp(38px,6vw,58px);line-height:.95;letter-spacing:.02em;color:var(--azul);margin:2px 0 0}
@@ -234,7 +236,7 @@ footer p{margin:4px 0}
 @media (min-width:901px){.filtros-pie,.velo{display:none!important}}
 @media (max-width:560px){
   header{padding:14px 0 38px}
-  .logo{height:58px}
+  .logo{height:72px}
   .sub{display:none}
   .cab{gap:12px}.cab-txt{padding-left:12px}
   .barras{grid-template-columns:minmax(90px,120px) 1fr auto}
@@ -246,7 +248,7 @@ footer p{margin:4px 0}
 <body>
 <header>
   <div class="wrap cab">
-    <a href="https://www.anperioja.es" aria-label="ANPE La Rioja"><img class="logo" src="img/logo-anpe.png" alt="ANPE"></a>
+    <a href="https://www.anperioja.es" aria-label="ANPE La Rioja"><img class="logo" src="img/logo-anpe-rioja.svg" alt="ANPE La Rioja" width="98" height="104"></a>
     <div class="cab-txt">
       <p class="antetitulo">Buscador de plazas</p>
       <h1>Oposiciones docentes</h1>
