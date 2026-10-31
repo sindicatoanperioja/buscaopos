@@ -528,8 +528,8 @@ function pintarFacetas() {
   // Estado
   const ce = contar("estado");
   const claves = Object.keys(ESTADOS).filter((k) => ce.has(k) || filtros.estado.has(k));
-  html.push(`<section class="faceta"><h2>Estado</h2>${claves.map((k) => opcion("estado", k,
-    `${ESTADOS[k].txt}<br><small>${ESTADOS[k].ayuda}</small>`, ce.get(k), `<span class="punto" style="background:${COLOR_ESTADO[k]}"></span>`)).join("")}</section>`);
+  html.push(plegable("estado", "Estado", `${claves.map((k) => opcion("estado", k,
+    `${ESTADOS[k].txt}<br><small>${ESTADOS[k].ayuda}</small>`, ce.get(k), `<span class="punto" style="background:${COLOR_ESTADO[k]}"></span>`)).join("")}`));
 
   // Cuerpo
   const cu = contar("cuerpo");
@@ -549,15 +549,15 @@ function pintarFacetas() {
   const ctu = contar("turno");
   const turnos = Object.keys(TURNOS).filter((k) => ctu.has(k) || filtros.turno.has(k));
   if (turnos.length) {
-    html.push(`<section class="faceta"><h2>Turno</h2><p class="ayuda">Solo convocatorias con reparto por turnos. Las cifras pasan a ser las del turno elegido.</p>${turnos.map((k) => opcion("turno", k, TURNOS[k].txt, ctu.get(k))).join("")}</section>`);
+    html.push(plegable("turno", "Turno", `<p class="ayuda">Solo convocatorias con reparto por turnos. Las cifras pasan a ser las del turno elegido.</p>${turnos.map((k) => opcion("turno", k, TURNOS[k].txt, ctu.get(k))).join("")}`));
   }
 
   // Tipo de oposición
   const ct = contar("tipo");
   const tipos = Object.keys(TIPOS).filter((k) => ct.has(k) || filtros.tipo.has(k));
   if (tipos.length > 1 || filtros.tipo.size) {
-    html.push(`<section class="faceta"><h2>Tipo de oposición</h2>${tipos.map((k) => opcion("tipo", k,
-      `${TIPOS[k].txt}<br><small>${TIPOS[k].ayuda}</small>`, ct.get(k))).join("")}</section>`);
+    html.push(plegable("tipo", "Tipo de oposición", `${tipos.map((k) => opcion("tipo", k,
+      `${TIPOS[k].txt}<br><small>${TIPOS[k].ayuda}</small>`, ct.get(k))).join("")}`));
   }
 
   // Requisito de idioma
