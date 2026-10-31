@@ -75,6 +75,14 @@ aside.filtros{align-self:start;position:sticky;top:84px;max-height:calc(100vh - 
 .faceta{border-bottom:1px solid var(--linea);padding:14px 0}
 .faceta:first-child{padding-top:0}
 .faceta h2{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--azul-profundo);margin:0 0 8px;display:flex;justify-content:space-between;align-items:center}
+.plegable summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;min-height:28px}
+.plegable summary::-webkit-details-marker{display:none}
+.plegable summary::after{content:"";width:8px;height:8px;border-right:2px solid var(--azul-profundo);border-bottom:2px solid var(--azul-profundo);transform:rotate(45deg);margin:0 6px 4px auto;flex:0 0 auto}
+.plegable[open] summary::after{transform:rotate(-135deg);margin-bottom:-4px}
+.plegable[open] summary{margin-bottom:8px}
+.plegable summary h2{margin:0}
+.plegable summary .elegidos{background:var(--azul);color:#fff;border-radius:999px;font-size:12px;font-weight:700;min-width:20px;height:20px;padding:0 6px;display:inline-grid;place-items:center}
+[data-theme="dark"] .plegable summary .elegidos{color:#0f161c}
 .faceta h3{font-size:12px;font-weight:700;color:var(--tinta-suave);margin:10px 0 4px}
 .faceta h3:first-of-type{margin-top:0}
 .opc{display:flex;align-items:center;gap:9px;padding:5px 6px;margin:0 -6px;border-radius:8px;cursor:pointer;font-size:14px}
@@ -469,6 +477,7 @@ function preparar(datos) {
 
 // ---------- Facetas ----------
 const abiertaFaceta = { esp: false, ccaa: false };
+const desplegada = {};  // Facetas plegables que el usuario ha abierto o cerrado
 let busquedaEsp = "";
 
 function contar(f) {
@@ -502,6 +511,13 @@ function opcion(f, v, et, info, extra = "") {
   return `<label class="opc${n ? "" : " vacia"}"><input type="checkbox" data-f="${f}" value="${esc(v)}"${marcado ? " checked" : ""}>${extra}<span class="et">${et}</span><span class="cnt">${cnt}</span></label>`;
 }
 
+// Bloque plegable: sale cerrado salvo que tenga algo marcado.
+function plegable(f, titulo, contenido) {
+  const n = filtros[f].size;
+  const abierta = f in desplegada ? desplegada[f] : n > 0;
+  return `<details class="faceta plegable" data-plegable="${f}"${abierta ? " open" : ""}><summary><h2>${titulo}</h2>${n ? `<span class="elegidos">${n}</span>` : ""}</summary>${contenido}</details>`;
+}
+
 function pintarFacetas() {
   const html = [];
   // Año
@@ -520,14 +536,14 @@ function pintarFacetas() {
   const cuerpos = [...new Map(TODAS.filter((p) => p.cuerpo).map((p) => [p.cuerpo, p])).values()]
     .filter((p) => cu.has(p.cuerpo) || filtros.cuerpo.has(p.cuerpo))
     .sort((a, b) => a.cuerpo.localeCompare(b.cuerpo));
-  html.push(`<section class="faceta"><h2>Cuerpo</h2>${cuerpos.map((p) => opcion("cuerpo", p.cuerpo, `${esc(p.cuerpo_corto)} <small>${p.cuerpo}</small>`, cu.get(p.cuerpo))).join("")}</section>`);
+  html.push(plegable("cuerpo", "Cuerpo", cuerpos.map((p) => opcion("cuerpo", p.cuerpo, `${esc(p.cuerpo_corto)} <small>${p.cuerpo}</small>`, cu.get(p.cuerpo))).join("")));
 
   // Comunidad
   const cc = contar("ccaa");
   const listas = [...new Map(TODAS.map((p) => [p.lista_id, p.lista])).entries()]
     .filter(([id]) => cc.has(id) || filtros.ccaa.has(id))
     .sort((a, b) => a[1].localeCompare(b[1], "es"));
-  html.push(`<section class="faceta"><h2>Comunidad</h2>${listas.map(([id, nom]) => opcion("ccaa", id, esc(nom), cc.get(id))).join("")}</section>`);
+  html.push(plegable("ccaa", "Comunidad", listas.map(([id, nom]) => opcion("ccaa", id, esc(nom), cc.get(id))).join("")));
 
   // Turno
   const ctu = contar("turno");
@@ -549,7 +565,7 @@ function pintarFacetas() {
   const idiomas = [...new Map(TODAS.map((p) => [valor(p, "idioma"), p.requisito_linguistico || "Sin requisito de idioma"])).entries()]
     .filter(([v]) => ci.has(v) || filtros.idioma.has(v))
     .sort((a, b) => (a[0] === "ninguno") - (b[0] === "ninguno") || a[1].localeCompare(b[1], "es"));
-  html.push(`<section class="faceta"><h2>Requisito de idioma</h2>${idiomas.map(([v, nom]) => opcion("idioma", v, esc(nom), ci.get(v))).join("")}</section>`);
+  html.push(plegable("idioma", "Requisito de idioma", idiomas.map(([v, nom]) => opcion("idioma", v, esc(nom), ci.get(v))).join("")));
 
   // Especialidad
   const ces = contar("esp");
@@ -560,10 +576,9 @@ function pintarFacetas() {
     .sort(porCodigo);
   const totalEsp = esps.length;
   if (!abiertaFaceta.esp && !qe) esps = esps.slice(0, 12);
-  html.push(`<section class="faceta"><h2>Especialidad</h2>
-    <input class="faceta-buscar" id="buscarEsp" type="search" placeholder="Filtrar especialidades" value="${esc(busquedaEsp)}" aria-label="Filtrar la lista de especialidades">
+  html.push(plegable("esp", "Especialidad", `<input class="faceta-buscar" id="buscarEsp" type="search" placeholder="Filtrar especialidades" value="${esc(busquedaEsp)}" aria-label="Filtrar la lista de especialidades">
     <div id="listaEsp">${esps.map((p) => opcion("esp", p.esp, `<span class="cod">${p.codigo_completo || p.cuerpo || ""}</span> ${esc(p.especialidad)}`, ces.get(p.esp))).join("") || `<p class="opc vacia">Ninguna coincide</p>`}</div>
-    ${!qe && totalEsp > 12 ? `<button class="ver-mas" type="button" data-ver="esp">${abiertaFaceta.esp ? "Ver menos" : `Ver las ${totalEsp}`}</button>` : ""}</section>`);
+    ${!qe && totalEsp > 12 ? `<button class="ver-mas" type="button" data-ver="esp">${abiertaFaceta.esp ? "Ver menos" : `Ver las ${totalEsp}`}</button>` : ""}`));
 
   const cont = $("#facetas");
   const enfocado = document.activeElement && document.activeElement.id === "buscarEsp";
@@ -784,6 +799,11 @@ $("#facetas").addEventListener("change", (ev) => {
   i.checked ? s.add(i.value) : s.delete(i.value);
   cambiar();
 });
+// "toggle" no burbujea: se escucha en captura para recordar el bloque tras repintar.
+$("#facetas").addEventListener("toggle", (ev) => {
+  const f = ev.target.dataset && ev.target.dataset.plegable;
+  if (f) desplegada[f] = ev.target.open;
+}, true);
 $("#facetas").addEventListener("input", (ev) => {
   if (ev.target.id !== "buscarEsp") return;
   busquedaEsp = ev.target.value;
