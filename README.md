@@ -17,7 +17,7 @@ Buscador: https://sindicatoanperioja.github.io/buscaopos/
   - `convocatorias.csv`: datos comunes de cada convocatoria (plazo de inscripción, fecha de las pruebas, normativa, requisito de idioma, concurso de méritos o concurso-oposición).
   - `requisitos_linguisticos.csv`: lengua cooficial que exige cada comunidad.
   - `plazas.json` y `plazas.js`: lo que lee el buscador. Se generan, no se editan a mano.
-- `documentacion/`: notas por comunidad, fuentes consultadas y el formato de los datos del buscador (`esquema-datos.md`) y notas sobre las convocatorias de 2023 a 2026 (`convocatorias-2023-2026.md`).
+- `documentacion/`: notas por comunidad, fuentes consultadas y el formato de los datos del buscador (`esquema-datos.md`) y notas sobre las convocatorias de 2022 a 2026 (`convocatorias-2022-2026.md`).
 - `herramientas/`: scripts para generar los datos del buscador y la Excel comparativa a partir de los CSV.
 - `calendario.html`: calendario por comunidad y gráficos de plazas. Lee los mismos datos que el buscador.
 - `img/`: logo.
