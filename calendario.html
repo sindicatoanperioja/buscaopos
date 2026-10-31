@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calendario de oposiciones · ANPE La Rioja</title>
+<meta name="description" content="ANPE La Rioja: cuándo abre cada comunidad el plazo de las oposiciones docentes, fechas de examen y plazas por año.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --azul:#1b619c; --azul-profundo:#1b4f7d; --azul-medio:#5b9bce; --azul-cielo:#c6dbec; --azul-niebla:#e4eef6;
+  --verde:#6cb195; --verde-texto:#3d7a62; --verde-niebla:#e6f2ec;
+  --tinta:#334155; --tinta-suave:#64748b; --linea:#d9e4ee;
+  --bg:#f5f8fb; --surface:#ffffff; --sombra:0 1px 2px rgba(27,79,125,.06),0 4px 14px rgba(27,79,125,.06);
+  --gris-niebla:#eef1f4;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --azul:#8dbbe4; --azul-profundo:#c6dbec; --azul-medio:#5b9bce; --azul-cielo:#2a4560; --azul-niebla:#1a2a3a;
+    --verde:#6cb195; --verde-texto:#8fd0b3; --verde-niebla:#1d3a30;
+    --tinta:#e2e8f0; --tinta-suave:#9aa9bb; --linea:#2b3a4a;
+    --bg:#0f161c; --surface:#16202a; --sombra:none; --gris-niebla:#222d38;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --azul:#8dbbe4; --azul-profundo:#c6dbec; --azul-medio:#5b9bce; --azul-cielo:#2a4560; --azul-niebla:#1a2a3a;
+  --verde:#6cb195; --verde-texto:#8fd0b3; --verde-niebla:#1d3a30;
+  --tinta:#e2e8f0; --tinta-suave:#9aa9bb; --linea:#2b3a4a;
+  --bg:#0f161c; --surface:#16202a; --sombra:none; --gris-niebla:#222d38;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+:root{
+  --a2023:#a9cbe6; --a2024:#7cafd9; --a2025:#4b8dc4; --a2026:#1b619c; --a2027:#0f3a5f;
+  --t-ord:#1b619c; --t-est:#6cb195; --t-sin:#0f3a5f;
+  --h0:#e4eef6; --h1:#c6dbec; --h2:#8fb9dd; --h3:#5b9bce; --h4:#1b619c; --h5:#0f3a5f;
+  --h-osc:#0b2a44;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --a2023:#35536e; --a2024:#4f7ca3; --a2025:#6fa3cf; --a2026:#a4cbea; --a2027:#e2eef8;
+    --t-ord:#8dbbe4; --t-est:#6cb195; --t-sin:#e2e8f0;
+    --h0:#1a2a3a; --h1:#21405c; --h2:#2c5f8a; --h3:#5b9bce; --h4:#a4cbea; --h5:#e2eef8;
+    --h-osc:#0b2a44;
+  }
+}
+:root[data-theme="dark"]{
+  --a2023:#35536e; --a2024:#4f7ca3; --a2025:#6fa3cf; --a2026:#a4cbea; --a2027:#e2eef8;
+  --t-ord:#8dbbe4; --t-est:#6cb195; --t-sin:#e2e8f0;
+  --h0:#1a2a3a; --h1:#21405c; --h2:#2c5f8a; --h3:#5b9bce; --h4:#a4cbea; --h5:#e2eef8;
+  --h-osc:#0b2a44;
+}
+body{margin:0;background:var(--bg);color:var(--tinta);font-family:Raleway,Arial,sans-serif;line-height:1.45;font-size:15px}
+button{font:inherit;color:inherit}
+a{color:var(--azul)}
+.wrap{max-width:1280px;margin:0 auto;padding:0 16px}
+header{background:var(--surface);position:relative;padding:18px 0 46px}
+.cab{display:flex;align-items:center;gap:18px}
+.logo{height:104px;width:auto;flex:0 0 auto;display:block}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .logo{background:#fff;border-radius:12px;padding:6px 8px}}
+[data-theme="dark"] .logo{background:#fff;border-radius:12px;padding:6px 8px}
+.cab-txt{border-left:2px solid var(--azul-cielo);padding-left:18px;min-width:0}
+.antetitulo{margin:0;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--verde-texto)}
+h1{font-family:"Bebas Neue",Impact,sans-serif;font-weight:400;font-size:clamp(38px,6vw,58px);line-height:.95;letter-spacing:.02em;color:var(--azul);margin:2px 0 0}
+.enlace-cab{display:inline-block;margin-top:6px;font-weight:700;font-size:14px}
+.onda{position:absolute;left:0;right:0;bottom:0;width:100%;height:40px;display:block}
+main{padding:20px 16px 40px}
+.datos{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:18px}
+.dato{background:var(--surface);border-radius:20px;box-shadow:var(--sombra);padding:16px 20px}
+.dato b{display:block;font-family:"Bebas Neue",Impact,sans-serif;font-weight:400;font-size:40px;line-height:1.05;letter-spacing:.02em;color:var(--azul)}
+.dato span{color:var(--tinta-suave);font-size:14px}
+.bloque{background:var(--surface);border-radius:20px;box-shadow:var(--sombra);padding:20px;margin-bottom:18px}
+.bloque h2{font-family:"Bebas Neue",Impact,sans-serif;font-weight:400;font-size:30px;letter-spacing:.02em;color:var(--azul-profundo);margin:0}
+.bloque>p{margin:4px 0 12px;color:var(--tinta-suave);max-width:80ch}
+.controles{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+.vistas{display:inline-flex;border:1.5px solid var(--azul-cielo);border-radius:999px;padding:2px}
+.vistas button{border:0;background:none;border-radius:999px;padding:6px 14px;font-weight:700;font-size:14px;cursor:pointer}
+.vistas button[aria-pressed="true"]{background:var(--azul);color:var(--surface)}
+.leyenda{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--tinta-suave);margin:0 0 8px;padding:0;list-style:none}
+.leyenda li{display:inline-flex;align-items:center;gap:6px}
+.leyenda i{width:11px;height:11px;border-radius:50%;display:inline-block}
+.leyenda i.cua{border-radius:3px}
+.leyenda i.raya{width:3px;height:15px;border-radius:2px;background:var(--tinta)}
+#tira{display:block;width:100%}
+#tira text{font-family:Raleway,Arial,sans-serif;fill:var(--tinta-suave);font-size:12px}
+#tira text.nom{fill:var(--tinta);font-weight:600;font-size:13px}
+#tira .rej{stroke:var(--linea);stroke-width:1}
+#tira .fin{stroke:var(--tinta);stroke-width:2.5;stroke-linecap:round}
+#tira .p{stroke:var(--surface);stroke-width:2}
+#tira .diana{fill:transparent;cursor:pointer}
+#tira .diana:hover+.p{stroke:var(--tinta)}
+.tabla-caja{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:14px;font-variant-numeric:tabular-nums}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--linea);white-space:nowrap;vertical-align:top}
+thead th{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--azul-profundo);background:var(--azul-niebla)}
+tbody th{font-weight:700;color:var(--azul-profundo)}
+th:first-child{position:sticky;left:0;z-index:1}
+tbody th:first-child{background:var(--surface)}
+td small{color:var(--tinta-suave)}
+td .fecha{display:block}
+td .nada{color:var(--tinta-suave)}
+.calor td{text-align:right;padding:0;border:2px solid var(--surface);border-radius:8px}
+.calor thead th:not(:first-child){text-align:right}
+.calor td a,.calor td span{display:block;padding:7px 10px;text-decoration:none;color:inherit;border-radius:6px}
+.calor td a:hover{outline:2px solid var(--azul-profundo);outline-offset:-2px}
+.calor tfoot th,.calor tfoot td{font-weight:800;border:0;color:var(--azul-profundo);padding:8px 10px;text-align:right}
+.calor tfoot th{text-align:left;background:var(--surface)}
+.h0{background:var(--h0);color:var(--azul-profundo)}.h1{background:var(--h1);color:var(--azul-profundo)}
+.h2{background:var(--h2);color:var(--h-osc)}.h3{background:var(--h3);color:var(--h-osc)}
+.h4{background:var(--h4);color:var(--surface)}.h5{background:var(--h5);color:var(--surface)}
+.barra-a{display:grid;grid-template-columns:84px 1fr 74px;gap:10px;align-items:center;margin:8px 0}
+.barra-a .pista{display:flex;gap:2px;height:22px}
+.barra-a .pista i{display:block;min-width:3px;height:100%}
+.barra-a .pista i:first-child{border-radius:4px 0 0 4px}.barra-a .pista i:last-child{border-radius:0 4px 4px 0}
+.barra-a .pista i:only-child{border-radius:4px}
+.barra-a b{font-weight:700;font-variant-numeric:tabular-nums;text-align:right}
+.barra-a span small{color:var(--tinta-suave);display:block;font-size:12px;line-height:1.1}
+.notas{font-size:14px;color:var(--tinta-suave);max-width:80ch}
+#tip{position:fixed;z-index:50;pointer-events:none;background:var(--surface);color:var(--tinta);border:1px solid var(--linea);border-radius:12px;box-shadow:0 4px 18px rgba(11,42,68,.2);padding:8px 12px;font-size:13px;max-width:260px;display:none}
+#tip b{display:block;color:var(--azul-profundo)}
+@media (max-width:560px){
+  header{padding:14px 0 38px}
+  .logo{height:72px}
+  .cab{gap:12px}.cab-txt{padding-left:12px}
+  .bloque{padding:16px 14px}
+  .barra-a{grid-template-columns:58px 1fr 58px;gap:8px}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap cab">
+    <a href="https://www.anperioja.es" aria-label="ANPE La Rioja"><img class="logo" src="img/logo-anpe-rioja.svg" alt="ANPE La Rioja" width="98" height="104"></a>
+    <div class="cab-txt">
+      <p class="antetitulo">Calendario y datos</p>
+      <h1>Cuándo convoca cada comunidad</h1>
+      <a class="enlace-cab" href="index.html">Volver al buscador de plazas</a>
+    </div>
+  </div>
+  <svg class="onda" viewBox="0 0 1440 40" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 22 C 260 4, 520 4, 760 18 S 1220 36, 1440 12 L1440 40 L0 40Z" fill="var(--azul-cielo)"/>
+    <path d="M0 30 C 300 16, 560 18, 820 28 S 1240 38, 1440 22 L1440 40 L0 40Z" fill="var(--verde)" opacity=".55"/>
+    <path d="M0 35 C 320 26, 620 28, 900 34 S 1260 40, 1440 30 L1440 40 L0 40Z" fill="var(--bg)"/>
+  </svg>
+</header>
+<main class="wrap">
+  <div class="datos" id="datos"></div>
+
+  <section class="bloque">
+    <h2 id="tituloTira"></h2>
+    <p id="ayudaTira"></p>
+    <div class="controles">
+      <div class="vistas" id="verQue" role="group" aria-label="Qué fecha mostrar">
+        <button type="button" data-v="inicio" aria-pressed="true">Apertura del plazo</button>
+        <button type="button" data-v="examen" aria-pressed="false">Examen</button>
+      </div>
+      <div class="vistas" id="verTipo" role="group" aria-label="Qué convocatorias mostrar">
+        <button type="button" data-v="ordinarias" aria-pressed="true">Ordinarias</button>
+        <button type="button" data-v="todas" aria-pressed="false">Todas</button>
+      </div>
+    </div>
+    <ul class="leyenda" id="leyTira"></ul>
+    <svg id="tira" role="img" aria-labelledby="tituloTira"></svg>
+  </section>
+
+  <section class="bloque">
+    <h2>Las fechas de cada año</h2>
+    <p>Cada columna es el año de las pruebas. Si la fecha cae en otro año, se indica. Pulsa una fecha para ver sus plazas en el buscador.</p>
+    <div class="tabla-caja"><table id="fechas"></table></div>
+  </section>
+
+  <section class="bloque">
+    <h2>Plazas por año</h2>
+    <p>Año de las pruebas. Las cifras de 2027 son casi todas previsiones y pueden cambiar.</p>
+    <ul class="leyenda" id="leyAnios"></ul>
+    <div id="anios"></div>
+  </section>
+
+  <section class="bloque">
+    <h2>Plazas por comunidad y año</h2>
+    <p>Cuanto más intenso el color, más plazas. Un guion indica que no hay plazas ese año en estos datos.</p>
+    <div class="tabla-caja"><table class="calor" id="calor"></table></div>
+  </section>
+
+  <p class="notas">Las fechas salen de las convocatorias publicadas en los boletines. El plazo suele abrirse uno o pocos días después de la publicación. Algunas fechas de examen no constan en el boletín y quedan sin fecha. El detalle y las fuentes de cada convocatoria están en el <a href="index.html">buscador</a>.</p>
+</main>
+<div id="tip" role="status"></div>
+<script src="datos/plazas.js"></script>
+<script>
+const $ = (s) => document.querySelector(s);
+const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const fmt = (n) => String(n).replace(/\B(?=(\d{3})+$)/g, ".");
+const MESES = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+const MES3 = MESES.map((m) => m.slice(0, 3));
+// El plazo se mira de septiembre a agosto, porque se convoca en otoño o invierno; el examen, de enero a diciembre.
+const ordenMes = () => (estado.que === "inicio" ? [8, 9, 10, 11, 0, 1, 2, 3, 4, 5, 6, 7] : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
+const DIAS_MES = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+const TIPOS = {
+  ordinaria: { txt: "Ordinaria", color: "--t-ord" },
+  estabilizacion_prueba: { txt: "Estabilización con prueba", color: "--t-est" },
+  estabilizacion_sin_prueba: { txt: "Estabilización sin prueba", color: "--t-sin" },
+};
+
+const PLAZAS = window.BUSCAOPOS_DATOS.plazas;
+const ANIOS = [...new Set(PLAZAS.map((p) => p.anio))].sort();
+const COMUNIDADES = [...new Set(PLAZAS.map((p) => p.comunidad))].sort((a, b) => a.localeCompare(b, "es"));
+const idsCcaa = (c) => [...new Set(PLAZAS.filter((p) => p.comunidad === c).map((p) => p.lista_id))].join(",");
+const enlace = (c, a) => `index.html?anio=${a}&ccaa=${idsCcaa(c)}`;
+
+const partes = (iso) => { const [a, m, d] = iso.split("-").map(Number); return { a, m: m - 1, d }; };
+// Días desde el inicio del eje, sin contar el año.
+function diaCurso(iso) {
+  const { m, d } = partes(iso);
+  let n = Math.min(d, DIAS_MES[m]) - 1;
+  for (const k of ordenMes()) { if (k === m) break; n += DIAS_MES[k]; }
+  return n;
+}
+function fechaCurso(n) {
+  for (const k of ordenMes()) { if (n < DIAS_MES[k]) return { m: k, d: n + 1 }; n -= DIAS_MES[k]; }
+  return { m: 7, d: 31 };
+}
+const fechaLarga = (iso) => { const { a, m, d } = partes(iso); return `${d} de ${MESES[m]} de ${a}`; };
+const mediana = (l) => { const o = [...l].sort((a, b) => a - b), i = o.length >> 1; return o.length % 2 ? o[i] : Math.round((o[i - 1] + o[i]) / 2); };
+
+// Una convocatoria: comunidad, año, fechas y tipo, con sus plazas sumadas.
+function convocatorias() {
+  const m = new Map();
+  for (const p of PLAZAS) {
+    if (!p.inicio_plazo) continue;
+    const k = [p.comunidad, p.anio, p.inicio_plazo, p.fecha_examen || "", p.tipo, p.procedimiento].join("|");
+    if (!m.has(k)) m.set(k, { comunidad: p.comunidad, anio: p.anio, inicio: p.inicio_plazo, fin: p.fin_plazo, examen: p.fecha_examen, tipo: p.tipo, meritos: p.procedimiento === "concurso_meritos", plazas: 0 });
+    m.get(k).plazas += p.plazas || 0;
+  }
+  return [...m.values()];
+}
+const CONV = convocatorias();
+
+const estado = { que: "inicio", tipo: "ordinarias" };
+const elegidas = () => CONV.filter((c) => estado.tipo === "todas" || (c.tipo === "ordinaria" && !c.meritos));
+const fechaDe = (c) => (estado.que === "inicio" ? c.inicio : c.examen);
+
+// Fecha habitual: la mediana de los años, tomando de cada año la convocatoria con más plazas.
+function habitual(lista, comunidad) {
+  const porAnio = new Map();
+  for (const c of lista) {
+    if (c.comunidad !== comunidad || !fechaDe(c)) continue;
+    const y = porAnio.get(c.anio);
+    if (!y || c.plazas > y.plazas) porAnio.set(c.anio, c);
+  }
+  const dias = [...porAnio.values()].map((c) => diaCurso(fechaDe(c)));
+  return dias.length ? { dia: mediana(dias), dias } : null;
+}
+// Con uno o dos años no hay pauta: se da el mes o el intervalo, no una mediana.
+function textoHabitual(h) {
+  if (h.dias.length < 3) {
+    const [a, b] = [...h.dias].sort((x, y) => x - y).map((n) => MESES[fechaCurso(n).m]);
+    return !b || a === b ? a : `de ${a} a ${b}`;
+  }
+  const { m, d } = fechaCurso(h.dia);
+  return `${d <= 10 ? "principios" : d <= 20 ? "mediados" : "finales"} de ${MESES[m]}`;
+}
+
+function pintarDatos() {
+  const lista = CONV.filter((c) => c.tipo === "ordinaria" && !c.meritos && c.plazas >= 50);
+  const contar = (campo) => {
+    const n = Array(12).fill(0);
+    lista.forEach((c) => { if (c[campo]) n[partes(c[campo]).m]++; });
+    const mes = n.indexOf(Math.max(...n));
+    return { mes, n: n[mes], de: n.reduce((a, b) => a + b, 0) };
+  };
+  const ini = contar("inicio"), ex = contar("examen");
+  const total = PLAZAS.filter((p) => p.estado !== "previsto").reduce((s, p) => s + (p.plazas || 0), 0);
+  $("#datos").innerHTML = `
+    <div class="dato"><b>${MESES[ini.mes]}</b><span>es el mes en que más plazos se abren: ${ini.n} de ${ini.de} convocatorias ordinarias</span></div>
+    <div class="dato"><b>${MESES[ex.mes]}</b><span>es el mes con más exámenes: ${ex.n} de ${ex.de} con fecha conocida</span></div>
+    <div class="dato"><b>${fmt(total)}</b><span>plazas convocadas desde ${ANIOS[0]}</span></div>`;
+}
+
+function pintarTira() {
+  const lista = elegidas().filter(fechaDe);
+  const ocupadas = [...new Set(lista.map((c) => c.anio))].sort();
+  const filas = COMUNIDADES.map((c) => ({ c, h: habitual(lista, c) })).filter((f) => f.h).sort((a, b) => a.h.dia - b.h.dia);
+  const ancho = $("#tira").clientWidth || 800;
+  const estrecho = ancho < 560;
+  const izq = estrecho ? 130 : 150, der = 8, arriba = 24, alto = 28;
+  const w = ancho - izq - der;
+  const x = (n) => izq + (n / 365) * w;
+  const H = arriba + filas.length * alto + 4;
+  const svg = [];
+  let acu = 0;
+  ordenMes().forEach((m) => {
+    const px = x(acu);
+    svg.push(`<line class="rej" x1="${px}" x2="${px}" y1="${arriba - 4}" y2="${H}"/>`);
+    svg.push(`<text x="${x(acu + DIAS_MES[m] / 2)}" y="14" text-anchor="middle">${estrecho ? MES3[m][0].toUpperCase() : MES3[m]}</text>`);
+    acu += DIAS_MES[m];
+  });
+  filas.forEach((f, i) => {
+    const y0 = arriba + i * alto;
+    svg.push(`<text class="nom" x="0" y="${y0 + alto / 2 + 4}">${esc(f.c)}</text>`);
+    if (f.h.dias.length >= 3) svg.push(`<line class="fin" x1="${x(f.h.dia)}" x2="${x(f.h.dia)}" y1="${y0 + 3}" y2="${y0 + alto - 3}"/>`);
+    lista.filter((c) => c.comunidad === f.c).sort((a, b) => a.anio - b.anio).forEach((c) => {
+      const px = x(diaCurso(fechaDe(c)));
+      // Cada año en su propia altura dentro de la fila: así no se tapan los puntos cercanos.
+      const y = y0 + 6 + (ANIOS.indexOf(c.anio) / (ANIOS.length - 1)) * (alto - 12);
+      const t = `${esc(c.comunidad)}|${c.anio}|${fechaDe(c)}|${c.plazas}|${c.tipo}|${c.meritos ? 1 : 0}`;
+      svg.push(`<circle class="diana" cx="${px}" cy="${y}" r="10" data-t="${t}"/><circle class="p" cx="${px}" cy="${y}" r="5.5" fill="var(--a${c.anio})" pointer-events="none"/>`);
+    });
+  });
+  const el = $("#tira");
+  el.setAttribute("viewBox", `0 0 ${ancho} ${H}`);
+  el.setAttribute("height", H);
+  el.innerHTML = svg.join("");
+  $("#leyTira").innerHTML = ocupadas.map((a) => `<li><i style="background:var(--a${a})"></i>${a}</li>`).join("") + `<li><i class="raya"></i>Fecha habitual (con tres años o más)</li>`;
+  $("#tituloTira").textContent = estado.que === "inicio" ? "En qué época del curso abre el plazo" : "En qué meses son los exámenes";
+  $("#ayudaTira").textContent = `Cada punto es una convocatoria, colocada en su mes. El color dice para qué año de pruebas es. Las comunidades van de la que ${estado.que === "inicio" ? "abre" : "examina"} antes a la que lo hace más tarde.`;
+}
+
+function pintarFechas() {
+  const lista = elegidas();
+  const anios = ANIOS.filter((a) => lista.some((c) => c.anio === a));
+  const cab = `<thead><tr><th scope="col">Comunidad</th><th scope="col">Suele ser</th>${anios.map((a) => `<th scope="col">${a}</th>`).join("")}</tr></thead>`;
+  const filas = COMUNIDADES.map((com) => {
+    const h = habitual(lista, com);
+    const celdas = anios.map((a) => {
+      const cs = lista.filter((c) => c.comunidad === com && c.anio === a).sort((x, y) => x.inicio.localeCompare(y.inicio));
+      if (!cs.length) return `<td><span class="nada">—</span></td>`;
+      const vistas = new Set();
+      const l = cs.map((c) => {
+        const f = fechaDe(c);
+        const clave = (f || "") + c.tipo;
+        if (vistas.has(clave)) return "";
+        vistas.add(clave);
+        if (!f) return `<span class="fecha nada">sin fecha</span>`;
+        const { a: y, m, d } = partes(f);
+        const marca = c.tipo === "ordinaria" ? "" : ` <small>${c.meritos ? "méritos" : "estab."}</small>`;
+        return `<span class="fecha"><a href="${esc(enlace(com, a))}">${d} ${MES3[m]}${y !== a ? ` ${y}` : ""}</a>${marca}</span>`;
+      });
+      return `<td>${l.join("")}</td>`;
+    }).join("");
+    return `<tr><th scope="row">${esc(com)}</th><td>${h ? textoHabitual(h) : `<span class="nada">—</span>`}</td>${celdas}</tr>`;
+  });
+  $("#fechas").innerHTML = cab + `<tbody>${filas.join("")}</tbody>`;
+}
+
+function pintarAnios() {
+  const por = ANIOS.map((a) => {
+    const t = { ordinaria: 0, estabilizacion_prueba: 0, estabilizacion_sin_prueba: 0 };
+    PLAZAS.filter((p) => p.anio === a).forEach((p) => { t[p.tipo] += p.plazas || 0; });
+    return { a, t, total: Object.values(t).reduce((x, y) => x + y, 0) };
+  });
+  const max = Math.max(...por.map((p) => p.total));
+  $("#leyAnios").innerHTML = Object.values(TIPOS).map((t) => `<li><i class="cua" style="background:var(${t.color})"></i>${t.txt}</li>`).join("");
+  $("#anios").innerHTML = por.map((p) => `<div class="barra-a"><span>${p.a}${p.a > new Date().getFullYear() ? "<small>previsión</small>" : ""}</span>
+    <div class="pista-caja"><div class="pista" style="width:${(p.total / max) * 100}%">${Object.entries(p.t).filter(([, n]) => n).map(([k, n]) =>
+      `<i style="flex:${n} 0 0;background:var(${TIPOS[k].color})" data-b="${esc(TIPOS[k].txt)}|${p.a}|${n}"></i>`).join("")}</div></div>
+    <b>${fmt(p.total)}</b></div>`).join("");
+}
+
+function pintarCalor() {
+  const n = (com, a) => PLAZAS.filter((p) => p.comunidad === com && p.anio === a).reduce((s, p) => s + (p.plazas || 0), 0);
+  const banda = (v) => [100, 300, 600, 1200, 2500].filter((t) => v >= t).length;
+  const cab = `<thead><tr><th scope="col">Comunidad</th>${ANIOS.map((a) => `<th scope="col">${a}</th>`).join("")}</tr></thead>`;
+  const filas = COMUNIDADES.map((c) => `<tr><th scope="row">${esc(c)}</th>${ANIOS.map((a) => {
+    const v = n(c, a);
+    return v ? `<td class="h${banda(v)}"><a href="${esc(enlace(c, a))}" aria-label="${esc(c)} ${a}: ${fmt(v)} plazas">${fmt(v)}</a></td>` : `<td><span class="nada">—</span></td>`;
+  }).join("")}</tr>`);
+  const pie = `<tfoot><tr><th scope="row">Total</th>${ANIOS.map((a) => `<td>${fmt(COMUNIDADES.reduce((s, c) => s + n(c, a), 0))}</td>`).join("")}</tr></tfoot>`;
+  $("#calor").innerHTML = cab + `<tbody>${filas.join("")}</tbody>` + pie;
+}
+
+function pintar() { pintarTira(); pintarFechas(); }
+
+// ---------- Eventos ----------
+function grupo(sel, clave) {
+  $(sel).addEventListener("click", (ev) => {
+    const b = ev.target.closest("button");
+    if (!b) return;
+    estado[clave] = b.dataset.v;
+    $(sel).querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", x === b));
+    pintar();
+  });
+}
+grupo("#verQue", "que");
+grupo("#verTipo", "tipo");
+
+const tip = $("#tip");
+function mostrar(html, ev) {
+  tip.innerHTML = html;
+  tip.style.display = "block";
+  const r = tip.getBoundingClientRect();
+  tip.style.left = Math.max(8, Math.min(ev.clientX + 12, innerWidth - r.width - 8)) + "px";
+  tip.style.top = Math.max(8, ev.clientY - r.height - 12) + "px";
+}
+function aviso(ev) {
+  const t = ev.target.closest && ev.target.closest("[data-t]");
+  const b = ev.target.closest && ev.target.closest("[data-b]");
+  if (t) {
+    const [com, a, f, n, ti, me] = t.dataset.t.split("|");
+    mostrar(`<b>${com}, pruebas de ${a}</b>${estado.que === "inicio" ? "Abre el" : "Examen el"} ${fechaLarga(f)}<br>${fmt(+n)} plazas · ${TIPOS[ti].txt}${me === "1" ? " (méritos)" : ""}`, ev);
+  } else if (b) {
+    const [ti, a, n] = b.dataset.b.split("|");
+    mostrar(`<b>${a}</b>${ti}: ${fmt(+n)} plazas`, ev);
+  } else tip.style.display = "none";
+}
+document.addEventListener("mousemove", aviso);
+document.addEventListener("click", aviso);
+let espera;
+addEventListener("resize", () => { clearTimeout(espera); espera = setTimeout(pintarTira, 150); });
+
+pintarDatos();
+pintar();
+pintarAnios();
+pintarCalor();
+</script>
+</body>
+</html>
