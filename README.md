@@ -12,6 +12,7 @@ Buscador: https://sindicatoanperioja.github.io/buscaopos/
   - `plazas_convocadas.csv`: convocatorias oficiales de 2023 a 2026, una fila por comunidad, cuerpo, especialidad e idioma.
   - `plazas_especialidad_2027.csv`: previsión y convocatorias de 2027, con el mismo formato.
   - `estado_ccaa_2027.csv`: estado de cada comunidad en Secundaria y en Maestros.
+  - `exenciones_idioma.csv`: especialidades exentas del requisito de lengua en una convocatoria.
   - `especialidades.csv`: catálogo de cuerpos y especialidades con su código.
   - `navarra_2027_turnos.csv`: Navarra 2027 por turno (libre, reserva y acceso).
   - `convocatorias.csv`: datos comunes de cada convocatoria (plazo de inscripción, fecha de las pruebas, normativa, requisito de idioma, concurso de méritos o concurso-oposición).

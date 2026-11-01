@@ -113,6 +113,8 @@ def datos_convocatoria(fila, anio, cu, fuentes):
 
 # Requisito de lengua cooficial por comunidad: se aplica a todas sus plazas, de cualquier año.
 requisitos = {r["comunidad"]: r for r in leer("requisitos_linguisticos.csv")}
+# Especialidades que una convocatoria deja fuera de ese requisito.
+exenciones = {(r["comunidad"], r["anio"], r["cuerpo"], slug(r["especialidad"])) for r in leer("exenciones_idioma.csv")}
 
 
 def comunidad(fila):
@@ -151,8 +153,9 @@ def registro(fila, anio, est_fase, cu, codigo, especialidad, idioma, plazas_n, n
     conv = datos_convocatoria(fila, str(anio), cu, fuentes)
     codigo = codigo.zfill(3) if codigo else por_nombre.get((cu, slug(especialidad or "")), "")
     nombre = catalogo.get((cu, codigo)) or especialidad or ""
-    req_ccaa = requisitos.get(comunidad(fila), {})
-    requisito = req_ccaa.get("requisito") or conv.get("requisito_linguistico", "").strip()
+    exenta = (comunidad(fila), str(anio), cu, slug(especialidad or "")) in exenciones
+    req_ccaa = {} if exenta else requisitos.get(comunidad(fila), {})
+    requisito = None if exenta else req_ccaa.get("requisito") or conv.get("requisito_linguistico", "").strip()
     if not requisito and idioma and idioma.lower() != "castellano":
         requisito = idioma
     obs = [x for x in (nota, conv.get("observaciones", "").strip()) if x]

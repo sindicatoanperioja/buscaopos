@@ -54,6 +54,7 @@ Hay tres estados:
 - `convocatorias.csv`: los datos comunes a toda una convocatoria (plazo, fecha de las pruebas, normativa, requisito de idioma, enlace). Con el cuerpo vacío se aplican a todos los cuerpos de esa comunidad y año. Así, si cambia el plazo, se toca una fila y no cincuenta. Si un mismo año y cuerpo tiene dos convocatorias (por ejemplo, ordinaria y de estabilización), cada fila de plazas se asocia a la convocatoria cuyo enlace aparece en su columna fuente.
 - `resumen_ccaa.csv`: los totales de 2025 de las comunidades sin reparto.
 - `requisitos_linguisticos.csv`: el requisito de lengua cooficial de cada comunidad que lo exige.
+- `exenciones_idioma.csv`: especialidades que una convocatoria deja fuera de ese requisito, por comunidad, año y cuerpo. Esas plazas salen sin requisito de idioma.
 
 En `convocatorias.csv`, la columna `tipo` vale "Ordinaria" o "Estabilización", `normativa` dice la norma, y `procedimiento` vale "Concurso de méritos" cuando no hay examen (vacía es concurso-oposición). Con `tipo` y `procedimiento` el generador saca los tres tipos: ordinaria, estabilización con prueba y estabilización sin prueba.
 
