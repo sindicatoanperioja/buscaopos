@@ -4,7 +4,7 @@ Datos para preparar el informe de situación y distribución de plazas de todas 
 
 Los datos de este resumen están en `../datos/` en CSV; la Excel comparativa se genera con `../herramientas/generar_excel.py`.
 
-La Rioja 2027 por especialidad (ya aprobadas + OPE extraordinaria = total), según la propuesta de la Consejería del 16-10-2026: Lengua 20+15=35, Matemáticas 17+8=25, Física y Química 11+4=15, Biología 11+15=26, Dibujo 6+4=10, Inglés 20+22=42, Educación Física 7+5=12, Informática 7, Intervención Sociocomunitaria 2+4=6, Fabricación Mecánica 4, Procesos Sanitarios 3+4=7, Instalaciones Electrotécnicas 5+2=7, Oficina de Proyectos de Construcción 3, Operaciones de Producción Agraria 3, Procesos Comerciales 6+3=9, Gestión Administrativa 10+15=25, EOI Inglés 8+6=14, Mantenimiento de Vehículos 5+4=9, Mecanizado 4+2=6, Patronaje y Confección 5+5=10. Total 157+118=275. La misma propuesta reparte 250 de Maestros para 2028 y 141 de otros cuerpos para 2029 (509 extraordinarias en total). Fuente: propuesta de la Consejería de Educación de 16-10-2026.
+La Rioja 2027 por especialidad (ya aprobadas + OPE extraordinaria = total), según la versión final de la Consejería del 4-11-2026: Lengua 20+15=35, Matemáticas 17+8=25, Física y Química 11+4=15, Biología 11+15=26, Dibujo 6+4=10, Inglés 20+22=42, Educación Física 7+5=12, Informática 7, Intervención Sociocomunitaria 2+4=6, Fabricación Mecánica 4, Procesos Sanitarios 3+4=7, Instalaciones Electrotécnicas 5+2=7, Oficina de Proyectos de Construcción 3, Operaciones de Producción Agraria 3, Procesos Comerciales 6+3=9, Gestión Administrativa 10+13=23, EOI Inglés 8+6=14, Mantenimiento de Vehículos 5+4=9, Mecanizado 4+2=6, Patronaje y Confección 5+5=10. Total 157+116=273. La misma versión reparte 250 de Maestros para 2028 y 139 de otros cuerpos para 2029 (505 extraordinarias en total, 36 de ellas de reserva por discapacidad). Respecto a la propuesta del 16-10-2026 (509) bajan Gestión Administrativa en 2027 (de 15 a 13) y Operaciones y Equipos de Elaboración de Productos Alimentarios en 2029 (de 5 a 3). Fuente: versión final de la Consejería de Educación de 4-11-2026.
 
 
 ## Tabla resumen (cifra más alta entre 2025 y 2027)
@@ -28,7 +28,7 @@ La Rioja 2027 por especialidad (ya aprobadas + OPE extraordinaria = total), seg�
 | Baleares | 567 | 2025 | Convocatoria |
 | Cantabria | 453 | 2027 | Borrador |
 | Ceuta y Melilla | 305 | 2025 | Convocatoria |
-| La Rioja | 275 | 2027 | OEP + OPE extraordinaria en mesa |
+| La Rioja | 273 | 2027 | OEP + OPE extraordinaria en mesa |
 
 ## Detalle por comunidad
 
@@ -105,8 +105,8 @@ La Rioja 2027 por especialidad (ya aprobadas + OPE extraordinaria = total), seg�
 
 ### La Rioja
 - 2025: convocatoria de 248 plazas: Secundaria 243 y FP singulares 5.
-- 2027: 275 plazas. 157 ordinarias (OEP 2026, BOR nº 90 de 14-5-2026, con 107, más 50 que quedaron sin adjudicar) y 118 de la OPE extraordinaria. Secundaria, FP y EOI. Las 118 son el dato que dio ANPE La Rioja el 27-10-2026; no están publicadas.
-- OPE extraordinaria: unas 500 plazas entre 2027 y 2029 (2027: 118 que se suman a la oferta; 2028: Maestros; 2029: Secundaria, FP, EOI, Conservatorio y ESDIR). Objetivo de interinidad estructural del 8 %. En mesa técnica, sin acuerdo ni BOR.
+- 2027: 273 plazas. 157 ordinarias (OEP 2026, BOR nº 90 de 14-5-2026, con 107, más 50 que quedaron sin adjudicar) y 116 de la OPE extraordinaria. Secundaria, FP y EOI. Las 116 son de la versión final que la Consejería pasó el 4-11-2026 (antes eran 118); no están publicadas.
+- OPE extraordinaria: 505 plazas entre 2027 y 2029 (2027: 116 que se suman a la oferta; 2028: Maestros; 2029: Secundaria, FP, EOI, Conservatorio y ESDIR). Objetivo de interinidad estructural del 8 %. En mesa técnica, sin acuerdo ni BOR.
 - Fuentes: https://anperioja.es/notices/203117/ · https://www.que.es/2026/09/18/500-plazas-docentes-la-rioja/ · https://www.campuseducacion.com/blog/convocatorias/convocatorias-2025/oposiciones-2025-la-rioja-publicada-convocatoria/
 
 ### Madrid

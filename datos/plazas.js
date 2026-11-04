@@ -1,6 +1,6 @@
 // Generado con herramientas/generar_datos.py. No editar a mano.
 window.BUSCAOPOS_DATOS = {
- "generado": "2026-11-02",
+ "generado": "2026-11-04",
  "plazas": [
   {
    "id": "2022-andalucia-0590-001",
@@ -180124,9 +180124,9 @@ window.BUSCAOPOS_DATOS = {
    "requisito_linguistico": null,
    "requisito_detalle": null,
    "procedimiento": "concurso_oposicion",
-   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 118 OPE extraordinaria.",
+   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 116 OPE extraordinaria. Las 15 extraordinarias por turno: 14 libre, 1 discapacidad.",
    "fuentes": [
-    "Oferta extraordinaria de empleo público, Consejería de Educación, 16-10-2026"
+    "Oferta extraordinaria de empleo público, versión final de la Consejería de Educación, 4-11-2026"
    ]
   },
   {
@@ -180157,9 +180157,9 @@ window.BUSCAOPOS_DATOS = {
    "requisito_linguistico": null,
    "requisito_detalle": null,
    "procedimiento": "concurso_oposicion",
-   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 118 OPE extraordinaria.",
+   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 116 OPE extraordinaria. Las 8 extraordinarias por turno: 7 libre, 1 discapacidad.",
    "fuentes": [
-    "Oferta extraordinaria de empleo público, Consejería de Educación, 16-10-2026"
+    "Oferta extraordinaria de empleo público, versión final de la Consejería de Educación, 4-11-2026"
    ]
   },
   {
@@ -180190,9 +180190,9 @@ window.BUSCAOPOS_DATOS = {
    "requisito_linguistico": null,
    "requisito_detalle": null,
    "procedimiento": "concurso_oposicion",
-   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 118 OPE extraordinaria.",
+   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 116 OPE extraordinaria. Las 4 extraordinarias por turno: 4 libre.",
    "fuentes": [
-    "Oferta extraordinaria de empleo público, Consejería de Educación, 16-10-2026"
+    "Oferta extraordinaria de empleo público, versión final de la Consejería de Educación, 4-11-2026"
    ]
   },
   {
@@ -180223,9 +180223,9 @@ window.BUSCAOPOS_DATOS = {
    "requisito_linguistico": null,
    "requisito_detalle": null,
    "procedimiento": "concurso_oposicion",
-   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 118 OPE extraordinaria.",
+   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 116 OPE extraordinaria. Las 15 extraordinarias por turno: 14 libre, 1 discapacidad.",
    "fuentes": [
-    "Oferta extraordinaria de empleo público, Consejería de Educación, 16-10-2026"
+    "Oferta extraordinaria de empleo público, versión final de la Consejería de Educación, 4-11-2026"
    ]
   },
   {
@@ -180256,9 +180256,9 @@ window.BUSCAOPOS_DATOS = {
    "requisito_linguistico": null,
    "requisito_detalle": null,
    "procedimiento": "concurso_oposicion",
-   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 118 OPE extraordinaria.",
+   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 116 OPE extraordinaria. Las 4 extraordinarias por turno: 4 libre.",
    "fuentes": [
-    "Oferta extraordinaria de empleo público, Consejería de Educación, 16-10-2026"
+    "Oferta extraordinaria de empleo público, versión final de la Consejería de Educación, 4-11-2026"
    ]
   },
   {
@@ -180289,9 +180289,9 @@ window.BUSCAOPOS_DATOS = {
    "requisito_linguistico": null,
    "requisito_detalle": null,
    "procedimiento": "concurso_oposicion",
-   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 118 OPE extraordinaria.",
+   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 116 OPE extraordinaria. Las 22 extraordinarias por turno: 17 libre, 2 discapacidad, 2 promoción interna, 1 promoción horizontal.",
    "fuentes": [
-    "Oferta extraordinaria de empleo público, Consejería de Educación, 16-10-2026"
+    "Oferta extraordinaria de empleo público, versión final de la Consejería de Educación, 4-11-2026"
    ]
   },
   {
@@ -180322,9 +180322,9 @@ window.BUSCAOPOS_DATOS = {
    "requisito_linguistico": null,
    "requisito_detalle": null,
    "procedimiento": "concurso_oposicion",
-   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 118 OPE extraordinaria.",
+   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 116 OPE extraordinaria. Las 5 extraordinarias por turno: 3 libre, 1 discapacidad, 1 promoción interna.",
    "fuentes": [
-    "Oferta extraordinaria de empleo público, Consejería de Educación, 16-10-2026"
+    "Oferta extraordinaria de empleo público, versión final de la Consejería de Educación, 4-11-2026"
    ]
   },
   {
@@ -180355,9 +180355,9 @@ window.BUSCAOPOS_DATOS = {
    "requisito_linguistico": null,
    "requisito_detalle": null,
    "procedimiento": "concurso_oposicion",
-   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 118 OPE extraordinaria.",
+   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 116 OPE extraordinaria.",
    "fuentes": [
-    "Oferta extraordinaria de empleo público, Consejería de Educación, 16-10-2026"
+    "Oferta extraordinaria de empleo público, versión final de la Consejería de Educación, 4-11-2026"
    ]
   },
   {
@@ -180388,9 +180388,9 @@ window.BUSCAOPOS_DATOS = {
    "requisito_linguistico": null,
    "requisito_detalle": null,
    "procedimiento": "concurso_oposicion",
-   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 118 OPE extraordinaria.",
+   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 116 OPE extraordinaria. Las 4 extraordinarias por turno: 4 libre.",
    "fuentes": [
-    "Oferta extraordinaria de empleo público, Consejería de Educación, 16-10-2026"
+    "Oferta extraordinaria de empleo público, versión final de la Consejería de Educación, 4-11-2026"
    ]
   },
   {
@@ -180421,9 +180421,9 @@ window.BUSCAOPOS_DATOS = {
    "requisito_linguistico": null,
    "requisito_detalle": null,
    "procedimiento": "concurso_oposicion",
-   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 118 OPE extraordinaria.",
+   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 116 OPE extraordinaria.",
    "fuentes": [
-    "Oferta extraordinaria de empleo público, Consejería de Educación, 16-10-2026"
+    "Oferta extraordinaria de empleo público, versión final de la Consejería de Educación, 4-11-2026"
    ]
   },
   {
@@ -180454,9 +180454,9 @@ window.BUSCAOPOS_DATOS = {
    "requisito_linguistico": null,
    "requisito_detalle": null,
    "procedimiento": "concurso_oposicion",
-   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 118 OPE extraordinaria.",
+   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 116 OPE extraordinaria. Las 4 extraordinarias por turno: 4 libre.",
    "fuentes": [
-    "Oferta extraordinaria de empleo público, Consejería de Educación, 16-10-2026"
+    "Oferta extraordinaria de empleo público, versión final de la Consejería de Educación, 4-11-2026"
    ]
   },
   {
@@ -180487,9 +180487,9 @@ window.BUSCAOPOS_DATOS = {
    "requisito_linguistico": null,
    "requisito_detalle": null,
    "procedimiento": "concurso_oposicion",
-   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 118 OPE extraordinaria.",
+   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 116 OPE extraordinaria. Las 2 extraordinarias por turno: 2 libre.",
    "fuentes": [
-    "Oferta extraordinaria de empleo público, Consejería de Educación, 16-10-2026"
+    "Oferta extraordinaria de empleo público, versión final de la Consejería de Educación, 4-11-2026"
    ]
   },
   {
@@ -180520,9 +180520,9 @@ window.BUSCAOPOS_DATOS = {
    "requisito_linguistico": null,
    "requisito_detalle": null,
    "procedimiento": "concurso_oposicion",
-   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 118 OPE extraordinaria.",
+   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 116 OPE extraordinaria.",
    "fuentes": [
-    "Oferta extraordinaria de empleo público, Consejería de Educación, 16-10-2026"
+    "Oferta extraordinaria de empleo público, versión final de la Consejería de Educación, 4-11-2026"
    ]
   },
   {
@@ -180553,9 +180553,9 @@ window.BUSCAOPOS_DATOS = {
    "requisito_linguistico": null,
    "requisito_detalle": null,
    "procedimiento": "concurso_oposicion",
-   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 118 OPE extraordinaria.",
+   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 116 OPE extraordinaria.",
    "fuentes": [
-    "Oferta extraordinaria de empleo público, Consejería de Educación, 16-10-2026"
+    "Oferta extraordinaria de empleo público, versión final de la Consejería de Educación, 4-11-2026"
    ]
   },
   {
@@ -180586,9 +180586,9 @@ window.BUSCAOPOS_DATOS = {
    "requisito_linguistico": null,
    "requisito_detalle": null,
    "procedimiento": "concurso_oposicion",
-   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 118 OPE extraordinaria.",
+   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 116 OPE extraordinaria. Las 3 extraordinarias por turno: 3 libre.",
    "fuentes": [
-    "Oferta extraordinaria de empleo público, Consejería de Educación, 16-10-2026"
+    "Oferta extraordinaria de empleo público, versión final de la Consejería de Educación, 4-11-2026"
    ]
   },
   {
@@ -180603,11 +180603,11 @@ window.BUSCAOPOS_DATOS = {
    "codigo": "222",
    "especialidad": "Procesos de Gestión Administrativa",
    "idioma": null,
-   "plazas": 25,
+   "plazas": 23,
    "turnos": null,
    "desglose": {
     "ordinarias": 10,
-    "extraordinarias": 15
+    "extraordinarias": 13
    },
    "estado": "previsto",
    "fase": "Acordada",
@@ -180619,9 +180619,9 @@ window.BUSCAOPOS_DATOS = {
    "requisito_linguistico": null,
    "requisito_detalle": null,
    "procedimiento": "concurso_oposicion",
-   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 118 OPE extraordinaria.",
+   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 116 OPE extraordinaria. Las 13 extraordinarias por turno: 12 libre, 1 discapacidad.",
    "fuentes": [
-    "Oferta extraordinaria de empleo público, Consejería de Educación, 16-10-2026"
+    "Oferta extraordinaria de empleo público, versión final de la Consejería de Educación, 4-11-2026"
    ]
   },
   {
@@ -180652,9 +180652,9 @@ window.BUSCAOPOS_DATOS = {
    "requisito_linguistico": null,
    "requisito_detalle": null,
    "procedimiento": "concurso_oposicion",
-   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 118 OPE extraordinaria.",
+   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 116 OPE extraordinaria. Las 6 extraordinarias por turno: 3 libre, 1 discapacidad, 1 promoción interna, 1 promoción horizontal.",
    "fuentes": [
-    "Oferta extraordinaria de empleo público, Consejería de Educación, 16-10-2026"
+    "Oferta extraordinaria de empleo público, versión final de la Consejería de Educación, 4-11-2026"
    ]
   },
   {
@@ -180685,9 +180685,9 @@ window.BUSCAOPOS_DATOS = {
    "requisito_linguistico": null,
    "requisito_detalle": null,
    "procedimiento": "concurso_oposicion",
-   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 118 OPE extraordinaria.",
+   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 116 OPE extraordinaria. Las 4 extraordinarias por turno: 4 libre.",
    "fuentes": [
-    "Oferta extraordinaria de empleo público, Consejería de Educación, 16-10-2026"
+    "Oferta extraordinaria de empleo público, versión final de la Consejería de Educación, 4-11-2026"
    ]
   },
   {
@@ -180718,9 +180718,9 @@ window.BUSCAOPOS_DATOS = {
    "requisito_linguistico": null,
    "requisito_detalle": null,
    "procedimiento": "concurso_oposicion",
-   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 118 OPE extraordinaria.",
+   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 116 OPE extraordinaria. Las 2 extraordinarias por turno: 2 libre.",
    "fuentes": [
-    "Oferta extraordinaria de empleo público, Consejería de Educación, 16-10-2026"
+    "Oferta extraordinaria de empleo público, versión final de la Consejería de Educación, 4-11-2026"
    ]
   },
   {
@@ -180751,9 +180751,9 @@ window.BUSCAOPOS_DATOS = {
    "requisito_linguistico": null,
    "requisito_detalle": null,
    "procedimiento": "concurso_oposicion",
-   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 118 OPE extraordinaria.",
+   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 116 OPE extraordinaria. Las 5 extraordinarias por turno: 4 libre, 1 discapacidad.",
    "fuentes": [
-    "Oferta extraordinaria de empleo público, Consejería de Educación, 16-10-2026"
+    "Oferta extraordinaria de empleo público, versión final de la Consejería de Educación, 4-11-2026"
    ]
   },
   {
