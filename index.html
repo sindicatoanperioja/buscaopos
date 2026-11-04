@@ -281,7 +281,7 @@ footer p{margin:4px 0}
     <div class="buscar">
       <label for="q" class="sr">Buscar</label>
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-      <input id="q" type="search" placeholder="Busca especialidad, comunidad o código" autocomplete="off">
+      <input id="q" type="search" placeholder="Especialidad, comunidad o código; separa con comas" autocomplete="off">
       <button class="limpiar oculto" id="limpiarQ" type="button" aria-label="Borrar búsqueda">✕</button>
     </div>
   </div>
@@ -441,8 +441,31 @@ function valor(p, f) {
   if (f === "tipo") return p.tipo;
   if (f === "idioma") return p.requisito_linguistico ? slug(p.requisito_linguistico) : "ninguno";
 }
+// Varias búsquedas separadas por comas. Las que nombran una comunidad se suman entre sí,
+// igual que el resto (especialidades, códigos, cuerpos); entre los dos grupos se exigen ambos.
+// "matemáticas, inglés, la rioja" = (matemáticas o inglés) en La Rioja.
+let cacheQ = { q: null, g: null };
+function grupos(q) {
+  if (cacheQ.q === q) return cacheQ.g;
+  const lugar = [], resto = [];
+  for (const parte of q.split(",")) {
+    const t = parte.trim().split(/\s+/).filter(Boolean);
+    if (!t.length) continue;
+    (TODAS.some((p) => t.every((x) => p.lugar.includes(x))) ? lugar : resto).push(t);
+  }
+  cacheQ = { q, g: { lugar, resto } };
+  return cacheQ.g;
+}
+function enLugar(p, q) {
+  const { lugar } = grupos(q);
+  return !lugar.length || lugar.some((t) => t.every((x) => p.lugar.includes(x)));
+}
 function pasaTexto(p, q) {
-  return !q || q.split(/\s+/).every((t) => p.texto.includes(t));
+  if (!q) return true;
+  const { lugar, resto } = grupos(q);
+  const cumple = (t, txt) => t.every((x) => txt.includes(x));
+  return (!lugar.length || lugar.some((t) => cumple(t, p.lugar)))
+    && (!resto.length || resto.some((t) => cumple(t, p.texto)));
 }
 // Una plaza pasa si cumple todos los filtros salvo el que se indique (para contar cada faceta).
 function pasa(p, salvo) {
@@ -471,7 +494,7 @@ function preparar(datos) {
       if (!nombresEsp.has(p.especialidad)) nombresEsp.set(p.especialidad, new Set());
       nombresEsp.get(p.especialidad).add(p.cuerpo);
     }
-    return { ...p, esp, sit, codigo_completo: codigo, texto };
+    return { ...p, esp, sit, codigo_completo: codigo, texto, lugar: norm(p.comunidad) };
   });
   // Si el mismo nombre existe en varios cuerpos, la faceta añade el cuerpo.
   for (const p of TODAS) p.esp_txt = p.especialidad && nombresEsp.get(p.especialidad).size > 1 ? p.cuerpo_corto : "";
@@ -598,6 +621,7 @@ function filtrar() {
   const buscaEsp = filtros.esp.size > 0 || !!q;
   const agregados = TODAS.filter((p) => {
     if (p.esp || !pasa(p)) return false;
+    if (q && !enLugar(p, q)) return false;
     if (q && pasaTexto(p, q)) return true;
     if (filtros.cuerpo.size && p.cuerpo && !filtros.cuerpo.has(p.cuerpo)) return false;
     if (buscaEsp && p.cuerpo && !cuerposBuscados.has(p.cuerpo)) return false;
