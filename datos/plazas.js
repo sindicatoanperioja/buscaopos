@@ -1,6 +1,6 @@
 // Generado con herramientas/generar_datos.py. No editar a mano.
 window.BUSCAOPOS_DATOS = {
- "generado": "2026-11-04",
+ "generado": "2026-11-05",
  "plazas": [
   {
    "id": "2022-andalucia-0590-001",
@@ -180388,7 +180388,7 @@ window.BUSCAOPOS_DATOS = {
    "requisito_linguistico": null,
    "requisito_detalle": null,
    "procedimiento": "concurso_oposicion",
-   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 116 OPE extraordinaria. Las 4 extraordinarias por turno: 4 libre.",
+   "observaciones": "157 ya aprobadas (OEP 2026 y 50 sin adjudicar) + 116 OPE extraordinaria. Las 4 extraordinarias por turno: 3 libre, 1 promoción interna.",
    "fuentes": [
     "Oferta extraordinaria de empleo público, versión final de la Consejería de Educación, 4-11-2026"
    ]
