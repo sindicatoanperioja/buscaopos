@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
 <title>Oposiciones docentes · ANPE La Rioja</title>
 <meta name="description" content="ANPE La Rioja: buscador de plazas de oposiciones docentes de todas las comunidades autónomas, por cuerpo, especialidad y estado.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,7 +36,7 @@
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--tinta);font-family:Raleway,Arial,sans-serif;line-height:1.45;font-size:15px}
+body{margin:0;background:var(--bg);color:var(--tinta);font-family:Raleway,Arial,sans-serif;font-size-adjust:.52;line-height:1.45;font-size:15px}
 a{color:var(--azul)}
 button,input,select{font:inherit;color:inherit}
 .wrap{max-width:1680px;margin:0 auto;padding:0 16px}
@@ -50,7 +51,7 @@ header{background:var(--surface);position:relative;padding:18px 0 46px}
 [data-theme="dark"] .logo{background:#fff;border-radius:12px;padding:6px 8px}
 .cab-txt{border-left:2px solid var(--azul-cielo);padding-left:18px;min-width:0}
 .antetitulo{margin:0;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--verde-texto)}
-h1{font-family:"Bebas Neue",Impact,sans-serif;font-weight:400;font-size:clamp(38px,6vw,58px);line-height:.95;letter-spacing:.02em;color:var(--azul);margin:2px 0 0}
+h1{font-family:"Bebas Neue",Impact,sans-serif;font-size-adjust:cap-height .7;font-weight:400;font-size:clamp(38px,6vw,58px);line-height:.95;letter-spacing:.02em;color:var(--azul);margin:2px 0 0}
 .sub{color:var(--tinta-suave);margin:6px 0 0;max-width:60ch}
 .enlace-cab{display:inline-block;margin-top:6px;font-weight:700;font-size:14px}
 .onda{position:absolute;left:0;right:0;bottom:0;width:100%;height:40px;display:block}
@@ -75,13 +76,13 @@ aside.filtros{align-self:start;position:sticky;top:84px;max-height:calc(100vh - 
 .filtros-cab{display:none}
 .faceta{border-bottom:1px solid var(--linea);padding:14px 0}
 .faceta:first-child{padding-top:0}
-.faceta h2{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--azul-profundo);margin:0 0 8px;display:flex;justify-content:space-between;align-items:center}
+.faceta h2,.faceta .tit{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--azul-profundo);margin:0 0 8px;display:flex;justify-content:space-between;align-items:center}
 .plegable summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;min-height:28px}
 .plegable summary::-webkit-details-marker{display:none}
 .plegable summary::after{content:"";width:8px;height:8px;border-right:2px solid var(--azul-profundo);border-bottom:2px solid var(--azul-profundo);transform:rotate(45deg);margin:0 6px 4px auto;flex:0 0 auto}
 .plegable[open] summary::after{transform:rotate(-135deg);margin-bottom:-4px}
 .plegable[open] summary{margin-bottom:8px}
-.plegable summary h2{margin:0}
+.plegable summary .tit{margin:0}
 .plegable summary .elegidos{background:var(--azul);color:#fff;border-radius:999px;font-size:12px;font-weight:700;min-width:20px;height:20px;padding:0 6px;display:inline-grid;place-items:center}
 [data-theme="dark"] .plegable summary .elegidos{color:#0f161c}
 .faceta h3{font-size:12px;font-weight:700;color:var(--tinta-suave);margin:10px 0 4px}
@@ -109,7 +110,7 @@ aside.filtros{align-self:start;position:sticky;top:84px;max-height:calc(100vh - 
 .res-cab{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:end;justify-content:space-between;margin-bottom:12px}
 .total{margin:0;font-size:15px}
 .total .extra{color:var(--tinta-suave)}
-.total b{font-family:"Bebas Neue",Impact,sans-serif;font-weight:400;font-size:34px;color:var(--azul);letter-spacing:.02em;margin-right:4px;vertical-align:-3px}
+.total b{font-family:"Bebas Neue",Impact,sans-serif;font-size-adjust:cap-height .7;font-weight:400;font-size:34px;color:var(--azul);letter-spacing:.02em;margin-right:4px;vertical-align:-3px}
 .orden{display:flex;gap:8px;align-items:center;font-size:14px;color:var(--tinta-suave)}
 .orden select{height:38px;border-radius:999px;border:1.5px solid var(--azul-cielo);background:var(--surface);padding:0 12px}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}
@@ -150,7 +151,7 @@ aside.filtros{align-self:start;position:sticky;top:84px;max-height:calc(100vh - 
 .ccaa{font-weight:700;color:var(--azul-profundo);font-size:15px;display:flex;align-items:center;gap:6px}
 .ccaa svg{flex:0 0 auto;color:var(--verde)}
 .cifra{text-align:right;line-height:1}
-.cifra b{display:block;font-family:"Bebas Neue",Impact,sans-serif;font-weight:400;font-size:46px;color:var(--azul);letter-spacing:.01em}
+.cifra b{display:block;font-family:"Bebas Neue",Impact,sans-serif;font-size-adjust:cap-height .7;font-weight:400;font-size:46px;color:var(--azul);letter-spacing:.01em}
 .cifra span{font-size:12px;color:var(--tinta-suave);font-weight:600}
 .cifra.sin b{font-size:24px;color:var(--tinta-suave)}
 .atributos{margin:0;display:grid;gap:6px;font-size:13px;border-top:1px dashed var(--linea);padding-top:10px}
@@ -174,7 +175,7 @@ aside.filtros{align-self:start;position:sticky;top:84px;max-height:calc(100vh - 
 .card.agregado{border-style:dashed;background:color-mix(in srgb,var(--surface) 70%,var(--azul-niebla))}
 
 .sin-reparto{margin-top:28px}
-.sin-reparto h2,.vacio h2{font-family:"Bebas Neue",Impact,sans-serif;font-weight:400;font-size:28px;letter-spacing:.02em;color:var(--azul-profundo);margin:0}
+.sin-reparto h2,.vacio h2{font-family:"Bebas Neue",Impact,sans-serif;font-size-adjust:cap-height .7;font-weight:400;font-size:28px;letter-spacing:.02em;color:var(--azul-profundo);margin:0}
 .sin-reparto>p{margin:2px 0 12px;color:var(--tinta-suave);font-size:14px}
 .vacio{background:var(--surface);border-radius:20px;border:1px dashed var(--azul-cielo);padding:28px;text-align:center}
 .cargar{display:flex;justify-content:center;margin-top:18px}
@@ -202,7 +203,7 @@ footer p{margin:4px 0}
 .c-ccaa{font-weight:700;color:var(--azul-profundo)}
 .c-cod,.codigo{font-variant-numeric:tabular-nums;font-weight:700;font-size:13px;color:var(--azul-profundo)}
 .codigo{display:inline-block;background:var(--azul-niebla);border-radius:6px;padding:1px 7px;margin-bottom:4px;font-size:12px}
-.c-num{text-align:right;font-family:"Bebas Neue",Impact,sans-serif;font-size:26px;line-height:1;color:var(--azul);font-variant-numeric:tabular-nums}
+.c-num{text-align:right;font-family:"Bebas Neue",Impact,sans-serif;font-size-adjust:cap-height .7;font-size:26px;line-height:1;color:var(--azul);font-variant-numeric:tabular-nums}
 .lista-cab .c-num{font-family:inherit;font-size:inherit;color:inherit}
 .c-num.sin{font-family:inherit;font-size:12px;color:var(--tinta-suave)}
 .c-fecha{font-size:13px}
@@ -240,7 +241,7 @@ footer p{margin:4px 0}
   aside.filtros{position:fixed;inset:0 auto 0 0;width:min(360px,92vw);max-height:none;height:100%;background:var(--bg);z-index:50;padding:0 18px 90px;transform:translateX(-102%);transition:transform .22s ease;box-shadow:0 0 40px rgba(0,0,0,.2)}
   aside.filtros.abierto{transform:none}
   .filtros-cab{display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:var(--bg);padding:14px 0;z-index:1;border-bottom:1px solid var(--linea);margin-bottom:12px}
-  .filtros-cab strong{font-family:"Bebas Neue",Impact,sans-serif;font-weight:400;font-size:26px;color:var(--azul)}
+  .filtros-cab strong{font-family:"Bebas Neue",Impact,sans-serif;font-size-adjust:cap-height .7;font-weight:400;font-size:26px;color:var(--azul)}
   .filtros-pie{position:fixed;bottom:0;left:0;width:min(360px,92vw);padding:12px 18px;background:var(--bg);border-top:1px solid var(--linea)}
   .filtros-pie .btn{width:100%;justify-content:center;background:var(--azul);border-color:var(--azul);color:#fff}
   .velo{position:fixed;inset:0;background:rgba(15,22,28,.4);z-index:40}
@@ -543,7 +544,7 @@ function opcion(f, v, et, info, extra = "") {
 function plegable(f, titulo, contenido) {
   const n = filtros[f].size;
   const abierta = f in desplegada ? desplegada[f] : n > 0;
-  return `<details class="faceta plegable" data-plegable="${f}"${abierta ? " open" : ""}><summary><h2>${titulo}</h2>${n ? `<span class="elegidos">${n}</span>` : ""}</summary>${contenido}</details>`;
+  return `<details class="faceta plegable" data-plegable="${f}"${abierta ? " open" : ""}><summary><span class="tit">${titulo}</span>${n ? `<span class="elegidos">${n}</span>` : ""}</summary>${contenido}</details>`;
 }
 
 function pintarFacetas() {
