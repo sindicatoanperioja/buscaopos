@@ -225,7 +225,7 @@ function fechaCurso(n) {
   return { m: 7, d: 31 };
 }
 const fechaLarga = (iso) => { const { a, m, d } = partes(iso); return `${d} de ${MESES[m]} de ${a}`; };
-const mediana = (l) => { const o = [...l].sort((a, b) => a - b), i = o.length >> 1; return o.length % 2 ? o[i] : Math.round((o[i - 1] + o[i]) / 2); };
+const mediana = (l) => { const o = l.toSorted((a, b) => a - b), i = o.length >> 1; return o.length % 2 ? o[i] : Math.round((o[i - 1] + o[i]) / 2); };
 
 // Una convocatoria: comunidad, año, fechas y tipo, con sus plazas sumadas.
 function convocatorias() {
@@ -258,7 +258,7 @@ function habitual(lista, comunidad) {
 // Con uno o dos años no hay pauta: se da el mes o el intervalo, no una mediana.
 function textoHabitual(h) {
   if (h.dias.length < 3) {
-    const [a, b] = [...h.dias].sort((x, y) => x - y).map((n) => MESES[fechaCurso(n).m]);
+    const [a, b] = h.dias.toSorted((x, y) => x - y).map((n) => MESES[fechaCurso(n).m]);
     return !b || a === b ? a : `de ${a} a ${b}`;
   }
   const { m, d } = fechaCurso(h.dia);
